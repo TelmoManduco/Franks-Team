@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="images/franks-logo.png" type="image/x-icon" />
+  <link rel="stylesheet" href="output.css" />
+  <title>Franks Team</title>
+</head>
+
+<body>
+  <header class="bg-gray-900 p-4 text-white shadow-lg">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav>
+        <a href="#"><img src="images/franks-logo.png" alt="Franks Team Logo" class="w-32 invert" /></a>
+      </nav>
+
+      <button id="mobile-menu-button" class="p-2 text-white focus:outline-none md:hidden">
+        <img src="images/burger-menu.svg" alt="Menu" class="h-8 w-8" />
+      </button>
+
+      <nav id="desktop-menu" class="hidden items-center space-x-6 md:flex md:flex-grow md:justify-end">
+        <a href="#" class="font-semibold text-yellow-400 transition duration-300 hover:text-yellow-500">Home</a>
+        <a href="#about" class="font-semibold text-white transition duration-300 hover:text-yellow-400">About Us</a>
+        <a href="#timetable"
+          class="font-semibold text-white transition duration-300 hover:text-yellow-400">Timetable</a>
+        <a href="#pricing" class="font-semibold text-white transition duration-300 hover:text-yellow-400">Membership</a>
+        <a href="#" class="font-semibold text-white transition duration-300 hover:text-yellow-400">Contact Us</a>
+
+        <a href="/my-account" class="font-semibold text-white transition duration-300 hover:text-yellow-400">
+          My Account
+        </a>
+
+        <a href="#"
+          class="rounded-full bg-yellow-500 px-4 py-2 text-sm font-bold text-gray-900 shadow-md transition duration-300 hover:bg-yellow-400">
+          Start Trial
+        </a>
+      </nav>
+    </div>
+
+    <nav id="mobile-menu"
+      class="fixed top-0 right-0 z-50 h-full w-64 translate-x-full transform bg-gray-800 p-6 transition-transform duration-300 md:hidden">
+      <button id="close-menu-button" class="absolute top-4 right-4 text-white hover:text-yellow-400 focus:outline-none">
+        <img src="images/close-x.svg" alt="Cross" class="h-8 w-8" />
+      </button>
+
+      <div class="mt-10 space-y-4">
+        <a href="#" class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Home</a>
+        <a href="#about" class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">About
+          Us</a>
+        <a href="#timetable"
+          class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Timetable</a>
+        <a href="#pricing"
+          class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Membership</a>
+        <a href="#" class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Contact
+          Us</a>
+
+        <a href="/my-account"
+          class="block text-xl font-bold text-yellow-400 transition duration-300 hover:text-white">My Account</a>
+
+        <a href="#"
+          class="mt-6 block rounded-lg bg-yellow-500 p-2 text-center text-xl font-bold text-gray-900 hover:bg-yellow-400">
+          Start Trial
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="menu-overlay"
+    class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300 md:hidden">
+  </div>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="relative flex min-h-screen items-center bg-gray-900 text-white">
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+        style="background-image: url(&quot;images/hero-img.jpg&quot;)"></div>
+
+      <div class="relative z-10 mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl">
+          Transform Your Body
+          <span class="block text-yellow-400 sm:inline">at Franks Team</span>
+        </h1>
+
+        <p class="mx-auto mt-3 max-w-3xl text-xl text-gray-300 sm:mt-5 sm:text-2xl">
+          Our commitment is to your strength, health, and lasting results.
+        </p>
+
+        <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+          <div class="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-1 sm:gap-5 sm:space-y-0">
+            <a href="#"
+              class="flex items-center justify-center rounded-md border border-transparent bg-yellow-400 px-8 py-3 text-base font-medium text-gray-900 shadow-lg transition duration-300 hover:bg-yellow-500 md:px-10 md:py-4 md:text-lg">
+              Start Your Free Trial Today
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- About Us Section -->
+  <section class="bg-white px-4 py-11 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="order-2 lg:order-1">
+        <img src="images/group-img.jpg" alt="The Franks Team Crew"
+          class="h-96 w-full transform rounded-xl object-cover shadow-2xl transition duration-500 hover:scale-[1.01]" />
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <p class="text-lg font-semibold tracking-wider text-yellow-500 uppercase">
+          Our Mission
+        </p>
+
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Manchester's Home for Fitness and Community
+        </h2>
+
+        <p class="mt-4 text-xl text-gray-600">
+          At Frank's Team, we're more than just a gym. We are a registered
+          Community Amateur Sports Club (CASC) dedicated to making fitness and
+          martial arts accessible to everyone. We welcome all ages, from kids
+          as young as 6 to adults, helping you get fit, learn new skills, and
+          thrive together.
+        </p>
+        <p class="mt-4 text-lg text-gray-600">
+          Located right here in the heart of Manchester, we actively invest in
+          our local area, creating programs and opportunities that go beyond
+          the mat. Join our supportive family and discover the power of
+          community-driven fitness.
+        </p>
+
+        <div class="mt-6">
+          <a href="#" class="text-base font-medium text-yellow-500 hover:text-yellow-600">
+            See Our CASC Programs &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-50 px-4 py-20 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+        <p class="text-lg font-semibold tracking-wider text-yellow-500 uppercase">
+          Our Difference
+        </p>
+        <h2 class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+          Why Choose Franks Team?
+        </h2>
+        <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-600">
+          We offer specialized training, a commitment to community, and a
+          family-friendly environment you won't find anywhere else.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl bg-white p-6 pt-6 text-center shadow-lg transition duration-300 hover:shadow-xl">
+          <div
+            class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+            <span class="text-3xl font-bold">C</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">
+            Community Sports Club
+          </h3>
+          <p class="mt-2 text-base text-gray-500">
+            As a registered CASC, we invest back into our local Manchester
+            community, ensuring fitness is accessible and supportive for all.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-white p-6 pt-6 text-center shadow-lg transition duration-300 hover:shadow-xl">
+          <div
+            class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+            <span class="text-3xl font-bold">🥊</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">
+            Specialized Martial Arts
+          </h3>
+          <p class="mt-2 text-base text-gray-500">
+            Expert coaching in various martial arts, including boxing and
+            kickboxing, to build discipline, strength, and confidence.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-white p-6 pt-6 text-center shadow-lg transition duration-300 hover:shadow-xl">
+          <div
+            class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+            <span class="text-3xl font-bold">👪</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">
+            Family-Friendly Training
+          </h3>
+          <p class="mt-2 text-base text-gray-500">
+            Programs for everyone, from adults looking for fitness, to
+            competitive athletes, and kids starting as young as 6.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-4 py-20 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-12 text-center">
+        <p class="text-lg font-semibold tracking-wider text-yellow-500 uppercase">
+          Your Training Schedule
+        </p>
+        <h2 class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+          Weekly Classes & Timetable
+        </h2>
+        <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-600">
+          Find the perfect session for you. All levels are welcome to join our
+          martial arts and fitness classes.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl shadow-2xl">
+        <table class="min-w-full divide-y divide-gray-200">
+          <caption class="rounded-t-xl bg-gray-800 py-3 text-xl font-bold text-white">
+            Class Timetable
+          </caption>
+
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th scope="col" class="w-1/12 px-2 py-3 text-left text-xs font-bold tracking-wider uppercase">
+                Time
+              </th>
+              <th scope="col" class="w-1/5 px-2 py-3 text-center text-xs font-bold tracking-wider uppercase">
+                Mon
+              </th>
+              <th scope="col" class="w-1/5 px-2 py-3 text-center text-xs font-bold tracking-wider uppercase">
+                Tue
+              </th>
+              <th scope="col" class="w-1/5 px-2 py-3 text-center text-xs font-bold tracking-wider uppercase">
+                Wed
+              </th>
+              <th scope="col" class="w-1/5 px-2 py-3 text-center text-xs font-bold tracking-wider uppercase">
+                Thu
+              </th>
+              <th scope="col" class="w-1/5 px-2 py-3 text-center text-xs font-bold tracking-wider uppercase">
+                Fri
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="divide-y divide-gray-100 bg-white text-center text-xs sm:text-sm">
+            <tr>
+              <td class="bg-gray-50 px-2 py-3 text-left font-bold whitespace-nowrap text-gray-900">
+                11-12pm
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">BOX</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+              <td class="bg-red-50 px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">BOX</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">BOX</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="bg-gray-50 px-2 py-3 text-left font-bold whitespace-nowrap text-gray-900">
+                5pm-6pm
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">YOUTH BOX</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap text-gray-400">---</td>
+              <td class="bg-red-50 px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">YOUTH BOX</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap text-gray-400">---</td>
+              <td class="px-2 py-3 whitespace-nowrap text-gray-400">---</td>
+            </tr>
+
+            <tr>
+              <td class="bg-gray-50 px-2 py-3 text-left font-bold whitespace-nowrap text-gray-900">
+                6pm-7pm
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+              <td class="bg-red-50 px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-red-100 px-2 py-1 text-red-800">MMA</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="bg-gray-50 px-2 py-3 text-left font-bold whitespace-nowrap text-gray-900">
+                7pm-8pm
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-blue-100 px-2 py-1 text-blue-800">WRESLING</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">BOX</span>
+              </td>
+              <td class="bg-red-50 px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">BOX</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-yellow-100 px-2 py-1 text-yellow-800">BOX</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-blue-100 px-2 py-1 text-blue-800">WRESLING</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="bg-gray-50 px-2 py-3 text-left font-bold whitespace-nowrap text-gray-900">
+                8pm-9pm
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap text-gray-400">---</td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-green-100 px-2 py-1 text-green-800">BJJ</span>
+              </td>
+              <td class="bg-red-50 px-2 py-3 whitespace-nowrap text-gray-400">
+                ---
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap">
+                <span class="rounded-full bg-green-100 px-2 py-1 text-green-800">BJJ</span>
+              </td>
+              <td class="px-2 py-3 whitespace-nowrap text-gray-400">---</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mx-auto mt-8 max-w-3xl rounded-lg border-l-4 border-yellow-500 bg-gray-100 p-4 text-center">
+        <p class="text-sm font-semibold text-gray-700">
+          Looking for individualized training?
+          <span class="text-yellow-700">Private Classes</span> available by
+          appointment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-800 px-4 py-20 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-16 text-center">
+        <p class="text-lg font-semibold tracking-wider text-yellow-500 uppercase">
+          Our Membership Plans
+        </p>
+        <h2 class="mt-2 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+          Find Your Perfect Plan
+        </h2>
+        <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-400">
+          Train in Boxing, BJJ, Wrestling, and MMA. Choose from flexible
+          access levels for adults and special plans for students & youth.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          class="flex h-full transform flex-col rounded-xl bg-white p-8 shadow-2xl transition duration-500 hover:scale-[1.05]">
+          <h3 class="text-2xl font-bold text-gray-900">Silver Plan</h3>
+          <p class="mt-2 text-gray-500">
+            Perfect for casual training or beginners.
+          </p>
+
+          <div class="mt-4 flex items-baseline">
+            <span class="text-4xl font-extrabold text-gray-900">£30</span>
+            <span class="text-base font-medium text-gray-500">/month</span>
+          </div>
+
+          <a href="#"
+            class="mt-6 block w-full rounded-lg border border-transparent bg-gray-300 py-3 text-center text-sm font-semibold text-gray-800 transition duration-150 hover:bg-gray-400">
+            Select Silver
+          </a>
+
+          <ul role="list" class="mt-6 flex-1 space-y-4 text-sm">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Max 1 adult class per week</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Access to any adult class</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="ml-3 text-gray-400 line-through">Student discount not applicable</span>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="flex h-full transform flex-col rounded-xl bg-white p-8 shadow-2xl ring-2 ring-gray-400 transition duration-500 hover:scale-[1.05]">
+          <h3 class="text-2xl font-bold text-gray-900">Gold Plan</h3>
+          <p class="mt-2 text-gray-500">
+            Structured training for rapid progression.
+          </p>
+
+          <div class="mt-4 flex flex-col items-start">
+            <div class="flex items-baseline">
+              <span class="text-4xl font-extrabold text-gray-900">£80</span>
+              <span class="text-base font-medium text-gray-500">/month (Adult)</span>
+            </div>
+            <div class="mt-1 flex items-baseline">
+              <span class="text-2xl font-extrabold text-blue-600">£60</span>
+              <span class="text-sm font-medium text-blue-600">/month (Student)</span>
+              <span class="ml-2 text-xs text-gray-500">*ID required</span>
+            </div>
+          </div>
+
+          <a href="#"
+            class="mt-6 block w-full rounded-lg border border-transparent bg-gray-600 py-3 text-center text-sm font-semibold text-white transition duration-150 hover:bg-gray-700">
+            Select Gold
+          </a>
+
+          <ul role="list" class="mt-6 flex-1 space-y-4 text-sm">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Max 4 adult classes per week</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Full access to all disciplines</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Includes Student pricing option</span>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="z-10 flex h-full transform flex-col rounded-xl bg-white p-8 shadow-2xl ring-4 ring-yellow-500 transition duration-500 hover:scale-[1.08]">
+          <p
+            class="inline-block self-start rounded-full bg-yellow-500 px-3 py-1 text-xs font-semibold tracking-wider text-white uppercase">
+            BEST VALUE
+          </p>
+          <h3 class="mt-2 text-2xl font-bold text-gray-900">Platinum Plan</h3>
+          <p class="mt-2 text-gray-500">
+            Train like a pro. Unlimited classes, any day, any time.
+          </p>
+
+          <div class="mt-4 flex flex-col items-start">
+            <div class="flex items-baseline">
+              <span class="text-4xl font-extrabold text-gray-900">£90</span>
+              <span class="text-base font-medium text-gray-500">/month (Adult)</span>
+            </div>
+            <div class="mt-1 flex items-baseline">
+              <span class="text-2xl font-extrabold text-blue-600">£75</span>
+              <span class="text-sm font-medium text-blue-600">/month (Student)</span>
+              <span class="ml-2 text-xs text-gray-500">*ID required</span>
+            </div>
+          </div>
+
+          <a href="#"
+            class="mt-6 block w-full rounded-lg border border-transparent bg-yellow-500 py-3 text-center text-sm font-semibold text-white transition duration-150 hover:bg-yellow-600">
+            Go Platinum
+          </a>
+
+          <ul role="list" class="mt-6 flex-1 space-y-4 text-sm">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 font-semibold text-gray-600">Unlimited access to all adult classes</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Full access to all disciplines</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 flex-shrink-0 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-600">Includes Student pricing option</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-16 rounded-xl bg-gray-700 p-8 text-white shadow-2xl">
+        <h3 class="mb-4 text-center text-3xl font-bold text-yellow-500">
+          Other Options
+        </h3>
+        <div class="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
+          <div>
+            <p class="text-2xl font-bold">Youth/Kids Plan</p>
+            <p class="mt-1 text-lg font-extrabold">£25/month</p>
+            <p class="mt-2 text-sm text-gray-300">
+              Any youth class (ages 6-11). Max 2 classes/week.
+            </p>
+          </div>
+
+          <div>
+            <p class="text-2xl font-bold">Pay As You Go</p>
+            <p class="mt-1 text-lg font-extrabold">Adults: £10 / Kids: £5</p>
+            <p class="mt-2 text-sm text-gray-300">
+              Pay per session. Ideal for drop-ins.
+            </p>
+          </div>
+
+          <div>
+            <p class="text-2xl font-bold">Personal Training</p>
+            <p class="mt-1 text-lg font-extrabold">£50/hr</p>
+            <p class="mt-2 text-sm text-gray-300">
+              Dedicated one-on-one coaching (1-hour duration).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center text-gray-400">
+        <p class="text-sm">
+          *Student ID is required at your first class for special pricing.
+        </p>
+        <p class="mt-2 text-sm">
+          All adult plans grant access to Boxing, BJJ, Wrestling and MMA
+          classes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-black px-4 py-24 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h2 class="text-4xl font-extrabold text-white sm:text-5xl">
+        Ready to Start Training?
+      </h2>
+      <p class="mt-4 text-xl text-gray-400">
+        Book your trial class or ask our team any questions you have about our
+        memberships and timetable.
+      </p>
+
+      <div class="mt-10 space-y-4 sm:flex sm:justify-center sm:space-y-0 sm:space-x-6">
+        <div class="flex items-center justify-center rounded-lg bg-gray-700 p-4">
+          <svg class="mr-3 h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.717 21 3 14.283 3 6V5z" />
+          </svg>
+          <span class="text-lg font-medium text-white">0161 555 1234</span>
+        </div>
+
+        <a href="mailto:info@franksteam.com"
+          class="inline-flex items-center justify-center rounded-lg border border-transparent bg-yellow-500 px-8 py-3 text-base font-medium text-gray-900 shadow-lg transition duration-150 hover:bg-yellow-600">
+          Email for a Free Trial
+        </a>
+      </div>
+
+      <p class="mt-8 text-sm text-gray-500">
+        You can also visit us directly at the gym (see address below).
+      </p>
+    </div>
+  </section>
+
+  <footer class="border-t border-gray-700 bg-gray-900">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+        <div class="space-y-4 xl:col-span-1">
+          <img class="h-10" src="images/franks-logo.png" alt="Franks Team MMA Gym Logo" />
+          <p class="text-sm text-gray-400">
+            &copy; 2024 Franks Team. All rights reserved.
+          </p>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+          <div class="md:grid md:grid-cols-2 md:gap-8">
+            <div>
+              <h3 class="text-sm font-semibold tracking-wider text-yellow-500 uppercase">
+                Navigation
+              </h3>
+              <ul role="list" class="mt-4 space-y-4">
+                <li>
+                  <a href="#" class="text-base text-gray-400 hover:text-white">Home</a>
+                </li>
+                <li>
+                  <a href="#about" class="text-base text-gray-400 hover:text-white">About Us</a>
+                </li>
+                <li>
+                  <a href="#timetable" class="text-base text-gray-400 hover:text-white">Timetable</a>
+                </li>
+                <li>
+                  <a href="#pricing" class="text-base text-gray-400 hover:text-white">Membership</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-12 md:mt-0">
+              <h3 class="text-sm font-semibold tracking-wider text-yellow-500 uppercase">
+                Hours
+              </h3>
+              <ul role="list" class="mt-4 space-y-4 text-base text-gray-400">
+                <li>Mon - Fri: 10:00 - 21:00</li>
+                <li>Sat: 10:00 - 14:00 (Open Mat)</li>
+                <li>Sun: Closed</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="md:grid md:grid-cols-1">
+            <div>
+              <h3 class="text-sm font-semibold tracking-wider text-yellow-500 uppercase">
+                Find Us
+              </h3>
+              <p class="mt-4 text-base text-gray-400">
+                123 Combat Avenue<br />
+                Manchester, M1 1AA<br />
+                United Kingdom
+              </p>
+              <p class="mt-4 text-base text-gray-400">
+                <a href="tel:01615551234" class="hover:text-white">Phone: 0161 555 1234</a><br />
+                <a href="mailto:info@franksteam.com" class="hover:text-white">Email: info@franksteam.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t border-gray-700 pt-8">
+        <p class="text-center text-sm text-gray-400">
+          Follow us on social media for the latest news and updates!
+        </p>
+        <div class="mt-4 flex justify-center space-x-6">
+          <a href="#" class="text-gray-400 hover:text-white">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.351.522.096.71-.225.71-.497 0-.246-.01-.902-.01-1.761-2.583.56-3.132-1.243-3.132-1.243-.422-1.07-.98-1.353-.98-1.353-.8-.545.06-.534.06-.534.887.062 1.356.91 1.356.91.787 1.357 2.07.965 2.578.739.08-.574.307-.965.559-1.188-1.968-.22-4.043-.986-4.043-4.383 0-.968.344-1.76.91-2.378-.09-.22-.395-1.127.085-2.355 0 0 .74-.238 2.428.914.7-.193 1.442-.29 2.18-.293.738.003 1.48.1 2.18.293 1.688-1.152 2.428-.914 2.428-.914.48 1.228.175 2.135.085 2.355.567.618.91 1.41.91 2.378 0 3.397-2.077 4.16-4.043 4.383.315.27.593.843.593 1.702 0 1.23-.01 2.22-.01 2.52 0 .276.188.598.71.496C18.364 19.855 21 16.237 21 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.773c0-2.53 1.545-3.924 3.784-3.924 1.087 0 2.247.193 2.247.193v2.46h-1.264c-1.245 0-1.633.778-1.633 1.563V12h2.77l-.443 2.766h-2.327v6.987C18.343 21.128 22 16.991 22 12z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
