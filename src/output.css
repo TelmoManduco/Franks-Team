@@ -332,6 +332,9 @@
   .inline-flex {
     display: inline-flex;
   }
+  .table {
+    display: table;
+  }
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
@@ -352,6 +355,9 @@
   }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
   }
   .w-1\/5 {
     width: calc(1/5 * 100%);
@@ -395,8 +401,17 @@
   .flex-1 {
     flex: 1;
   }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .flex-shrink-0 {
     flex-shrink: 0;
+  }
+  .flex-grow {
+    flex-grow: 1;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .translate-x-full {
     --tw-translate-x: 100%;
@@ -619,6 +634,9 @@
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
   }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
   .py-11 {
     padding-block: calc(var(--spacing) * 11);
   }
@@ -765,6 +783,9 @@
   .line-through {
     text-decoration-line: line-through;
   }
+  .underline {
+    text-decoration-line: underline;
+  }
   .opacity-0 {
     opacity: 0%;
   }
@@ -797,8 +818,15 @@
   .ring-yellow-500 {
     --tw-ring-color: var(--color-yellow-500);
   }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
   .invert {
     --tw-invert: invert(100%);
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .transition {
@@ -1021,6 +1049,16 @@
     @media (width >= 40rem) {
       font-size: var(--text-sm);
       line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+  }
+  .md\:sticky {
+    @media (width >= 48rem) {
+      position: sticky;
+    }
+  }
+  .md\:top-0 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing) * 0);
     }
   }
   .md\:mt-0 {
@@ -1279,6 +1317,11 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -1367,6 +1410,7 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
