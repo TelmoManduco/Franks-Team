@@ -51,64 +51,65 @@ document.addEventListener("DOMContentLoaded", function () {
     link.addEventListener("click", closeMenu);
   });
 
-  const loginModal = document.getElementById('login-modal');
-    
-    // Links para abrir o modal
-    const openModalButtons = [
-        document.getElementById('open-login-modal'),
-        document.getElementById('open-login-modal-mobile')
-    ].filter(btn => btn);
+  const loginModal = document.getElementById("login-modal");
 
-    const closeModalButton = document.getElementById('close-login-modal');
-    // Conteúdo interno para o efeito de deslizar (a caixa branca)
-    const modalContent = loginModal ? loginModal.querySelector('div:nth-child(2)') : null;
+  // Links para abrir o modal
+  const openModalButtons = [
+    document.getElementById("open-login-modal"),
+    document.getElementById("open-login-modal-mobile"),
+  ].filter((btn) => btn);
 
-    if (loginModal && closeModalButton && modalContent) {
+  const closeModalButton = document.getElementById("close-login-modal");
+  // Conteúdo interno para o efeito de deslizar (a caixa branca)
+  const modalContent = loginModal
+    ? loginModal.querySelector("div:nth-child(2)")
+    : null;
 
-        function openLoginModal(e) {
-            e.preventDefault(); 
-            
-            // 1. Torna o overlay do Login visível/clicável (Z-index superior ao menu)
-            loginModal.classList.remove('opacity-0', 'pointer-events-none');
-            loginModal.classList.add('opacity-100');
-            
-            // 2. Efeito de deslizar do conteúdo
-            modalContent.classList.remove('translate-y-4');
-            modalContent.classList.add('translate-y-0');
+  if (loginModal && closeModalButton && modalContent) {
+    function openLoginModal(e) {
+      e.preventDefault();
 
-            // 3. *Ação Corretiva*: Fecha o menu mobile se estiver aberto
-            closeMenu(); 
-        }
+      // 1. Torna o overlay do Login visível/clicável (Z-index superior ao menu)
+      loginModal.classList.remove("opacity-0", "pointer-events-none");
+      loginModal.classList.add("opacity-100");
 
-        function closeLoginModal() {
-            // Torna o overlay do Login invisível/não clicável
-            loginModal.classList.remove('opacity-100');
-            loginModal.classList.add('opacity-0', 'pointer-events-none');
+      // 2. Efeito de deslizar do conteúdo
+      modalContent.classList.remove("translate-y-4");
+      modalContent.classList.add("translate-y-0");
 
-            // Reposiciona o conteúdo
-            modalContent.classList.remove('translate-y-0');
-            modalContent.classList.add('translate-y-4');
-        }
+      // 3. *Ação Corretiva*: Fecha o menu mobile se estiver aberto
+      closeMenu();
+    }
 
-        // --- Atribuir Event Listeners ---
-        openModalButtons.forEach(button => {
-            button.addEventListener('click', openLoginModal);
-        });
+    function closeLoginModal() {
+      // Torna o overlay do Login invisível/não clicável
+      loginModal.classList.remove("opacity-100");
+      loginModal.classList.add("opacity-0", "pointer-events-none");
 
-        closeModalButton.addEventListener('click', closeLoginModal);
+      // Reposiciona o conteúdo
+      modalContent.classList.remove("translate-y-0");
+      modalContent.classList.add("translate-y-4");
+    }
 
-        // Fechar ao clicar fora do modal de login
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                closeLoginModal();
-            }
-        });
+    // --- Atribuir Event Listeners ---
+    openModalButtons.forEach((button) => {
+      button.addEventListener("click", openLoginModal);
+    });
 
-        // Fechar ao pressionar a tecla ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && loginModal.classList.contains('opacity-100')) {
-                closeLoginModal();
-            }
-        });
+    closeModalButton.addEventListener("click", closeLoginModal);
+
+    // Fechar ao clicar fora do modal de login
+    loginModal.addEventListener("click", (e) => {
+      if (e.target === loginModal) {
+        closeLoginModal();
       }
+    });
+
+    // Fechar ao pressionar a tecla ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && loginModal.classList.contains("opacity-100")) {
+        closeLoginModal();
+      }
+    });
+  }
 });
