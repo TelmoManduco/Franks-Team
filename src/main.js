@@ -112,4 +112,41 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // ==========================================================
+  // SEÇÃO 3: NAVEGAÇÃO SUAVE COM CORREÇÃO DE OFFSET (FINAL)
+  // ==========================================================
+
+  // 1. Obtém o cabeçalho para medir a sua altura (necessário para a correção)
+  const header = document.querySelector("header");
+
+  // Seleciona todos os links de âncora válidos
+  const anchorLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
+
+  if (anchorLinks.length > 0 && header) {
+    anchorLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          // 1. OBTÉM A ALTURA REAL DO SEU HEADER (ex: 64px, 80px)
+          const headerHeight = header.offsetHeight;
+
+          // 2. CALCULA O DESTINO DA ROLAGEM
+          // targetElement.offsetTop -> Posição do topo do elemento
+          // - headerHeight -> Subtrai a altura do header
+          const targetPosition = targetElement.offsetTop - headerHeight;
+
+          // 3. Executa a rolagem suave para a nova posição calculada
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  }
 });
