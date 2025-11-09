@@ -149,4 +149,37 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+
+  // ==========================================================
+  // SEÇÃO 4: IMAGEM DE FUNDO DIÁRIA (Baseada no Dia do Mês)
+  // ==========================================================
+  const heroBackground = document.getElementById("hero-background-slideshow");
+
+  // **IMPORTANTE:** Mude estes URLs. Adicione mais imagens para mais variação mensal.
+  const backgroundImages = [
+    "images/header-images/hero-img.jpg", // Dia 1, 4, 7, ...
+    "images/header-images/1255.jpg", // Dia 2, 5, 8, ...
+    "images/header-images/1256.jpg", // Dia 3, 6, 9, ...
+    // Adicione mais imagens até 31 para ter uma imagem única por dia.
+    // Se tiver menos, elas irão ciclar a cada X dias.
+  ];
+
+  if (heroBackground && backgroundImages.length > 0) {
+    // 1. Obtém o dia do mês (1 a 31)
+    const today = new Date().getDate();
+
+    // 2. Calcula o índice: (Dia do Mês - 1) % Número de Imagens
+    // O -1 é necessário porque os arrays começam em 0. O % garante a repetição.
+    const imageIndex = (today - 1) % backgroundImages.length;
+
+    // 3. Obtém o URL para o dia
+    const imageUrl = backgroundImages[imageIndex];
+
+    // 4. Aplica a nova imagem de fundo na div
+    heroBackground.style.backgroundImage = `url('${imageUrl}')`;
+    heroBackground.classList.add("opacity-100"); // Garante que a div está visível
+
+    // Não há necessidade de setInterval, a imagem só muda na próxima meia-noite
+    // quando o utilizador voltar a carregar a página.
+  }
 });
