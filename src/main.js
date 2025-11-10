@@ -233,4 +233,47 @@ document.addEventListener("DOMContentLoaded", function () {
     // Adiciona listener para redimensionamento, para parar/iniciar conforme necessário
     mediaQuery.addEventListener("change", startSlideshow);
   }
+
+  // ==========================================================
+  // SEÇÃO 5: FAQ EXPANSÍVEL (ACCORDION)
+  // ==========================================================
+  function setupFAQAccordion() {
+    // Seleciona todos os botões de cabeçalho do FAQ
+    const faqHeaders = document.querySelectorAll(".faq-header");
+
+    faqHeaders.forEach((header) => {
+      header.addEventListener("click", () => {
+        const content = header.nextElementSibling; // O conteúdo é o elemento irmão seguinte
+        const icon = header.querySelector("svg"); // 1. FECHAR OS OUTROS (para manter apenas um aberto de cada vez)
+
+        faqHeaders.forEach((otherHeader) => {
+          if (otherHeader !== header) {
+            const otherContent = otherHeader.nextElementSibling;
+            const otherIcon = otherHeader.querySelector("svg"); // Colapsa e reseta o ícone
+            otherContent.classList.add("hidden");
+            otherHeader.setAttribute("aria-expanded", "false");
+            otherIcon.classList.remove("rotate-45");
+          }
+        }); // 2. TOGGLE: Abre ou fecha o item clicado
+
+        const isExpanded = header.getAttribute("aria-expanded") === "true";
+
+        if (isExpanded) {
+          // Se estiver aberto, fecha
+          content.classList.add("hidden");
+          header.setAttribute("aria-expanded", "false");
+          icon.classList.remove("rotate-45");
+        } else {
+          // Se estiver fechado, abre
+          content.classList.remove("hidden");
+          header.setAttribute("aria-expanded", "true");
+          icon.classList.add("rotate-45"); // Gira o ícone para se parecer com um 'X' ou '-'
+        }
+      });
+    });
+  }
+
+  // CORREÇÃO: Chamada da função movida para dentro do DOMContentLoaded
+  // O código é executado aqui, logo após o seu Slideshow (Seção 4)
+  setupFAQAccordion();
 });
