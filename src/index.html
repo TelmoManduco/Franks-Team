@@ -74,7 +74,7 @@
     class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300 md:hidden">
   </div>
 
-  <!-- Hero Section -->
+  <!-- Hero Section
   <main>
     <section class="relative flex min-h-screen items-center bg-gray-900 text-white">
       <div id="hero-background-slideshow" class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style="
@@ -82,7 +82,6 @@
           "></div>
 
       <div class="absolute inset-0 bg-black/50"></div>
-      x
       <div class="relative z-10 mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <h1 class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl">
           Transform Your Body
@@ -91,6 +90,37 @@
 
         <p class="mx-auto mt-3 max-w-3xl text-xl text-gray-300 sm:mt-5 sm:text-2xl">
           Our commitment is to your strength, health, and lasting results.
+        </p>
+
+        <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+          <div class="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-1 sm:gap-5 sm:space-y-0">
+            <a href="#"
+              class="flex items-center justify-center rounded-md border border-transparent bg-yellow-400 px-8 py-3 text-base font-medium text-gray-900 shadow-lg transition duration-300 hover:bg-yellow-500 md:px-10 md:py-4 md:text-lg">
+              Start Your Free Trial Today
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main> -->
+
+  <main>
+    <section class="relative flex min-h-screen items-center bg-gray-900 text-white overflow-hidden">
+
+      <div id="hero-slideshow-container" class="absolute inset-0 flex transition-transform duration-1000 ease-in-out"
+        style="width: calc(100% * var(--image-count, 1));" aria-live="polite">
+      </div>
+
+      <div class="absolute inset-0 bg-black/50"></div>
+
+      <div class="relative z-20 mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl">
+          The Manchester Home of
+          <span class="block text-yellow-400 sm:inline">Martial Arts</span>
+        </h1>
+
+        <p class="mx-auto mt-3 max-w-3xl text-xl text-gray-300 sm:mt-5 sm:text-2xl">
+          Build Discipline, Strength, and Confidence.
         </p>
 
         <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
@@ -145,67 +175,6 @@
     </div>
   </section>
 
-  <!-- <section class="bg-gray-50 px-4 py-20 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-7xl">
-      <div class="text-center">
-        <p class="text-lg font-semibold tracking-wider text-yellow-500 uppercase">
-          Our Difference
-        </p>
-        <h2 class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-          Why Choose Franks Team?
-        </h2>
-        <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-600">
-          We offer specialized training, a commitment to community, and a
-          family-friendly environment you won't find anywhere else.
-        </p>
-      </div>
-
-      <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-xl bg-white p-6 pt-6 text-center shadow-lg transition duration-300 hover:shadow-xl">
-          <div
-            class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
-            <span class="text-3xl font-bold">C</span>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">
-            Community Sports Club
-          </h3>
-          <p class="mt-2 text-base text-gray-500">
-            As a registered CASC, we invest back into our local Manchester
-            community, ensuring fitness is accessible and supportive for all.
-          </p>
-        </div>
-
-        <div class="rounded-xl bg-white p-6 pt-6 text-center shadow-lg transition duration-300 hover:shadow-xl">
-          <div
-            class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
-            <span class="text-3xl font-bold">🥊</span>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">
-            Specialized Martial Arts
-          </h3>
-          <p class="mt-2 text-base text-gray-500">
-            Expert coaching in various martial arts, including boxing and
-            kickboxing, to build discipline, strength, and confidence.
-          </p>
-        </div>
-
-        <div class="rounded-xl bg-white p-6 pt-6 text-center shadow-lg transition duration-300 hover:shadow-xl">
-          <div
-            class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
-            <span class="text-3xl font-bold">👪</span>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">
-            Family-Friendly Training
-          </h3>
-          <p class="mt-2 text-base text-gray-500">
-            Programs for everyone, from adults looking for fitness, to
-            competitive athletes, and kids starting as young as 6.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
   <section id="about" class="bg-gray-50 px-4 py-20 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="text-center">
@@ -233,7 +202,7 @@
             <!--License to use the image  
             <div> Icons made by <a href="https://www.flaticon.com/authors/juicy-fish" title="juicy_fish"> juicy_fish </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div> 
             -->
-            <img src="images/fitness.png" alt="fitness" class="h-20 w-20">
+            <img src="images/fitness.png" alt="fitness" class="h-20 w-20" />
           </div>
           <h3 class="mt-4 text-3xl font-extrabold text-gray-900">
             Registered Community Club

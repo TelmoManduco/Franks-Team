@@ -151,35 +151,86 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ==========================================================
-  // SEÇÃO 4: IMAGEM DE FUNDO DIÁRIA (Baseada no Dia do Mês)
+  // SEÇÃO 4: SLIDESHOW AUTOMÁTICO (10s) COM EFEITO SLIDE
+  // Ativo apenas a partir de 768px (md)
   // ==========================================================
-  const heroBackground = document.getElementById("hero-background-slideshow");
+  const heroSlideshowContainer = document.getElementById(
+    "hero-slideshow-container",
+  );
 
-  // **IMPORTANTE:** Mude estes URLs. Adicione mais imagens para mais variação mensal.
+  // **IMPORTANTE:** Mude estes URLs de imagem para as suas imagens reais!
   const backgroundImages = [
-    "images/header-images/hero-img.jpg", // Dia 1, 4, 7, ...
-    "images/header-images/1255.jpg", // Dia 2, 5, 8, ...
-    "images/header-images/1256.jpg", // Dia 3, 6, 9, ...
-    // Adicione mais imagens até 31 para ter uma imagem única por dia.
-    // Se tiver menos, elas irão ciclar a cada X dias.
+    "images/header-images/hero-img.jpg",
+    "images/header-images/1255.jpg",
+    "images/header-images/1256.jpg",
+    // Adicione mais imagens aqui, se desejar
   ];
 
-  if (heroBackground && backgroundImages.length > 0) {
-    // 1. Obtém o dia do mês (1 a 31)
-    const today = new Date().getDate();
+  let currentImageIndex = 0;
+  const slideIntervalTime = 10000; // 10 segundos
+  let slideshowTimer;
 
-    // 2. Calcula o índice: (Dia do Mês - 1) % Número de Imagens
-    // O -1 é necessário porque os arrays começam em 0. O % garante a repetição.
-    const imageIndex = (today - 1) % backgroundImages.length;
+  // Media Query para 768px (Breakpoint MD do Tailwind)
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
 
-    // 3. Obtém o URL para o dia
-    const imageUrl = backgroundImages[imageIndex];
+  if (heroSlideshowContainer && backgroundImages.length > 0) {
+    // 1. Cria e injeta as divs de imagem no container
+    backgroundImages.forEach((imageUrl) => {
+      const imgDiv = document.createElement("div");
 
-    // 4. Aplica a nova imagem de fundo na div
-    heroBackground.style.backgroundImage = `url('${imageUrl}')`;
-    heroBackground.classList.add("opacity-100"); // Garante que a div está visível
+      // CORREÇÃO CRÍTICA: USAR 'w-screen' em vez de 'w-full' para forçar a largura do ecrã
+      imgDiv.className =
+        "w-screen h-full bg-cover bg-center bg-no-repeat flex-shrink-0";
+      imgDiv.style.backgroundImage = `url('${imageUrl}')`;
+      heroSlideshowContainer.appendChild(imgDiv);
+    });
 
-    // Não há necessidade de setInterval, a imagem só muda na próxima meia-noite
-    // quando o utilizador voltar a carregar a página.
+    // 2. Define a variável CSS para o width total do container (3 imagens = 300%)
+    heroSlideshowContainer.style.setProperty(
+      "--image-count",
+      backgroundImages.length,
+    );
+
+    /**
+     * Função que executa o efeito de slide.
+     */
+    function slideHeroBackground() {
+      // Calcula o próximo índice
+      currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+
+      // Move o container das imagens horizontalmente
+      // NOTA: Agora o translateX usa w-screen. O cálculo é: 100% * index.
+      heroSlideshowContainer.style.transform = `translateX(-${currentImageIndex * 100}vw)`;
+    }
+
+    /**
+     * Inicia/Reinicia o timer do slideshow automático (apenas se for desktop).
+     */
+    function startSlideshow() {
+      // Limpa qualquer timer antigo antes de iniciar um novo
+      clearInterval(slideshowTimer);
+
+      if (mediaQuery.matches) {
+        // Reinicia o índice e a posição quando o slideshow é ativado/reiniciado
+        currentImageIndex = 0;
+        heroSlideshowContainer.style.transform = `translateX(0vw)`;
+
+        slideshowTimer = setInterval(() => {
+          slideHeroBackground();
+        }, slideIntervalTime);
+      } else {
+        // Se estiver em mobile, garante que o timer é parado e a primeira imagem é visível
+        heroSlideshowContainer.style.transform = `translateX(0vw)`;
+        currentImageIndex = 0; // Garante que a primeira imagem está sempre visível
+      }
+    }
+
+    // --- Inicialização ---
+
+    // Inicia o slideshow SE o ecrã for grande o suficiente (ou ajusta para mobile)
+    startSlideshow();
+
+    // Adiciona listener para redimensionamento, para parar/iniciar conforme necessário
+    mediaQuery.addEventListener("change", startSlideshow);
   }
 });
