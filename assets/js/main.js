@@ -160,9 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // **IMPORTANTE:** Mude estes URLs de imagem para as suas imagens reais!
   const backgroundImages = [
-    "images/header-images/hero-img.jpg",
-    "images/header-images/1255.jpg",
-    "images/header-images/1256.jpg",
+    "assets/images/header-images/hero-img.jpg",
+    "assets/images/header-images/1255.jpg",
+    "assets/images/header-images/1256.jpg",
     // Adicione mais imagens aqui, se desejar
   ];
 
