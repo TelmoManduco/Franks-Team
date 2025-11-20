@@ -12,17 +12,16 @@
 <body>
   <header class="z-50 bg-gray-900 text-white shadow-lg md:sticky md:top-0">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <nav>
-        <a href="/" aria-label="Go to homepage"><img src="assets/images/franks-logo.png" alt="Franks Team - Homepage"
-            class="w-32 invert" /></a>
-      </nav>
+      <a href="/" aria-label="Go to homepage"><img src="assets/images/franks-logo.png" alt="Franks Team - Homepage"
+          class="w-32 invert" /></a>
+
 
       <button id="mobile-menu-button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
         type="button" class="p-2 text-white focus:outline-none md:hidden">
         <img src="assets/images/burger-menu.svg" class="h-8 w-8" />
       </button>
 
-      <nav id="desktop-menu" aria-label="Main Navigation"
+      <nav id="desktop-menu" aria-label="Main site navigation"
         class="hidden items-center space-x-6 md:flex md:flex-grow md:justify-end">
         <a href="#" class="font-semibold text-yellow-400 transition duration-300 hover:text-yellow-500">Home</a>
         <a href="#about" class="font-semibold text-white transition duration-300 hover:text-yellow-400">About Us</a>
@@ -43,11 +42,11 @@
       </nav>
     </div>
 
-    <nav id="mobile-menu"
+    <nav id="mobile-menu" aria-label="Mobile navigation menu" role="dialog" aria-modal="true" aria-hidden="true"
       class="fixed top-0 right-0 z-50 h-full w-54 translate-x-full transform bg-gray-800 p-6 transition-transform duration-300 md:hidden">
-      <button id="close-menu-button" aria-label="Close menu"
+      <button id="close-menu-button" aria-label="Close menu" type="button"
         class="absolute top-4 right-4 text-white hover:text-yellow-400 focus:outline-none">
-        <img src="assets/images/close-x.svg" class="h-8 w-8" />
+        <img src="assets/images/close-x.svg" alt="" class="h-8 w-8" />
       </button>
 
       <div class="mt-10 space-y-4">
@@ -61,9 +60,8 @@
         <a href="#contact"
           class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Contact Us</a>
 
-        <button id="open-login-modal-mobile"
-          class="block cursor-pointer text-xl font-bold text-yellow-400 transition duration-300 hover:text-white"
-          type="button">
+        <button id="open-login-modal-mobile" type="button"
+          class="block cursor-pointer text-xl font-bold text-yellow-400 transition duration-300 hover:text-white">
           My Account
         </button>
 
