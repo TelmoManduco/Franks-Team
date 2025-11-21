@@ -43,7 +43,7 @@ function setupMobileMenuAndModal() {
     });
 
     // Closes the menu when an internal link is clicked (improves mobile UX)
-    const menuLinks = menu.querySelectorAll("a");
+    const menuLinks = menu.querySelectorAll("a, button");
     menuLinks.forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
@@ -142,6 +142,10 @@ function setupHeroSlideshow() {
   const heroSlideshowContainer = document.getElementById(
     "hero-slideshow-container",
   );
+
+  if (!heroSlideshowContainer) return;
+
+  heroSlideshowContainer.innerHTML = "";
 
   // IMPORTANT: Update these URLs to your actual image paths in /assets/images/header-images/
   const backgroundImages = [
