@@ -12,8 +12,10 @@
 
     <header class="z-50 bg-gray-900 text-white shadow-lg md:sticky md:top-0">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <a href="index.html" aria-label="Go to homepage"><img src="assets/images/franks-logo.png"
-                    alt="Franks Team - Homepage" class="w-32 invert" /></a>
+            <a href="index.html" aria-label="Go to homepage">
+                <img src="assets/images/franks-logo.png" alt="Franks Team - Homepage" class="w-32 invert" />
+            </a>
+        </div>
     </header>
 
     <main class="min-h-screen">
@@ -23,7 +25,8 @@
                 <h1 class="text-5xl font-extrabold text-gray-900 mb-12 text-center tracking-tight">Weekly Class Schedule
                 </h1>
 
-                <div class="bg-white p-2 md:p-6 rounded-xl shadow-lg overflow-x-auto border border-gray-200">
+                <div
+                    class="bg-white p-2 md:p-6 rounded-xl shadow-lg overflow-x-auto border border-gray-200 hidden md:block">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
@@ -214,9 +217,201 @@
                                 <td></td>
                                 <td></td>
                             </tr>
-
                         </tbody>
                     </table>
+                </div>
+
+
+                <div class="space-y-8 block md:hidden max-w-lg mx-auto">
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            MONDAY
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-red-50 hover:bg-red-100"
+                                data-title="Boxing" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Technique, fitness and basic drills.">
+                                <span class="text-sm font-semibold text-gray-500">11:00 AM - 12:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-green-50 hover:bg-green-100"
+                                data-title="Youth Boxing" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Ages 12-16. Discipline and basics.">
+                                <span class="text-sm font-semibold text-gray-500">5:00 PM - 6:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Youth Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Stand-up and clinch focus.">
+                                <span class="text-sm font-semibold text-gray-500">6:00 PM - 7:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-yellow-50 hover:bg-yellow-100"
+                                data-title="Wrestling" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Takedowns, control, and transition drills.">
+                                <span class="text-sm font-semibold text-gray-500">7:00 PM - 8:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Wrestling</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-teal-50 hover:bg-teal-100"
+                                data-title="Muay Thai" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Clinch, knees, elbows, and kicking power.">
+                                <span class="text-sm font-semibold text-gray-500">8:30 PM - 9:30 PM</span>
+                                <span class="text-base font-bold text-gray-900">Muay Thai</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            TUESDAY
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Focus on foundational integration.">
+                                <span class="text-sm font-semibold text-gray-500">11:00 AM - 12:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Groundwork and control focus.">
+                                <span class="text-sm font-semibold text-gray-500">6:00 PM - 7:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-red-50 hover:bg-red-100"
+                                data-title="Boxing" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Footwork and defensive drills.">
+                                <span class="text-sm font-semibold text-gray-500">7:00 PM - 8:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-purple-50 hover:bg-purple-100"
+                                data-title="Brazilian Jiu-Jitsu" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Ground control and submission techniques.">
+                                <span class="text-sm font-semibold text-gray-500">8:00 PM - 9:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Brazilian Jiu-Jitsu</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            WEDNESDAY (SPARING)
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-red-50 hover:bg-red-100"
+                                data-title="Boxing" data-trainer="Coach Placeholder"
+                                data-focus="Sparing Day. All levels.">
+                                <span class="text-sm font-semibold text-gray-500">11:00 AM - 12:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-green-50 hover:bg-green-100"
+                                data-title="Youth Boxing" data-trainer="Coach Placeholder"
+                                data-focus="Sparing Day. All levels. Ages 12-16.">
+                                <span class="text-sm font-semibold text-gray-500">5:00 PM - 6:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Youth Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder" data-focus="Sparing Day. All levels.">
+                                <span class="text-sm font-semibold text-gray-500">6:00 PM - 7:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-red-50 hover:bg-red-100"
+                                data-title="Boxing" data-trainer="Coach Placeholder"
+                                data-focus="Sparing Day. All levels.">
+                                <span class="text-sm font-semibold text-gray-500">7:00 PM - 8:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-teal-50 hover:bg-teal-100"
+                                data-title="Muay Thai" data-trainer="Coach Placeholder"
+                                data-focus="Sparing Day. All levels.">
+                                <span class="text-sm font-semibold text-gray-500">8:30 PM - 9:30 PM</span>
+                                <span class="text-base font-bold text-gray-900">Muay Thai</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            THURSDAY
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Focus on foundational integration.">
+                                <span class="text-sm font-semibold text-gray-500">11:00 AM - 12:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Stand-up and clinch focus.">
+                                <span class="text-sm font-semibold text-gray-500">6:00 PM - 7:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-red-50 hover:bg-red-100"
+                                data-title="Boxing" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Footwork and defensive drills.">
+                                <span class="text-sm font-semibold text-gray-500">7:00 PM - 8:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-purple-50 hover:bg-purple-100"
+                                data-title="Brazilian Jiu-Jitsu" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Ground control and submission techniques.">
+                                <span class="text-sm font-semibold text-gray-500">8:00 PM - 9:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Brazilian Jiu-Jitsu</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            FRIDAY
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-red-50 hover:bg-red-100"
+                                data-title="Boxing" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Technique, fitness and basic drills.">
+                                <span class="text-sm font-semibold text-gray-500">11:00 AM - 12:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Boxing</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-blue-50 hover:bg-blue-100"
+                                data-title="MMA" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Groundwork and control focus.">
+                                <span class="text-sm font-semibold text-gray-500">6:00 PM - 7:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">MMA</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-yellow-50 hover:bg-yellow-100"
+                                data-title="Wrestling" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Takedowns, control, and transition drills.">
+                                <span class="text-sm font-semibold text-gray-500">7:00 PM - 8:00 PM</span>
+                                <span class="text-base font-bold text-gray-900">Wrestling</span>
+                            </li>
+                            <li class="class-card flex items-center justify-between p-4 cursor-pointer bg-teal-50 hover:bg-teal-100"
+                                data-title="Muay Thai" data-trainer="Coach Placeholder"
+                                data-focus="All levels. Clinch, knees, elbows, and kicking power.">
+                                <span class="text-sm font-semibold text-gray-500">8:30 PM - 9:30 PM</span>
+                                <span class="text-base font-bold text-gray-900">Muay Thai</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            SATURDAY
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-4 text-center text-gray-500 italic">No classes scheduled.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                        <h2 class="bg-indigo-600 text-white text-xl font-bold p-4 text-center">
+                            SUNDAY
+                        </h2>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-4 text-center text-gray-500 italic">No classes scheduled.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <p class="mt-8 text-center text-gray-600">**NOTE:** Please arrive 10 minutes before the class start
