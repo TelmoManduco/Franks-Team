@@ -11,16 +11,20 @@ function setupFAQAccordion() {
   faqHeaders.forEach((header) => {
     header.addEventListener("click", () => {
       const content = header.nextElementSibling; // The content is the immediate next sibling element
-      const icon = header.querySelector("svg"); // The icon to be rotated
+      const icon = header.querySelector('[data-icon="plus"]'); // The icon to be rotated
 
       // 1. Close all other FAQ items (maintaining only one open at a time)
       faqHeaders.forEach((otherHeader) => {
         if (otherHeader !== header) {
           const otherContent = otherHeader.nextElementSibling;
-          const otherIcon = otherHeader.querySelector("svg");
+          const otherIcon = otherHeader.querySelector('[data-icon="plus"]');
+          // Usa "classList.contains" para verificar se precisa remover a classe
+          if (otherIcon && otherIcon.classList.contains("rotate-45")) {
+            otherIcon.classList.remove("rotate-45");
+          }
+
           otherContent.classList.add("hidden");
           otherHeader.setAttribute("aria-expanded", "false");
-          if (otherIcon) otherIcon.classList.remove("rotate-45");
         }
       });
 
