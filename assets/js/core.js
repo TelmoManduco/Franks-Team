@@ -67,8 +67,8 @@ function setupMobileMenuAndModal() {
       loginModal.classList.remove("opacity-0", "pointer-events-none");
       loginModal.classList.add("opacity-100");
       // Slide in the modal content
-      modalContent.classList.remove("translate-y-4");
-      modalContent.classList.add("translate-y-0");
+      modalContent.classList.remove("scale-95");
+      modalContent.classList.add("scale-100");
       closeMenu(); // Corrective action: Ensure mobile menu is closed
     }
 
@@ -77,8 +77,8 @@ function setupMobileMenuAndModal() {
       loginModal.classList.remove("opacity-100");
       loginModal.classList.add("opacity-0", "pointer-events-none");
       // Slide out the modal content
-      modalContent.classList.remove("translate-y-0");
-      modalContent.classList.add("translate-y-4");
+      modalContent.classList.remove("scale-100");
+      modalContent.classList.add("scale-95");
     }
 
     // Attach listeners for opening and closing the modal
@@ -100,6 +100,87 @@ function setupMobileMenuAndModal() {
         closeLoginModal();
       }
     });
+
+    // --- Switch Logic: Close Login and Prepare to Open Register ---
+    const switchToRegisterLink = document.getElementById("switch-to-register");
+
+    if (switchToRegisterLink) {
+      switchToRegisterLink.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevents the link from navigating to '#'
+        // 1. Close the current Login Modal
+        closeLoginModal(); // 2. NEXT STEP: This is where you will open the Register Modal
+        setTimeout(openRegisterModal, 180, e); // CHAMA A FUNÇÃO DE REGISTRO
+      });
+    }
+  }
+
+  // --- Register Modal Logic ---
+  const registerModal = document.getElementById("register-modal");
+  // Seleciona o botão de fechar que você criou: id="close-register-modal"
+  const closeRegisterButton = document.getElementById("close-register-modal");
+  const registerContent = registerModal
+    ? registerModal.querySelector("div:nth-child(2)") // Selects the actual content box
+    : null;
+
+  // Selects the switch link you created: id="switch-to-login"
+  const switchToLoginLink = document.getElementById("switch-to-login");
+
+  if (registerModal && closeRegisterButton && registerContent) {
+    // Function to open the Register Modal
+    function openRegisterModal(e) {
+      if (e) e.preventDefault();
+      // Show the modal overlay
+      registerModal.classList.remove("opacity-0", "pointer-events-none");
+      registerModal.classList.add("opacity-100");
+      // Slide in the modal content
+      modalContent.classList.remove("scale-95");
+      modalContent.classList.add("scale-100");
+      closeMenu(); // Ensure mobile menu is closed
+    }
+
+    // Function to close the Register Modal
+    function closeRegisterModal() {
+      // Hide the modal overlay
+      registerModal.classList.remove("opacity-100");
+      registerModal.classList.add("opacity-0", "pointer-events-none");
+      // Slide out the modal content
+      modalContent.classList.remove("scale-100");
+      modalContent.classList.add("scale-95");
+    }
+
+    // Attach listeners for closing the modal
+    closeRegisterButton.addEventListener("click", closeRegisterModal);
+
+    // Close when clicking outside the modal content
+    registerModal.addEventListener("click", (e) => {
+      if (e.target === registerModal) {
+        closeRegisterModal();
+      }
+    });
+
+    // Close when pressing the ESC key
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Escape" &&
+        registerModal.classList.contains("opacity-100")
+      ) {
+        closeRegisterModal();
+      }
+    });
+
+    // --- Switch Logic: Close Register and Open Login ---
+    if (switchToLoginLink) {
+      switchToLoginLink.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // 1. Close the current Register Modal
+        closeRegisterModal();
+
+        // 2. Open the Login Modal after a slight delay (300ms transition)
+        // Usamos o setTimeout para permitir que a animação de fechamento termine
+        setTimeout(openLoginModal, 180, e);
+      });
+    }
   }
 }
 
