@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="assets/css/output.css" />
 
   <!-- <script src="assets/js/main.js"></script> -->
-  <script defer src="assets/js/core.js"></script>
+  <!-- <script defer src="assets/js/core.js"></script> -->
+  <script type="module" src="assets/js/main.js"></script>
   <script defer src="assets/js/faq.js"></script>
 
   <title>Franks Team - Martial Arts in Manchester</title>
@@ -620,7 +621,7 @@
         </button>
       </div>
 
-      <form class="space-y-4">
+      <form id="login-form" class="space-y-4">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
           <input type="email" id="email"
@@ -666,7 +667,7 @@
         </button>
       </div>
 
-      <form class="space-y-4">
+      <form id="register-form" class="space-y-4">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
           <input type="text" id="name"
