@@ -1,20 +1,25 @@
-// LOGIN FORM
-const loginForm = document.getElementById("login-form");
+// /assets/js/forms.js
+// Módulo de Formulários
 
-if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    console.log("LOGIN SUBMITTED!");
-    // depois ligamos ao backend
-  });
-}
+export function setupForms() {
+    // LOGIN FORM
+    const loginForm = document.getElementById("login-form");
 
-// REGISTER FORM
-const registerForm = document.getElementById("register-form");
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log("LOGIN SUBMITTED!");
+            // depois ligamos ao backend
+        });
+    }
 
-if (registerForm) {
-  registerForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    console.log("REGISTER SUBMITTED!");
-  });
+    // REGISTER FORM
+    const registerForm = document.getElementById("register-form");
+
+    if (registerForm) {
+        registerForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log("REGISTER SUBMITTED!");
+        });
+    }
 }
