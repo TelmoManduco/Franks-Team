@@ -2,124 +2,161 @@
 
 import { closeMenu } from './helpers.js';
 
+/**
+ * Initializes all modal logic for Login and Register.
+ * Includes:
+ * - open/close animations
+ * - switching between modals
+ * - closing on overlay click
+ * - closing on ESC key
+ */
+
 export function setupModals() {
-    // --- ELEMENTOS PARTILHADOS ---
+
+    // ------------------------------------------------------------
+    // SELECT DOM ELEMENTS
+    // ------------------------------------------------------------
     const loginModal = document.getElementById("login-modal");
     const registerModal = document.getElementById("register-modal");
-    
-    // Seletores de Conteúdo (para animação scale)
-    const modalContent = loginModal
-        ? loginModal.querySelector("div:nth-child(2)") 
-        : null;
-    const registerContent = registerModal
-        ? registerModal.querySelector("div:nth-child(2)") 
-        : null;
-    
-    // Links de switch
+
+    // Content wrappers (used for scale animation)
+    const loginContent = loginModal?.querySelector("div:nth-child(2)") || null;
+    const registerContent = registerModal?.querySelector("div:nth-child(2)") || null;
+
+    // Switch links
     const switchToRegisterLink = document.getElementById("switch-to-register");
     const switchToLoginLink = document.getElementById("switch-to-login");
 
-    // --- FUNÇÕES DE LOGIN ---
+    // Buttons that open login modal (desktop + mobile)
+    const openLoginButtons = [
+        document.getElementById("open-login-modal"),
+        document.getElementById("open-login-modal-mobile")
+    ].filter(btn => btn);
 
-    function openLoginModal(e) {
+
+    // ------------------------------------------------------------
+    // HELPER FUNCTIONS (Animations)
+    // ------------------------------------------------------------
+
+    /** Smoothly opens a modal */
+    function openModal(modal, content) {
+        if (!modal || !content) return;
+
+        modal.classList.remove("opacity-0", "pointer-events-none");
+        modal.classList.add("opacity-100");
+
+        // Play scale animation
+        content.classList.remove("scale-95");
+        content.classList.add("scale-100");
+
+        closeMenu(); // Prevents menu being open under the modal
+    }
+
+    /** Smoothly closes a modal */
+    function closeModal(modal, content) {
+        if (!modal || !content) return;
+
+        modal.classList.add("opacity-0", "pointer-events-none");
+        modal.classList.remove("opacity-100");
+
+        // Reverse scale animation
+        content.classList.remove("scale-100");
+        content.classList.add("scale-95");
+    }
+
+
+    // ------------------------------------------------------------
+    // INDIVIDUAL OPEN/CLOSE WRAPPERS
+    // ------------------------------------------------------------
+
+    const openLoginModal = (e) => {
         if (e) e.preventDefault();
-        if (!loginModal || !modalContent) return;
+        closeModal(registerModal, registerContent); // Ensure register is closed
+        openModal(loginModal, loginContent);
+    };
 
-        // Mostrar o modal
-        loginModal.classList.remove("opacity-0", "pointer-events-none");
-        loginModal.classList.add("opacity-100");
-        // Animação de slide in
-        modalContent.classList.remove("scale-95");
-        modalContent.classList.add("scale-100");
-        closeMenu(); // Garante que o menu móvel fecha
-    }
+    const closeLoginModal = () => {
+        closeModal(loginModal, loginContent);
+    };
 
-    function closeLoginModal() {
-        if (!loginModal || !modalContent) return;
-        
-        // Esconder o modal
-        loginModal.classList.remove("opacity-100");
-        loginModal.classList.add("opacity-0", "pointer-events-none");
-        // Animação de slide out
-        modalContent.classList.remove("scale-100");
-        modalContent.classList.add("scale-95");
-    }
-
-    // --- FUNÇÕES DE REGISTO ---
-
-    function openRegisterModal(e) {
+    const openRegisterModal = (e) => {
         if (e) e.preventDefault();
-        if (!registerModal || !registerContent) return;
+        closeModal(loginModal, loginContent); // Ensure login is closed
+        openModal(registerModal, registerContent);
+    };
 
-        // Mostrar o modal
-        registerModal.classList.remove("opacity-0", "pointer-events-none");
-        registerModal.classList.add("opacity-100");
-        // Animação de slide in
-        registerContent.classList.remove("scale-95");
-        registerContent.classList.add("scale-100");
-        closeMenu(); // Garante que o menu móvel fecha
-    }
-
-    function closeRegisterModal() {
-        if (!registerModal || !registerContent) return;
-        
-        // Esconder o modal
-        registerModal.classList.remove("opacity-100");
-        registerModal.classList.add("opacity-0", "pointer-events-none");
-        // Animação de slide out
-        registerContent.classList.remove("scale-100");
-        registerContent.classList.add("scale-95");
-    }
+    const closeRegisterModal = () => {
+        closeModal(registerModal, registerContent);
+    };
 
 
-    // --- ATTACH LISTENERS (LOGIN) ---
+    // ------------------------------------------------------------
+    // ATTACH EVENT LISTENERS — LOGIN MODAL
+    // ------------------------------------------------------------    
     if (loginModal) {
-        const openModalButtons = [
-            document.getElementById("open-login-modal"),
-            document.getElementById("open-login-modal-mobile"),
-        ].filter((btn) => btn);
-        const closeModalButton = document.getElementById("close-login-modal");
 
-        // Abrir/Fechar
-        openModalButtons.forEach((button) => button.addEventListener("click", openLoginModal));
-        if (closeModalButton) closeModalButton.addEventListener("click", closeLoginModal);
-        
-        // Fechar ao clicar no overlay ou ESC
-        loginModal.addEventListener("click", (e) => { if (e.target === loginModal) closeLoginModal(); });
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && loginModal.classList.contains("opacity-100")) closeLoginModal();
+        // Buttons that open login
+        openLoginButtons.forEach(btn => {
+            btn.addEventListener("click", openLoginModal);
         });
 
-        // Switch Login -> Register
+        // Close button
+        const closeLoginButton = document.getElementById("close-login-modal");
+        if (closeLoginButton) {
+            closeLoginButton.addEventListener("click", closeLoginModal);
+        }
+
+        // Close on overlay click
+        loginModal.addEventListener("click", (e) => {
+            if (e.target === loginModal) closeLoginModal();
+        });
+
+        // Keyboard ESC support
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && loginModal.classList.contains("opacity-100")) {
+                closeLoginModal();
+            }
+        });
+
+        // Switch Login → Register
         if (switchToRegisterLink) {
             switchToRegisterLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 closeLoginModal();
-                // Pequeno delay para a animação de fecho (180ms)
-                setTimeout(() => openRegisterModal(e), 180); 
+                setTimeout(() => openRegisterModal(e), 180); // Wait animation
             });
+
         }
     }
 
-    // --- ATTACH LISTENERS (REGISTO) ---
+    // ------------------------------------------------------------
+    // ATTACH EVENT LISTENERS — REGISTER MODAL
+    // ------------------------------------------------------------
     if (registerModal) {
-        const closeRegisterButton = document.getElementById("close-register-modal");
-        
-        if (closeRegisterButton) closeRegisterButton.addEventListener("click", closeRegisterModal);
 
-        // Fechar ao clicar no overlay ou ESC
-        registerModal.addEventListener("click", (e) => { if (e.target === registerModal) closeRegisterModal(); });
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && registerModal.classList.contains("opacity-100")) closeRegisterModal();
+        const closeRegisterButton = document.getElementById("close-register-modal");
+        if (closeRegisterButton) {
+            closeRegisterButton.addEventListener("click", closeRegisterModal);
+        }
+
+        // Close on overlay click
+        registerModal.addEventListener("click", (e) => {
+            if (e.target === registerModal) closeRegisterModal();
         });
 
-        // Switch Register -> Login
+        // Keyboard ESC support
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && registerModal.classList.contains("opacity-100")) {
+                closeRegisterModal();
+            }
+        });
+
+        // Switch Register → Login
         if (switchToLoginLink) {
             switchToLoginLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 closeRegisterModal();
-                // Pequeno delay para a animação de fecho (180ms)
-                setTimeout(() => openLoginModal(e), 180); 
+                setTimeout(() => openLoginModal(e), 180);
             });
         }
     }
