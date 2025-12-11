@@ -1,23 +1,42 @@
 // /assets/js/main.js
-// Ponto de Entrada principal do JavaScript.
+// -----------------------------------------------------------------------------
+// CORE ENTRY POINT
+// -----------------------------------------------------------------------------
+// This module serves as the main application orchestrator.
+// Its sole responsibility is to import all individual feature modules 
+// and execute their setup functions once the entire HTML document is ready.
+// This implements a clean, modular structure for the front-end.
+// -----------------------------------------------------------------------------
 
-// Importa os módulos criados
-import { setupMobileMenu } from './menu.js';
-import { setupModals } from './modals.js';
-import { setupSmoothScrolling } from './smooth-scroll.js';
-import { setupHeroSlideshow } from './slideshow.js';
-import { setupForms } from './forms.js'; // Incluímos a função do ficheiro futuro
+// Import created feature modules (using ES Module syntax)
+// The './' specifies the path relative to the current file (i.e., inside /assets/js/).
 
-// O Core Entry Point do seu core.js original foi movido para aqui:
+import { setupMobileMenu } from './menu.js';             // Handles mobile navigation open/close logic.
+import { setupModals } from './modals.js';               // Manages Login/Registration modal visibility and switching.
+import { setupSmoothScrolling } from './smooth-scroll.js'; // Implements smooth scrolling for anchor links.
+import { setupHeroSlideshow } from './slideshow.js';     // Initializes the hero section image rotator (slideshow).
+import { setupForms } from './forms.js';                 // Reserved for form submission logic (linking Front-end to Back-end API via fetch).
+
+// Core Entry Point - Executes code only after the entire DOM structure is loaded.
+// This replaces the initialization block from the original 'core.js' file.
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("DOM totalmente carregado. Inicializando módulos.");
+    console.log("DOM fully loaded. Initializing modules.");
     
-    // Executa todas as funções de configuração
+    // Execute all setup functions to attach event listeners and initialize features.
+    // The order generally does not matter here, as modules are independent.
+    
+    // Mobile Menu & Overlay Setup
     setupMobileMenu();
+    
+    // Modal Setup (Login, Register, and the switch logic)
     setupModals();
+    
+    // Anchor Link Scrolling Setup
     setupSmoothScrolling();
+    
+    // Hero Section Slideshow Initialization
     setupHeroSlideshow();
     
-    // Módulo pronto para receber a lógica de submissão (Backend/Fetch)
+    // Forms Setup: Ready for API/Backend submission logic (fetch).
     setupForms(); 
 });
