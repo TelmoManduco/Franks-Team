@@ -1,27 +1,14 @@
 import express from "express";
-import testRoutes from "./routes/test";
-
+import authRoutes from "./routes/auth";
+import { json } from "node:stream/consumers";
 
 const app = express();
-const PORT = 3000;
 
-// --------------------
-// Middlewares
-// --------------------
 app.use(express.json());
-app.use("/api", testRoutes);
 
+// API routes
+app.use("/api", authRoutes);
 
-// --------------------
-// Test route
-// --------------------
-app.get("/", (req, res) => {
-  res.json({ message: "Franks Team backend is running 🚀" });
-});
-
-// --------------------
-// Start server
-// --------------------
-app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
 });

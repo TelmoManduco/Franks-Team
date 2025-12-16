@@ -1,40 +1,42 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+import { prisma } from "../lib/prisma";
+import { error } from "node:console";
 
-// ================================
-// POST /api/register
-// Handles user registration
-// ================================
-router.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
+const router = Router();
 
-  console.log("New registration received:", req.body);
+/**
+ * POST /api/register
+ */
+router.post("/register", async (req, res) => {
+  try {
+    const { email, password, name } = req.body;
 
-  // In the future:
-  // 1. Validate input
-  // 2. Check if user already exists
-  // 3. Hash password
-  // 4. Save user to database
+    // 1. Basic validation
+    if (!email || !password) {
+      return res.status(400).json({
+        error: "Email and password are required",
+      });
+    }
 
-  res.json({ message: "Registration received successfully!" });
+    // 2. Check if user already exists
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+
+    if (existingUser) {
+      return res.status(409).json({ error: "User already exists" });
+    }
+
+    // 3. Create user (passwordNOT hashed yet - next step)
+    const user = await prisma.user.create({ data: { email, password, name } });
+
+    // 4. Return success (never return password)
+    return res.status(201).json({
+      message: "User created successfully",
+      user: { id: user.id, email: user.email, name: user.name },
+    });
+  } catch (error) {
+    console.error("REGISTER ERROR", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-// ================================
-// POST /api/login
-// Handles user login
-// ================================
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  console.log("Login attempt:", req.body);
-
-  // In the future:
-  // 1. Validate input
-  // 2. Check if user exists
-  // 3. Compare password with hashed password
-  // 4. Generate JWT token
-
-  res.json({ message: "Login received!" });
-});
-
-module.exports = router;
+export default router;
