@@ -620,14 +620,16 @@
       </div>
 
       <form id="login-form" class="space-y-4">
+        <div id="login-error"
+          class="hidden text-sm text-red-600 bg-red-50 p-2 rounded border border-red-200 text-center"></div>
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-          <input type="email" id="email" autocomplete="email"
+          <input type="email" id="email" name="email" autocomplete="email" required
             class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-yellow-500 focus:ring-yellow-500" />
         </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" id="password"
+          <input type="password" id="password" name="password" required
             class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-yellow-500 focus:ring-yellow-500" />
         </div>
 
@@ -664,21 +666,26 @@
       </div>
 
       <form id="register-form" class="space-y-4">
+        <div id="register-error"
+          class="hidden text-sm text-red-600 bg-red-50 p-2 rounded border border-red-200 text-center"></div>
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-          <input type="text" id="name" autocomplete="name"
+          <input type="text" id="name" name="name" autocomplete="name" required
             class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-yellow-500 focus:ring-yellow-500" />
         </div>
         <div>
           <label for="register-email" class="block text-sm font-medium text-gray-700">Email Address</label>
-          <input type="email" id="register-email"
+          <input type="email" id="register-email" name="email" required
             class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-yellow-500 focus:ring-yellow-500" />
         </div>
         <div>
           <label for="register-password" class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" id="register-password"
+          <input type="password" id="register-password" name="password" required minlength="6"
             class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-yellow-500 focus:ring-yellow-500" />
+          <p class="text-[10px] text-gray-400 mt-1">Minimum of 6 characters.</p>
         </div>
+
+
 
         <button type="submit"
           class="w-full cursor-pointer rounded-lg bg-yellow-500 py-2 font-bold text-gray-900 transition duration-150 hover:bg-yellow-600">
@@ -692,6 +699,8 @@
       </p>
     </div>
   </div>
+
+  <script src="assets/js/auth-handler.js"></script>
 </body>
 
 </html>
