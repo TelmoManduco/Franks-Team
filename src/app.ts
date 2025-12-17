@@ -2,16 +2,11 @@ import express from "express";
 import authRoutes from "./routes/auth";
 import testRoutes from "./routes/test";
 
-const app = express();
-const PORT = 3000;
+export const app = express();
 
-// Middleware to parse JSON
+// ✅ Middleware GLOBAL (antes das rotas)
 app.use(express.json());
 
-// Routes
+// ✅ Todas as rotas herdam o middleware
 app.use("/api", authRoutes);
 app.use("/api", testRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
