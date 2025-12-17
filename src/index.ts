@@ -1,17 +1,7 @@
-import express from "express";
-import authRoutes from "./routes/auth";
-import testRoutes from "./routes/test";
+import { app } from "./app"; // Importa o app já configurado do apps.ts
 
-const app = express();
 const PORT = 3000;
 
-// Middleware to parse JSON
-app.use(express.json());
-
-// Routes
-app.use("/api", authRoutes);
-app.use("/api", testRoutes);
-
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
