@@ -1,5 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/auth";
+import testDbRoutes from "./routes/test-db";
+
 import path from "path";
 
 export const app = express();
@@ -14,6 +16,7 @@ app.use(express.static(path.join(process.cwd(), "public")));
 
 // --- Rotas ---
 app.use("/api", authRoutes);
+app.use("/api", testDbRoutes);
 
 // Opcional: Rota padrão para verificar se o servidor está vivo
 app.get("/health", (req, res) => {

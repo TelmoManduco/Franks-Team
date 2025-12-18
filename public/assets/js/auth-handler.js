@@ -1,46 +1,51 @@
 /**
- * Auth Handler - Manages Client-Side Authentication
- * Connects the Login/Register modals to the Express/Prisma API
+ * Auth Handler - Client-Side Authentication
+ * Connects Login / Register modals to Express + Prisma API
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- UI ELEMENTS ---
+  // --- FORMS ---
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
 
+  // --- ERROR CONTAINERS ---
   const loginErrorDiv = document.getElementById("login-error");
   const registerErrorDiv = document.getElementById("register-error");
 
-  /**
-   * Helper to display error messages in the UI
-   * @param {HTMLElement} element - The error container
-   * @param {string} message - The text to display
-   */
+  // --- BUTTONS ---
+  const loginButton = document.getElementById("login-submit");
+  const registerButton = document.getElementById("register-submit");
+
+  // --- HELPERS ---
   const showError = (element, message) => {
+    if (!element) return;
     element.textContent = message;
     element.classList.remove("hidden");
   };
 
-  /**
-   * Helper to hide error messages
-   * @param {HTMLElement} element - The error container
-   */
   const hideError = (element) => {
-    element.classList.add("hidden");
+    if (!element) return;
     element.textContent = "";
+    element.classList.add("hidden");
   };
 
-  // --- REGISTRATION LOGIC ---
+  /* ===========================
+      REGISTER
+  ============================ */
   if (registerForm) {
     registerForm.addEventListener("submit", async (event) => {
-      event.preventDefault(); // Prevent page reload
+      event.preventDefault();
       hideError(registerErrorDiv);
 
-      // Collect data from HTML IDs
+      if (registerButton) {
+        registerButton.disabled = true;
+        registerButton.textContent = "Creating account...";
+      }
+
       const userData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("register-email").value,
-        password: document.getElementById("register-password").value,
+        name: document.getElementById("name")?.value.trim(),
+        email: document.getElementById("register-email")?.value.trim(),
+        password: document.getElementById("register-password")?.value,
       };
 
       try {
@@ -53,33 +58,47 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
 
         if (response.ok) {
-          alert("Account created successfully! You can now log in.");
-          // Close register modal and open login modal via trigger buttons
-          document.getElementById("close-register-modal").click();
-          // Optional: Automatically open login modal here if desired
+          console.log("Account created:", result.user);
+
+          // Close register modal
+          document.getElementById("close-register-modal")?.click();
+
+          // Optional: open login modal automatically
+          // document.getElementById("open-login-modal")?.click();
         } else {
-          // Display error sent by the backend (e.g., "User already exists")
           showError(registerErrorDiv, result.error || "Registration failed.");
         }
       } catch (error) {
-        console.error("Registration fetch error:", error);
+        console.error("REGISTER ERROR:", error);
         showError(
           registerErrorDiv,
-          "Server connection error. Please try again later.",
+          "Server connection error. Try again later.",
         );
+      } finally {
+        if (registerButton) {
+          registerButton.disabled = false;
+          registerButton.textContent = "Sign Up";
+        }
       }
     });
   }
 
-  // --- LOGIN LOGIC ---
+  /* ===========================
+      LOGIN
+  ============================ */
   if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       hideError(loginErrorDiv);
 
+      if (loginButton) {
+        loginButton.disabled = true;
+        loginButton.textContent = "Logging in...";
+      }
+
       const credentials = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
+        email: document.getElementById("login-email")?.value.trim(),
+        password: document.getElementById("login-password")?.value,
       };
 
       try {
@@ -93,20 +112,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.ok) {
           console.log("Login successful:", result.user);
-          alert(`Welcome back, ${result.user.name}!`);
 
-          // Redirect or refresh page to update Auth state
+          // Close login modal
+          document.getElementById("close-login-modal")?.click();
+
+          // Refresh UI / redirect
           window.location.reload();
         } else {
-          // Display error (e.g., "Invalid email or password")
-          showError(loginErrorDiv, result.error || "Login failed.");
+          showError(
+            loginErrorDiv,
+            result.error || "Invalid email or password.",
+          );
         }
       } catch (error) {
-        console.error("Login fetch error:", error);
-        showError(
-          loginErrorDiv,
-          "Server connection error. Please try again later.",
-        );
+        console.error("LOGIN ERROR:", error);
+        showError(loginErrorDiv, "Server connection error. Try again later.");
+      } finally {
+        if (loginButton) {
+          loginButton.disabled = false;
+          loginButton.textContent = "Log In";
+        }
       }
     });
   }
