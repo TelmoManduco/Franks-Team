@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- BUTTONS ---
   const loginButton = document.getElementById("login-submit");
-  const registerButton = document.getElementById("register-submit");
+  const registerButton = registerForm?.querySelector("button[type='submit']");
 
   // --- HELPERS ---
   const showError = (element, message) => {
@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const userData = {
-        name: document.getElementById("name")?.value.trim(),
-        email: document.getElementById("register-email")?.value.trim(),
-        password: document.getElementById("register-password")?.value,
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("register-email").value.trim(),
+        password: document.getElementById("register-password").value,
       };
 
       try {
@@ -62,9 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Close register modal
           document.getElementById("close-register-modal")?.click();
-
-          // Optional: open login modal automatically
-          // document.getElementById("open-login-modal")?.click();
         } else {
           showError(registerErrorDiv, result.error || "Registration failed.");
         }
@@ -97,8 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const credentials = {
-        email: document.getElementById("login-email")?.value.trim(),
-        password: document.getElementById("login-password")?.value,
+        email: document.getElementById("login-email").value.trim(),
+        password: document.getElementById("login-password").value,
       };
 
       try {
