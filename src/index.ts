@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { app } from "./app"; // Importa o app já configurado do apps.ts
 
 const PORT = 3000;

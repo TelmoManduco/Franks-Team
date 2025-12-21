@@ -1,11 +1,14 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
+import { signToken } from "../lib/jwt";
 import { prisma } from "../lib/prisma";
+import { requireAuth } from "../middlewares/auth";
 
 const router = Router();
 
 /**
  * POST /api/register
+ * Creates a new user account
  */
 router.post("/register", async (req, res) => {
   try {
@@ -29,10 +32,10 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Hash password
+    // Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
+    // Create new user in database
     const user = await prisma.user.create({
       data: {
         email,
@@ -59,40 +62,51 @@ router.post("/register", async (req, res) => {
 
 /**
  * POST /api/login
+ * Authenticates user and issues JWT
  */
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validation
+    // Validate request body
     if (!email || !password) {
       return res.status(400).json({
         error: "Email and password are required",
       });
     }
 
-    // Find user
+    // Find user by email
     const user = await prisma.user.findUnique({
       where: { email },
     });
 
     if (!user) {
       return res.status(401).json({
-        error: "Invalid email or password",
+        error: "Invalid credentials",
       });
     }
 
-    // Compare password
+    // Compare plain password with hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({
-        error: "Invalid email or password",
+        error: "Invalid credentials",
       });
     }
 
-    // Success (never send password)
-    return res.status(200).json({
+    // Create JWT containing the user ID
+    const token = signToken({ userId: user.id });
+
+    // Send JWT as httpOnly cookie (secure authentication)
+    res.cookie("token", token, {
+      httpOnly: true, // Not accessible via JS
+      secure: false, // Set to true in production (HTTPS)
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    return res.json({
       message: "Login successful",
       user: {
         id: user.id,
@@ -106,6 +120,23 @@ router.post("/login", async (req, res) => {
       error: "Internal server error",
     });
   }
+});
+
+/**
+ * GET /api/me
+ * Returns logged-in user
+ */
+router.get("/me", requireAuth, async (req, res) => {
+  const user = await prisma.user.findUnique({
+    where: { id: req.userId },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
+
+  res.json({ user });
 });
 
 export default router;

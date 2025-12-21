@@ -16,6 +16,7 @@ import { setupModals } from "./modals.js"; // Manages Login/Registration modal v
 import { setupSmoothScrolling } from "./smooth-scroll.js"; // Implements smooth scrolling for anchor links.
 import { setupHeroSlideshow } from "./slideshow.js"; // Initializes the hero section image rotator (slideshow).
 import { setupForms } from "./forms.js"; // Reserved for form submission logic (linking Front-end to Back-end API via fetch).
+import { initAuthSession } from "./auth-session.js";
 
 // Core Entry Point - Executes code only after the entire DOM structure is loaded.
 // This replaces the initialization block from the original 'core.js' file.
@@ -27,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Mobile Menu & Overlay Setup
   setupMobileMenu();
+
+  // Check if user is logged in right away
+  initAuthSession(); 
 
   // Modal Setup (Login, Register, and the switch logic)
   setupModals();
