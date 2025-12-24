@@ -5,7 +5,9 @@
 
 export async function initAuthSession() {
   try {
-    const response = await fetch("/api/me");
+    const response = await fetch("/api/me", {
+      credentials: "include", // ✅ REQUIRED to send cookies
+    });
 
     if (response.ok) {
       const data = await response.json();
@@ -46,6 +48,5 @@ function renderLoggedInUI(user) {
 
 function renderLoggedOutUI() {
   // Logic to ensure buttons show "My Account" if no session exists
-  // Usually, the HTML already has this by default.
   console.log("User is a guest.");
 }
