@@ -139,4 +139,21 @@ router.get("/me", requireAuth, async (req, res) => {
   res.json({ user });
 });
 
+/**
+ * POST /api/logout
+ * Clears the authentication cookie
+ */
+router.post("/logout", (req, res) => {
+  // Limpa o cookie "token" com as mesmas definições de segurança
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false, // Mantém igual ao login (false para dev local)
+    sameSite: "lax",
+  });
+
+  return res.status(200).json({
+    message: "Logged out successfully",
+  });
+});
+
 export default router;

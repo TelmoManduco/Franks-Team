@@ -22,7 +22,7 @@
           alt="Franks Team - Homepage" class="w-32 invert" /></a>
 
       <button id="mobile-menu-button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
-        type="button" class="p-2 text-white focus:outline-none md:hidden">
+        type="button" class="cursor-pointer p-2 text-white focus:outline-none md:hidden">
         <img src="assets/images/icons-images/burger-menu.svg" class="h-8 w-8" />
       </button>
 
@@ -621,7 +621,7 @@
 
       <form id="login-form" class="space-y-4">
         <div id="login-error"
-          class="hidden text-sm text-red-600 bg-red-50 p-2 rounded border border-red-200 text-center"></div>
+          class="hidden rounded border border-red-200 bg-red-50 p-2 text-center text-sm text-red-600"></div>
         <div>
           <label for="login-email" class="block text-sm font-medium text-gray-700">Email Address</label>
           <input type="email" id="login-email" name="email" autocomplete="email" required
@@ -667,7 +667,7 @@
 
       <form id="register-form" class="space-y-4">
         <div id="register-error"
-          class="hidden text-sm text-red-600 bg-red-50 p-2 rounded border border-red-200 text-center"></div>
+          class="hidden rounded border border-red-200 bg-red-50 p-2 text-center text-sm text-red-600"></div>
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
           <input type="text" id="name" name="name" autocomplete="name" required
@@ -683,10 +683,10 @@
           <input type="password" id="register-password" name="password" autocomplete="new-password" required
             minlength="6"
             class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-yellow-500 focus:ring-yellow-500" />
-          <p class="text-[10px] text-gray-400 mt-1">Minimum of 6 characters.</p>
+          <p class="mt-1 text-[10px] text-gray-400">
+            Minimum of 6 characters.
+          </p>
         </div>
-
-
 
         <button id="register-submit" type="submit"
           class="w-full cursor-pointer rounded-lg bg-yellow-500 py-2 font-bold text-gray-900 transition duration-150 hover:bg-yellow-600">

@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(userData),
         });
 
@@ -62,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Close register modal
           document.getElementById("close-register-modal")?.click();
+
+          window.location.href = "dashboard.html";
         } else {
           showError(registerErrorDiv, result.error || "Registration failed.");
         }
@@ -102,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await fetch("/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(credentials),
         });
 
@@ -114,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("close-login-modal")?.click();
 
           // Refresh UI / redirect
-          window.location.reload();
+          window.location.href = "dashboard.html";
         } else {
           showError(
             loginErrorDiv,
