@@ -9,66 +9,65 @@
 </head>
 
 <body class="min-h-full bg-gray-50 font-sans antialiased">
-    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm">
+    <header class="z-50 bg-white border-b border-gray-200 shadow-sm sticky top-0">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <div>
-                <h1 class="text-xl font-black text-gray-900 uppercase italic md:text-2xl">
-                    Welcome,
-                    <span id="user-name" class="text-yellow-500 italic">Athlete</span>
+
+            <div class="flex items-center">
+                <h1 class="text-xl md:text-2xl font-black text-gray-900 uppercase italic">
+                    Welcome, <span id="user-name" class="text-yellow-500 italic">Athlete</span>
                 </h1>
             </div>
 
-            <button id="mobile-menu-button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
-                type="button" class="p-2 text-gray-900 focus:outline-none">
+            <nav id="desktop-menu" class="hidden md:flex items-center space-x-8">
+                <a href="index.html"
+                    class="font-bold text-gray-700 transition duration-300 hover:text-yellow-500 uppercase italic">Home</a>
+                <a href="timetable.html"
+                    class="font-bold text-gray-700 transition duration-300 hover:text-yellow-500 uppercase italic">Timetable</a>
+                <a href="#"
+                    class="font-bold text-gray-700 transition duration-300 hover:text-yellow-500 uppercase italic">My
+                    Profile</a>
+
+                <button id="desktop-logout-btn" type="button"
+                    class="font-bold text-red-500 transition duration-300 hover:text-red-700 uppercase italic">
+                    Sign Out
+                </button>
+            </nav>
+
+            <button id="mobile-menu-button" aria-label="Open menu" type="button"
+                class="p-2 text-gray-900 focus:outline-none md:hidden">
                 <img src="assets/images/icons-images/burger-menu-black.svg" class="h-8 w-8" alt="Menu" />
             </button>
 
             <div id="menu-overlay"
-                class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300">
+                class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300">
             </div>
-
             <nav id="mobile-menu" aria-label="Mobile navigation menu" role="dialog" aria-modal="true" aria-hidden="true"
                 inert
                 class="fixed top-0 right-0 z-50 h-full w-64 translate-x-full transform bg-gray-800 p-6 transition-transform duration-300">
+
                 <button id="close-menu-button" aria-label="Close menu" type="button"
                     class="absolute top-4 right-4 text-white hover:text-yellow-400 focus:outline-none">
                     <img src="assets/images/icons-images/close-x.svg" alt="Close" class="h-8 w-8" />
                 </button>
 
-                <div class="mt-12 flex h-full flex-col">
-                    <div class="mb-6 border-b border-gray-700 pb-6">
-                        <p class="mb-1 text-[10px] font-black tracking-[0.2em] text-yellow-500 uppercase">
-                            Status: Active Athlete
-                        </p>
-                        <p id="menu-full-name" class="text-lg font-bold text-white uppercase italic">
-                            Loading Name...
-                        </p>
-                        <p id="menu-email" class="truncate text-xs text-gray-400">
-                            loading@franks.com
-                        </p>
+                <div class="mt-12 flex flex-col h-full">
+                    <div class="pb-6 border-b border-gray-700 mb-6">
+                        <p id="menu-full-name" class="text-lg font-bold text-white uppercase italic">Athlete Name</p>
+                        <p id="menu-email" class="text-xs text-gray-400 truncate">athlete@franks.com</p>
                     </div>
 
-                    <div class="flex-1 space-y-5">
+                    <div class="space-y-5 flex-1">
                         <a href="index.html"
-                            class="block text-xl font-bold text-white uppercase italic transition duration-300 hover:text-yellow-400">Home</a>
-                        <a href="#"
-                            class="block text-xl font-bold text-white uppercase italic transition duration-300 hover:text-yellow-400">My
-                            Profile</a>
+                            class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">Home</a>
                         <a href="timetable.html"
-                            class="block text-xl font-bold text-white uppercase italic transition duration-300 hover:text-yellow-400">Timetable</a>
-                        <a href="#"
-                            class="block text-xl font-bold text-white uppercase italic transition duration-300 hover:text-yellow-400">Settings</a>
+                            class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">Timetable</a>
+                        <a href="#" class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">My
+                            Profile</a>
+
                         <button id="dashboard-logout-btn" type="button"
-                            class="block w-full pt-4 text-left text-xl font-bold text-red-500 uppercase italic transition duration-300 hover:text-white">
+                            class="block w-full text-left text-xl font-bold text-red-500 hover:text-white uppercase italic pt-4 border-t border-gray-700">
                             Sign Out
                         </button>
-                    </div>
-
-                    <div class="mt-auto space-y-4 pt-6">
-                        <a href="#"
-                            class="block rounded-lg bg-yellow-500 p-3 text-center text-sm font-black tracking-tighter text-gray-900 uppercase transition hover:bg-yellow-400">
-                            Start Training
-                        </a>
                     </div>
                 </div>
             </nav>

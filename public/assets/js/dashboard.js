@@ -32,25 +32,36 @@ async function checkUserSession() {
  * Sets up the event listener for the logout button in the dashboard.
  */
 function setupLogout() {
-  const logoutBtn = document.getElementById("dashboard-logout-btn");
+  // 1. Identify both potential buttons
+  const mobileLogoutBtn = document.getElementById("dashboard-logout-btn");
+  const desktopLogoutBtn = document.getElementById("desktop-logout-btn");
 
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", async () => {
-      try {
-        const response = await fetch("/api/logout", {
-          method: "POST",
-          credentials: "include",
-        });
+  // 2. Define what happens when ANY logout button is clicked
+  const handleLogoutAction = async () => {
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        credentials: "include",
+      });
 
-        if (response.ok) {
-          // Once the server clears the cookie, redirect back to home
-          window.location.href = "index.html";
-        } else {
-          console.error("Logout failed on the server side");
-        }
-      } catch (error) {
-        console.error("Error connecting to logout endpoint:", error);
+      if (response.ok) {
+        // Once the server clears the cookie, redirect back to home
+        window.location.href = "index.html";
+      } else {
+        console.error("Logout failed on the server side");
       }
-    });
+    } catch (error) {
+      console.error("Error connecting to logout endpoint:", error);
+    }
+  };
+
+  // 3. Place the IF statements here, at the bottom of the function
+  // We check if each button exists before adding the listener
+  if (mobileLogoutBtn) {
+    mobileLogoutBtn.addEventListener("click", handleLogoutAction);
+  }
+
+  if (desktopLogoutBtn) {
+    desktopLogoutBtn.addEventListener("click", handleLogoutAction);
   }
 }
