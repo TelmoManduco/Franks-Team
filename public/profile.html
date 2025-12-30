@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franks Team | My Profile</title>
+    <link rel="stylesheet" href="assets/css/output.css" />
+</head>
+
+<body class="bg-[#0f172a] font-sans text-white min-h-screen">
+
+    <main class="px-6 py-10 flex flex-col items-center">
+        <div class="relative mb-8">
+            <div class="absolute inset-0 bg-yellow-500 blur-2xl opacity-20 rounded-full"></div>
+
+            <div class="relative h-20 w-20 rounded-full border-4 border-yellow-500 overflow-hidden shadow-2xl">
+                <img id="profile-img-main" src="assets/images/icons-images/default-avatar.png" alt="Profile"
+                    class="h-full w-full object-cover">
+            </div>
+
+            <label for="profile-upload"
+                class="absolute bottom-0 right-0 bg-yellow-500 p-2 rounded-full shadow-xl cursor-pointer hover:scale-110 active:scale-95 transition-transform border-2 border-[#0f172a]">
+                <img src="assets/images/icons-images/edit-icon.svg" class="h-4 w-4" alt="Edit">
+                <input type="file" id="profile-upload" class="hidden" accept="image/*">
+            </label>
+        </div>
+
+        <div class="text-center mb-10">
+            <h1 id="display-name" class="text-3xl font-black uppercase italic tracking-tighter">Athlete Name</h1>
+            <p class="text-yellow-500 font-bold uppercase text-xs tracking-widest mt-1">Elite Member</p>
+        </div>
+
+        <div class="w-full max-w-sm space-y-4">
+            <div class="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-md">
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-1">Full
+                    Name</label>
+                <p id="profile-name" class="text-lg font-semibold italic text-gray-100 uppercase">Loading...</p>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-md">
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-1">Email
+                    Address</label>
+                <p id="profile-email" class="text-lg font-semibold text-gray-100">Loading...</p>
+            </div>
+        </div>
+
+        <div class="w-full max-w-sm mt-10 space-y-3">
+            <button
+                class="w-full bg-yellow-500 text-black font-black py-4 rounded-xl uppercase italic shadow-lg shadow-yellow-500/20 hover:bg-yellow-400 transition-colors">
+                Save Changes
+            </button>
+            <a href="dashboard.html"
+                class="block w-full text-center text-gray-400 font-bold py-2 uppercase text-xs tracking-widest hover:text-white transition">
+                Return to Dashboard
+            </a>
+        </div>
+    </main>
+
+    <script type="module" src="assets/js/profile.js"></script>
+</body>
+
+</html>
