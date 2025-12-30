@@ -1,14 +1,16 @@
-<!doctype html>
-<html lang="en" class="h-full bg-gray-50">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Athlete Dashboard | Frank's Team</title>
-    <link rel="stylesheet" href="assets/css/output.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franks Team | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="min-h-full bg-gray-50 font-sans antialiased">
+<body class="bg-gray-50 font-sans">
+
     <header class="z-50 bg-white border-b border-gray-200 shadow-sm sticky top-0">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
 
@@ -20,76 +22,66 @@
 
             <nav id="desktop-menu" class="hidden md:flex items-center space-x-8">
                 <a href="index.html"
-                    class="font-bold text-gray-700 transition duration-300 hover:text-yellow-500 uppercase italic">Home</a>
+                    class="font-bold text-gray-700 hover:text-yellow-500 uppercase italic transition">Home</a>
                 <a href="timetable.html"
-                    class="font-bold text-gray-700 transition duration-300 hover:text-yellow-500 uppercase italic">Timetable</a>
-                <a href="#"
-                    class="font-bold text-gray-700 transition duration-300 hover:text-yellow-500 uppercase italic">My
+                    class="font-bold text-gray-700 hover:text-yellow-500 uppercase italic transition">Timetable</a>
+                <a href="#" class="font-bold text-gray-700 hover:text-yellow-500 uppercase italic transition">My
                     Profile</a>
-
-                <button id="desktop-logout-btn" type="button"
-                    class="font-bold text-red-500 transition duration-300 hover:text-red-700 uppercase italic">
-                    Sign Out
-                </button>
+                <button id="desktop-logout-btn"
+                    class="font-bold text-red-500 hover:text-red-700 uppercase italic transition">Sign Out</button>
             </nav>
 
-            <button id="mobile-menu-button" aria-label="Open menu" type="button"
-                class="p-2 text-gray-900 focus:outline-none md:hidden">
-                <img src="assets/images/icons-images/burger-menu-black.svg" class="h-8 w-8" alt="Menu" />
+            <button id="mobile-menu-button" class="p-2 text-gray-900 md:hidden focus:outline-none">
+                <img src="assets/images/icons-images/burger-menu-black.svg" class="h-8 w-8" alt="Menu">
+            </button>
+        </div>
+
+        <div id="menu-overlay"
+            class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+        <nav id="mobile-menu"
+            class="fixed top-0 right-0 z-50 h-full w-72 translate-x-full transform bg-gray-900 p-6 transition-transform duration-300 shadow-2xl">
+
+            <button id="close-menu-button" class="absolute top-4 right-4 text-white">
+                <img src="assets/images/icons-images/close-x.svg" alt="Close" class="h-8 w-8">
             </button>
 
-            <div id="menu-overlay"
-                class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300">
-            </div>
-            <nav id="mobile-menu" aria-label="Mobile navigation menu" role="dialog" aria-modal="true" aria-hidden="true"
-                inert
-                class="fixed top-0 right-0 z-50 h-full w-64 translate-x-full transform bg-gray-800 p-6 transition-transform duration-300">
-
-                <button id="close-menu-button" aria-label="Close menu" type="button"
-                    class="absolute top-4 right-4 text-white hover:text-yellow-400 focus:outline-none">
-                    <img src="assets/images/icons-images/close-x.svg" alt="Close" class="h-8 w-8" />
-                </button>
-
-                <div class="mt-12 flex flex-col h-full">
-                    <div class="pb-6 border-b border-gray-700 mb-6">
-                        <p id="menu-full-name" class="text-lg font-bold text-white uppercase italic">Athlete Name</p>
-                        <p id="menu-email" class="text-xs text-gray-400 truncate">athlete@franks.com</p>
+            <div class="mt-12 flex flex-col h-full">
+                <div class="flex flex-col items-center pb-8 border-b border-gray-800 mb-6">
+                    <div class="relative">
+                        <div class="h-24 w-24 rounded-full border-4 border-yellow-500 overflow-hidden bg-gray-700">
+                            <img id="profile-img-mobile" src="assets/images/icons-images/default-avatar.png"
+                                alt="Profile" class="h-full w-full object-cover">
+                        </div>
+                        <label for="profile-upload"
+                            class="absolute bottom-0 right-0 bg-yellow-500 p-2 rounded-full cursor-pointer hover:bg-yellow-400 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-black" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            <input type="file" id="profile-upload" class="hidden" accept="image/*">
+                        </label>
                     </div>
-
-                    <div class="space-y-5 flex-1">
-                        <a href="index.html"
-                            class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">Home</a>
-                        <a href="timetable.html"
-                            class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">Timetable</a>
-                        <a href="#" class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">My
-                            Profile</a>
-
-                        <button id="dashboard-logout-btn" type="button"
-                            class="block w-full text-left text-xl font-bold text-red-500 hover:text-white uppercase italic pt-4 border-t border-gray-700">
-                            Sign Out
-                        </button>
-                    </div>
+                    <h2 id="menu-full-name" class="mt-4 text-xl font-bold text-white uppercase italic">Athlete Name</h2>
+                    <p id="menu-email" class="text-sm text-gray-400">athlete@franks.com</p>
                 </div>
-            </nav>
-        </div>
+
+                <div class="space-y-6 flex-1">
+                    <a href="index.html"
+                        class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">Home</a>
+                    <a href="timetable.html"
+                        class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">Timetable</a>
+                    <a href="#" class="block text-xl font-bold text-white hover:text-yellow-400 uppercase italic">My
+                        Profile</a>
+                    <button id="dashboard-logout-btn"
+                        class="block w-full text-left text-xl font-bold text-red-500 hover:text-white uppercase italic pt-6 border-t border-gray-800">Sign
+                        Out</button>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <main class="mx-auto max-w-7xl p-6">
-        <div class="grid grid-cols-1 gap-6">
-            <section
-                class="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-gray-200 bg-white p-12 text-center">
-                <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gray-100">
-                    <span class="text-4xl">🔥</span>
-                </div>
-                <h2 class="text-2xl font-black text-gray-900 uppercase italic">
-                    Your Training Hub is Ready
-                </h2>
-                <p class="mt-2 max-w-sm text-gray-500">
-                    We are currently syncing your latest sessions from the team
-                    database. Get ready to push your limits.
-                </p>
-            </section>
-        </div>
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     </main>
 
     <script type="module" src="assets/js/dashboard.js"></script>
