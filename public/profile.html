@@ -4,84 +4,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franks Team | Athlete Profile</title>
+    <title>Franks Team | My Profile</title>
     <link rel="stylesheet" href="assets/css/output.css" />
 </head>
 
-<body class="bg-gray-50 font-sans text-gray-900 min-h-screen">
+<body class="bg-gray-900 font-sans text-white antialiased">
 
-    <main class="px-6 pt-40 pb-12 flex flex-col items-center max-w-md mx-auto">
-
-        <div class="flex flex-col items-center mb-8 w-full text-center">
-            <div class="relative mt-10 mb-4">
-                <div class="h-24 w-24 rounded-full border-4 border-white overflow-hidden shadow-xl bg-gray-200">
-                    <img id="profile-img-main" src="assets/images/icons-images/default-avatar.png" alt="Profile"
-                        class="h-full w-full object-cover">
-                </div>
-
-                <label for="profile-upload"
-                    class="absolute bg-blue-600 w-8 h-8 rounded-full shadow-lg cursor-pointer hover:bg-blue-700 active:scale-90 transition-all border-2 border-white flex items-center justify-center"
-                    style="bottom: 8px; right: 8px;">
-                    <img src="assets/images/icons-images/camera-icon.png" class="w-4 h-4 object-contain" alt="Edit">
-                    <input type="file" id="profile-upload" class="hidden" accept="image/*">
-                </label>
+    <header class="z-50 bg-gray-950 border-b border-gray-800 shadow-2xl sticky top-0 backdrop-blur-sm">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <a href="dashboard.html" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                    <span class="text-sm text-gray-400 uppercase italic font-bold">Back</span>
+                </a>
             </div>
 
-            <h1 class="text-2xl font-black uppercase italic tracking-tight text-gray-900">Sana Afzal</h1>
-            <div class="mt-2 px-4 py-1 bg-blue-50 rounded-full border border-blue-100 inline-block">
-                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Elite Athlete</p>
-            </div>
+            <h1 class="text-lg md:text-xl font-black text-white uppercase italic">My Profile</h1>
+
+            <button id="mobile-menu-button"
+                class="p-2 focus:outline-none hover:bg-gray-800 rounded-lg transition-colors">
+                <img src="assets/images/icons-images/burger-menu.svg" class="h-7 w-7" alt="Menu">
+            </button>
         </div>
+    </header>
 
+    <main class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+
+        <!-- Profile Header Card -->
         <div
-            class="w-full bg-white rounded-2xl shadow-sm border border-gray-100 grid grid-cols-3 divide-x divide-gray-100 py-4 mb-8">
-            <div class="text-center px-2">
-                <p class="text-[10px] text-gray-400 uppercase font-black tracking-tighter">Weight</p>
-                <p class="text-lg font-black italic text-gray-800">80<span
-                        class="text-[10px] text-gray-400 lowercase not-italic ml-0.5">kg</span></p>
-            </div>
-            <div class="text-center px-2">
-                <p class="text-[10px] text-gray-400 uppercase font-black tracking-tighter">Age</p>
-                <p class="text-lg font-black italic text-gray-800">24</p>
-            </div>
-            <div class="text-center px-2">
-                <p class="text-[10px] text-gray-400 uppercase font-black tracking-tighter">Height</p>
-                <p class="text-lg font-black italic text-gray-800">180<span
-                        class="text-[10px] text-gray-400 lowercase not-italic ml-0.5">cm</span></p>
-            </div>
-        </div>
+            class="bg-gradient-to-br from-yellow-600 to-yellow-500 rounded-3xl p-8 mb-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full -ml-24 -mb-24"></div>
 
-        <div class="w-full space-y-4">
-            <div class="space-y-2">
-                <h3 class="ml-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Profile Settings</h3>
-                <div
-                    class="bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-50 overflow-hidden">
-                    <button
-                        class="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group text-left">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-blue-50 w-10 h-10 rounded-xl flex items-center justify-center">
-                                <img src="assets/images/icons-images/user-icon.svg" class="h-5 w-5 opacity-70"
-                                    style="filter: invert(34%) sepia(91%) saturate(2454%) hue-rotate(201deg);">
-                            </div>
-                            <span class="text-sm font-bold text-gray-700 uppercase italic">Personal Information</span>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-300 group-hover:text-blue-600 transition-colors" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+            <div class="relative flex flex-col items-center text-center">
+                <div class="relative mb-4">
+                    <div
+                        class="h-28 w-28 rounded-full border-4 border-white overflow-hidden shadow-2xl bg-gray-800 ring-8 ring-white/20">
+                        <img id="profile-img-main" src="assets/images/icons-images/default-avatar.png" alt="Profile"
+                            class="h-full w-full object-cover">
+                    </div>
+                    <label for="profile-upload"
+                        class="absolute bg-white w-10 h-10 rounded-full shadow-xl cursor-pointer hover:scale-110 active:scale-95 transition-all border-4 border-yellow-500 flex items-center justify-center bottom-0 right-0">
+                        <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
                             </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
-                    </button>
+                        <input type="file" id="profile-upload" class="hidden" accept="image/*">
+                    </label>
+                </div>
+
+                <h2 id="profile-full-name" class="text-2xl md:text-3xl font-black uppercase italic text-white mb-2">Sana
+                    Afzal</h2>
+                <div class="px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 inline-block">
+                    <p class="text-xs font-bold text-white uppercase tracking-wider">Elite Athlete</p>
                 </div>
             </div>
         </div>
 
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+            <div
+                class="bg-gray-950 border border-gray-800 rounded-2xl p-4 text-center hover:border-yellow-500/50 transition-colors">
+                <p class="text-xs text-gray-400 uppercase font-bold mb-1">Weight</p>
+                <p class="text-2xl font-black italic text-white">80<span
+                        class="text-sm text-gray-500 lowercase not-italic ml-1">kg</span></p>
+            </div>
+            <div
+                class="bg-gray-950 border border-gray-800 rounded-2xl p-4 text-center hover:border-yellow-500/50 transition-colors">
+                <p class="text-xs text-gray-400 uppercase font-bold mb-1">Age</p>
+                <p class="text-2xl font-black italic text-white">24</p>
+            </div>
+            <div
+                class="bg-gray-950 border border-gray-800 rounded-2xl p-4 text-center hover:border-yellow-500/50 transition-colors">
+                <p class="text-xs text-gray-400 uppercase font-bold mb-1">Height</p>
+                <p class="text-2xl font-black italic text-white">180<span
+                        class="text-sm text-gray-500 lowercase not-italic ml-1">cm</span></p>
+            </div>
+        </div>
+
+        <!-- Personal Information Section -->
+        <div class="mb-6">
+            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-3 ml-1">Personal Information</h3>
+            <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden divide-y divide-gray-800">
+
+                <div class="p-4 hover:bg-gray-900 transition-colors">
+                    <label class="block">
+                        <span class="text-xs font-bold text-gray-500 uppercase mb-2 block">Full Name</span>
+                        <input type="text" id="input-full-name" value="Sana Afzal"
+                            class="w-full bg-transparent text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-lg px-3 py-2 border border-gray-800 hover:border-gray-700 transition-colors">
+                    </label>
+                </div>
+
+                <div class="p-4 hover:bg-gray-900 transition-colors">
+                    <label class="block">
+                        <span class="text-xs font-bold text-gray-500 uppercase mb-2 block">Email Address</span>
+                        <input type="email" id="input-email" value="sana.afzal@franks.com"
+                            class="w-full bg-transparent text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-lg px-3 py-2 border border-gray-800 hover:border-gray-700 transition-colors">
+                    </label>
+                </div>
+
+                <div class="p-4 hover:bg-gray-900 transition-colors">
+                    <label class="block">
+                        <span class="text-xs font-bold text-gray-500 uppercase mb-2 block">Phone Number</span>
+                        <input type="tel" id="input-phone" value="+44 7700 900000"
+                            class="w-full bg-transparent text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-lg px-3 py-2 border border-gray-800 hover:border-gray-700 transition-colors">
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Physical Stats Section -->
+        <div class="mb-6">
+            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-3 ml-1">Physical Stats</h3>
+            <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden divide-y divide-gray-800">
+
+                <div class="p-4 hover:bg-gray-900 transition-colors">
+                    <label class="block">
+                        <span class="text-xs font-bold text-gray-500 uppercase mb-2 block">Weight (kg)</span>
+                        <input type="number" id="input-weight" value="80"
+                            class="w-full bg-transparent text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-lg px-3 py-2 border border-gray-800 hover:border-gray-700 transition-colors">
+                    </label>
+                </div>
+
+                <div class="p-4 hover:bg-gray-900 transition-colors">
+                    <label class="block">
+                        <span class="text-xs font-bold text-gray-500 uppercase mb-2 block">Height (cm)</span>
+                        <input type="number" id="input-height" value="180"
+                            class="w-full bg-transparent text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-lg px-3 py-2 border border-gray-800 hover:border-gray-700 transition-colors">
+                    </label>
+                </div>
+
+                <div class="p-4 hover:bg-gray-900 transition-colors">
+                    <label class="block">
+                        <span class="text-xs font-bold text-gray-500 uppercase mb-2 block">Age</span>
+                        <input type="number" id="input-age" value="24"
+                            class="w-full bg-transparent text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-lg px-3 py-2 border border-gray-800 hover:border-gray-700 transition-colors">
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <button id="save-profile-btn"
+            class="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-black uppercase italic text-sm py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] active:scale-[0.98]">
+            Save Changes
+        </button>
+
+        <!-- Sign Out Button -->
         <button id="logout-btn"
-            class="mt-12 mb-6 text-sm font-black text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors underline decoration-2 underline-offset-8">
+            class="w-full mt-4 text-sm font-bold text-red-500 uppercase italic hover:text-red-400 transition-colors py-3">
             Sign Out
         </button>
 
     </main>
 
+    <script type="module" src="assets/js/profile.js"></script>
 </body>
-
-</html>
