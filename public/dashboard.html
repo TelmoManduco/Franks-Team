@@ -4,96 +4,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franks Team | Dashboard</title>
+    <title>MMA Gym Dashboard</title>
     <link rel="stylesheet" href="assets/css/output.css" />
 </head>
 
-<body class="bg-gray-50 font-sans text-gray-900 pb-24">
-
-    <header class="px-6 pt-12 pb-6 bg-white border-b border-gray-100">
-        <div class="flex items-center justify-between">
+<body class="bg-gray-950 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-10">
+        <div class="px-4 py-4 flex items-center justify-between">
             <div>
-                <p class="text-xs font-black uppercase tracking-widest text-blue-600">Welcome back,</p>
-                <h1 class="text-2xl font-black italic uppercase italic">Sana Afzal</h1>
+                <h1 class="text-white font-semibold">Welcome back, Alex</h1>
+                <p class="text-gray-400 text-sm">Intermediate Fighter</p>
             </div>
-            <div class="h-12 w-12 rounded-full border-2 border-blue-500 p-0.5">
-                <img src="assets/images/icons-images/default-avatar.png"
-                    class="h-full w-full rounded-full object-cover">
-            </div>
+            <button id="open-menu-button" class="p-2 hover:bg-gray-800 rounded-lg transition-all active:scale-90">
+                <img src="assets/images/icons-images/burger-menu.svg" alt="Menu"
+                    class="w-6 h-6 object-contain icon-gray" />
+            </button>
         </div>
     </header>
 
-    <main class="px-6 mt-8">
+    <div class="px-4 py-6 space-y-6">
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 gap-3">
+            <!-- Workouts Card -->
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+                <svg class="w-6 h-6 mb-2 text-red-500" viewBox="0 0 32 32" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(-45deg);"
+                    xmlns="http://www.w3.org/2000/svg">
 
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="bg-blue-600 p-5 rounded-3xl shadow-blue-200 shadow-lg text-white">
-                <p class="text-[10px] font-bold uppercase opacity-80">Weight</p>
-                <p class="text-2xl font-black italic">80<span class="text-sm ml-1 lowercase">kg</span></p>
+                    <g>
+                        <path d="M7,25c-1.7,0-3-1.3-3-3V10c0-1.7,1.3-3,3-3s3,1.3,3,3v12C10,23.7,8.7,25,7,25z" />
+                        <path d="M25,25c-1.7,0-3-1.3-3-3V10c0-1.7,1.3-3,3-3s3,1.3,3,3v12C28,23.7,26.7,25,25,25z" />
+                        <path d="M23,17H9c-0.6,0-1-0.4-1-1s0.4-1,1-1h14c0.6,0,1,0.4,1,1S23.6,17,23,17z" />
+                        <path d="M2,10.2c-1.2,0.4-2,1.5-2,2.8v6c0,1.3,0.8,2.4,2,2.8V10.2z" />
+                        <path d="M30,10.2v11.6c1.2-0.4,2-1.5,2-2.8v-6C32,11.7,31.2,10.6,30,10.2z" />
+                    </g>
+                </svg>
+
+                <div class="text-2xl font-bold text-white">24</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">Workouts</div>
             </div>
-            <div class="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm">
-                <p class="text-[10px] font-bold uppercase text-gray-400">Workouts</p>
-                <p class="text-2xl font-black italic text-gray-800">12</p>
+
+            <!-- Streak Card -->
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+                <svg class="w-6 h-6 mb-2 text-orange-500" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(-417.000000, -413.000000)">
+                        <path fill="currentColor"
+                            d="M439.905,419.953 C435.52,421.203 434.717,424.748 435,427 C431.872,423.322 432,419.093 432,413 C421.968,416.783 424.301,427.688 424,431 C421.477,428.935 421,424 421,424 C418.336,425.371 417,429.031 417,432 C417,439.18 422.82,445 430,445 C437.18,445 443,439.18 443,432 C443,427.733 439.867,425.765 439.905,419.953"
+                            id="flame-fire">
+                        </path>
+                    </g>
+                </svg>
+
+                <div class="text-2xl font-bold text-white">12</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">Streak</div>
+            </div>
+            <!-- Goals Card -->
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+                <img src="assets/images/dashboard-images/target.svg" alt="Target"
+                    class="w-6 h-6 mb-2 object-contain icon-green" />
+                <div class="text-2xl font-bold text-white">8/10</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">Goals Hit</div>
+            </div>
+
+            <!-- Rank Card -->
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+                <img src="assets/images/dashboard-images/trophy.svg" alt="Trophy"
+                    class="w-6 h-6 mb-2 object-contain icon-yellow" />
+                <div class="text-2xl font-bold text-white">#15</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wide">Rank</div>
             </div>
         </div>
 
-        <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 ml-2">Training Menu</h3>
-        <div class="grid grid-cols-2 gap-4">
-
-            <button
-                class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center text-center group active:scale-95 transition-all">
-                <div
-                    class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-blue-600 transition-colors">
-                    <img src="assets/images/icons-images/workout.svg" class="w-6 h-6 opacity-70 group-hover:invert">
-                </div>
-                <span class="text-xs font-black uppercase italic">Workout Plan</span>
-            </button>
-
-            <button
-                class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center text-center group active:scale-95 transition-all">
-                <div
-                    class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-green-600 transition-colors">
-                    <img src="assets/images/icons-images/nutrition.svg" class="w-6 h-6 opacity-70 group-hover:invert">
-                </div>
-                <span class="text-xs font-black uppercase italic">Nutrition</span>
-            </button>
-
-            <button
-                class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center text-center group active:scale-95 transition-all">
-                <div
-                    class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-purple-600 transition-colors">
-                    <img src="assets/images/icons-images/stats.svg" class="w-6 h-6 opacity-70 group-hover:invert">
-                </div>
-                <span class="text-xs font-black uppercase italic">Progress</span>
-            </button>
-
-            <button
-                class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center text-center group active:scale-95 transition-all">
-                <div
-                    class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-gray-800 transition-colors">
-                    <img src="assets/images/icons-images/user-icon.svg" class="w-6 h-6 opacity-70 group-hover:invert">
-                </div>
-                <span class="text-xs font-black uppercase italic">Profile</span>
-            </button>
-
+        <!-- Quick Actions -->
+        <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-xl p-5 shadow-lg">
+            <h3 class="text-white font-semibold mb-3">Quick Book</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <button
+                    class="bg-white/20 backdrop-blur-sm text-white rounded-lg py-3 px-4 text-sm font-medium hover:bg-white/30 transition-colors active:scale-95">
+                    <img src="assets/images/dashboard-images/calendar.svg" alt="Calendar"
+                        class="w-4 h-4 mx-auto mb-1 object-contain icon-white" />
+                    Schedule
+                </button>
+                <button
+                    class="bg-white/20 backdrop-blur-sm text-white rounded-lg py-3 px-4 text-sm font-medium hover:bg-white/30 transition-colors active:scale-95">
+                    <img src="assets/images/dashboard-images/users.svg" alt="Users"
+                        class="w-4 h-4 mx-auto mb-1 object-contain icon-white" />
+                    Open Gym
+                </button>
+            </div>
         </div>
-    </main>
 
-    <nav
-        class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg border-t border-gray-100 px-8 py-4 flex justify-between items-center z-50">
-        <button class="flex flex-col items-center space-y-1">
-            <img src="assets/images/icons-images/home.svg" class="w-6 h-6 text-blue-600">
-            <span class="text-[9px] font-bold uppercase">Home</span>
-        </button>
-        <button class="flex flex-col items-center space-y-1 opacity-30">
-            <img src="assets/images/icons-images/calendar.svg" class="w-6 h-6">
-            <span class="text-[9px] font-bold uppercase">Schedule</span>
-        </button>
-        <button class="flex flex-col items-center space-y-1 opacity-30">
-            <img src="assets/images/icons-images/settings.svg" class="w-6 h-6">
-            <span class="text-[9px] font-bold uppercase">Settings</span>
-        </button>
-    </nav>
+        <!-- Upcoming Classes -->
+        <div>
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-white font-semibold">Upcoming Classes</h2>
+                <button class="text-red-500 text-sm font-medium">View All</button>
+            </div>
+            <div class="space-y-3">
+                <!-- Class 1 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex-1">
+                            <h3 class="text-white font-medium mb-1">Brazilian Jiu-Jitsu</h3>
+                            <p class="text-gray-400 text-sm">Coach Marcus</p>
+                        </div>
+                        <img src="assets/images/dashboard-images/chevron-right.svg" alt="Arrow"
+                            class="w-5 h-5 flex-shrink-0 object-contain icon-gray" />
+                    </div>
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                        <div class="flex items-center gap-1">
+                            <img src="assets/images/dashboard-images/clock.svg" alt="Clock"
+                                class="w-3.5 h-3.5 object-contain" />
+                            Today, 6:00 PM
+                        </div>
+                        <div>• 60 min</div>
+                        <div class="ml-auto text-green-500">3 spots left</div>
+                    </div>
+                </div>
 
+                <!-- Class 2 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex-1">
+                            <h3 class="text-white font-medium mb-1">Muay Thai Basics</h3>
+                            <p class="text-gray-400 text-sm">Coach Sarah</p>
+                        </div>
+                        <img src="assets/images/dashboard-images/chevron-right.svg" alt="Arrow"
+                            class="w-5 h-5 flex-shrink-0 object-contain icon-gray" />
+                    </div>
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                        <div class="flex items-center gap-1">
+                            <img src="assets/images/dashboard-images/clock.svg" alt="Clock"
+                                class="w-3.5 h-3.5 object-contain" />
+                            Tomorrow, 7:00 AM
+                        </div>
+                        <div>• 45 min</div>
+                        <div class="ml-auto text-green-500">5 spots left</div>
+                    </div>
+                </div>
+
+                <!-- Class 3 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex-1">
+                            <h3 class="text-white font-medium mb-1">MMA Sparring</h3>
+                            <p class="text-gray-400 text-sm">Coach Diego</p>
+                        </div>
+                        <img src="assets/images/dashboard-images/chevron-right.svg" alt="Arrow"
+                            class="w-5 h-5 flex-shrink-0 object-contain icon-gray" />
+                    </div>
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                        <div class="flex items-center gap-1">
+                            <img src="assets/images/dashboard-images/clock.svg" alt="Clock"
+                                class="w-3.5 h-3.5 object-contain" />
+                            Tomorrow, 5:30 PM
+                        </div>
+                        <div>• 90 min</div>
+                        <div class="ml-auto text-green-500">2 spots left</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div>
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-white font-semibold">Recent Activity</h2>
+                <button class="text-red-500 text-sm font-medium">See More</button>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-xl divide-y divide-gray-800">
+                <div class="p-4 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white text-sm font-medium mb-1">Boxing Fundamentals</h3>
+                        <p class="text-gray-500 text-xs">Jan 7</p>
+                    </div>
+                    <div class="text-gray-400 text-sm">45 min</div>
+                </div>
+                <div class="p-4 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white text-sm font-medium mb-1">Strength & Conditioning</h3>
+                        <p class="text-gray-500 text-xs">Jan 6</p>
+                    </div>
+                    <div class="text-gray-400 text-sm">60 min</div>
+                </div>
+                <div class="p-4 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white text-sm font-medium mb-1">Wrestling Technique</h3>
+                        <p class="text-gray-500 text-xs">Jan 5</p>
+                    </div>
+                    <div class="text-gray-400 text-sm">60 min</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-white font-semibold">Monthly Goal</h2>
+                <span class="text-red-500 font-semibold">80%</span>
+            </div>
+            <div class="bg-gray-800 rounded-full h-2 mb-2 overflow-hidden">
+                <div class="bg-gradient-to-r from-red-500 to-red-600 h-full rounded-full" style="width: 80%;"></div>
+            </div>
+            <p class="text-gray-400 text-sm">24/30 classes this month</p>
+        </div>
+    </div>
 </body>
 
 </html>
