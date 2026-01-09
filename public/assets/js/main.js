@@ -11,7 +11,7 @@
 // Import created feature modules (using ES Module syntax)
 // The './' specifies the path relative to the current file (i.e., inside /assets/js/).
 
-import { setupMobileMenu } from "./menu.js"; // Handles mobile navigation open/close logic.
+//import { setupMobileMenu } from "./menu.js"; // Handles mobile navigation open/close logic.
 import { setupModals } from "./modals.js"; // Manages Login/Registration modal visibility and switching.
 import { setupSmoothScrolling } from "./smooth-scroll.js"; // Implements smooth scrolling for anchor links.
 import { setupHeroSlideshow } from "./slideshow.js"; // Initializes the hero section image rotator (slideshow).
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // The order generally does not matter here, as modules are independent.
 
   // Mobile Menu & Overlay Setup
-  setupMobileMenu();
+  //setupMobileMenu();
 
   // Check if user is logged in right away
   initAuthSession(); 

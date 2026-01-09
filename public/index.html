@@ -39,43 +39,10 @@
           class="cursor-pointer font-semibold text-white transition duration-300 hover:text-yellow-400" type="button">
           My Account
         </button>
-
-        <a href="#"
-          class="rounded-full bg-yellow-500 px-4 py-2 text-sm font-bold text-gray-900 shadow-md transition duration-300 hover:bg-yellow-400">
-          Start Trial
-        </a>
       </nav>
     </div>
 
-    <nav id="mobile-menu" aria-label="Mobile navigation menu" role="dialog" aria-modal="true" aria-hidden="true" inert
-      class="fixed top-0 right-0 z-50 h-full w-52 translate-x-full transform bg-gray-800 p-6 transition-transform duration-300 md:hidden">
-      <button id="close-menu-button" aria-label="Close menu" type="button"
-        class="absolute top-4 right-4 text-white hover:text-yellow-400 focus:outline-none">
-        <img src="assets/images/icons-images/close-x.svg" alt="" class="h-8 w-8" />
-      </button>
 
-      <div class="mt-10 space-y-4">
-        <a href="#" class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Home</a>
-        <a href="#about" class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">About
-          Us</a>
-        <a href="timetable.html"
-          class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Timetable</a>
-        <a href="#pricing"
-          class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Membership</a>
-        <a href="#contact"
-          class="block text-xl font-bold text-white transition duration-300 hover:text-yellow-400">Contact Us</a>
-
-        <button id="open-login-modal-mobile" type="button"
-          class="block cursor-pointer text-xl font-bold text-yellow-400 transition duration-300 hover:text-white">
-          My Account
-        </button>
-
-        <a href="#"
-          class="mt-6 block rounded-lg bg-yellow-500 p-2 text-center text-xl font-bold text-gray-900 hover:bg-yellow-400">
-          Start Trial
-        </a>
-      </div>
-    </nav>
   </header>
 
   <div id="menu-overlay"
@@ -701,8 +668,83 @@
     </div>
   </div>
 
+
+
+
+
+  <!-- Testing new Menu-->
+
+  <div id="menu-overlay"
+    class="fixed inset-0 z-40 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+  </div>
+
+  <nav id="mobile-menu"
+    class="fixed top-0 right-0 z-50 h-full w-50 bg-gray-950 border-l border-gray-800 translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
+
+    <div id="menu-guest-header" class="p-6 border-b border-gray-800 flex items-center justify-between">
+      <span class="text-white font-bold tracking-tight">Navigation</span>
+      <button id="close-menu-button-guest" class="text-gray-400 hover:text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="menu-user-profile" class="hidden p-6 border-b border-gray-800 flex flex-col items-center relative">
+      <button id="close-menu-button" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <img id="menu-avatar" src="assets/images/franks-logo.png"
+        class="w-14 h-14 rounded-full border-2 border-red-500 p-0.5 object-cover" />
+      <h2 id="menu-full-name" class="text-white font-bold mt-3 text-lg text-center">Welcome</h2>
+      <p id="menu-user-status" class="text-gray-500 text-[10px] uppercase tracking-widest mt-1">Guest</p>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-4 space-y-1">
+      <div id="links-public">
+        <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Explore</p>
+        <a href="index.html"
+          class="flex items-center gap-4 px-4 py-3 text-white hover:bg-gray-900 rounded-xl transition-all group">
+          <span class="font-medium group-hover:text-yellow-400">Home</span>
+        </a>
+        <a href="#about"
+          class="flex items-center gap-4 px-4 py-3 text-white hover:bg-gray-900 rounded-xl transition-all group">
+          <span class="font-medium group-hover:text-yellow-400">About Us</span>
+        </a>
+        <a href="timetable.html"
+          class="flex items-center gap-4 px-4 py-3 text-white hover:bg-gray-900 rounded-xl transition-all group">
+          <span class="font-medium group-hover:text-yellow-400">Timetable</span>
+        </a>
+        <a href="#pricing"
+          class="flex items-center gap-4 px-4 py-3 text-white hover:bg-gray-900 rounded-xl transition-all group">
+          <span class="font-medium group-hover:text-yellow-400">Membership</span>
+        </a>
+        <a href="#contact"
+          class="flex items-center gap-4 px-4 py-3 text-white hover:bg-gray-900 rounded-xl transition-all group">
+          <span class="font-medium group-hover:text-yellow-400">Contact Us</span>
+        </a>
+      </div>
+
+      <div id="links-authenticated" class="hidden border-t border-gray-800 pt-2 mt-2">
+        <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Member Tools</p>
+        <a href="dashboard.html"
+          class="flex items-center gap-4 px-4 py-3 text-white hover:bg-gray-900 rounded-xl transition-all">
+          <span class="font-medium">Go to Dashboard</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="p-4 border-t border-gray-800">
+      <button id="menu-login-btn" class="w-full py-3 bg-yellow-500 text-gray-900 font-bold rounded-xl">Login</button>
+      <button id="menu-logout-btn"
+        class="hidden w-full py-3 text-red-500 font-bold hover:bg-red-500/10 rounded-xl transition-all">Log Out</button>
+    </div>
+  </nav>
   <script src="assets/js/auth-handler.js"></script>
   <script type="module" src="assets/js/home-auth-check.js"></script>
+  <script src="assets/js/universal-menu.js"></script>
 </body>
 
 </html>

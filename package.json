@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
+    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./public/assets/css/output.css --watch",
     "server": "nodemon server.js",
     "start": "node server.js",
     "tsdev": "tsx src/index.ts",
