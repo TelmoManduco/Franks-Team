@@ -583,6 +583,9 @@
   .max-w-\[85vw\] {
     max-width: 85vw;
   }
+  .max-w-\[340px\] {
+    max-width: 340px;
+  }
   .max-w-lg {
     max-width: var(--container-lg);
   }
@@ -1073,6 +1076,9 @@
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
+  .p-2\.5 {
+    padding: calc(var(--spacing) * 2.5);
+  }
   .p-3 {
     padding: calc(var(--spacing) * 3);
   }
@@ -1539,6 +1545,13 @@
       }
     }
   }
+  .hover\:bg-gray-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-100);
+      }
+    }
+  }
   .hover\:bg-gray-400 {
     &:hover {
       @media (hover: hover) {
@@ -1656,6 +1669,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-yellow-600);
+      }
+    }
+  }
+  .hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
       }
     }
   }
