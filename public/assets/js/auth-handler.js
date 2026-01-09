@@ -1,96 +1,51 @@
-/**
- * Auth Handler - Client-Side Authentication
- * Connects Login / Register modals to Express + Prisma API
- */
+// /assets/js/auth-handler.js
 
-document.addEventListener("DOMContentLoaded", () => {
-  // --- FORMS ---
+// Helpers for UI feedback
+const showError = (element, message) => {
+  if (!element) return;
+  element.textContent = message;
+  element.classList.remove("hidden");
+};
+
+const hideError = (element) => {
+  if (!element) return;
+  element.textContent = "";
+  element.classList.add("hidden");
+};
+
+/**
+ * Global Logout Function
+ * POSTs to the server to clear the session cookie and redirects to home.
+ */
+export async function handleLogout() {
+  try {
+    const response = await fetch("/api/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      window.location.href = "index.html"; // Refresh and reset state
+    } else {
+      console.error("Logout failed on server");
+    }
+  } catch (error) {
+    console.error("Logout Error:", error);
+  }
+}
+
+export function setupForms() {
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
-
-  // --- ERROR CONTAINERS ---
   const loginErrorDiv = document.getElementById("login-error");
   const registerErrorDiv = document.getElementById("register-error");
 
-  // --- BUTTONS ---
-  const loginButton = document.getElementById("login-submit");
-  const registerButton = registerForm?.querySelector("button[type='submit']");
-
-  // --- HELPERS ---
-  const showError = (element, message) => {
-    if (!element) return;
-    element.textContent = message;
-    element.classList.remove("hidden");
-  };
-
-  const hideError = (element) => {
-    if (!element) return;
-    element.textContent = "";
-    element.classList.add("hidden");
-  };
-
-  /* ===========================
-      REGISTER
-  ============================ */
-  if (registerForm) {
-    registerForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      hideError(registerErrorDiv);
-
-      if (registerButton) {
-        registerButton.disabled = true;
-        registerButton.textContent = "Creating account...";
-      }
-
-      const userData = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("register-email").value.trim(),
-        password: document.getElementById("register-password").value,
-      };
-
-      try {
-        const response = await fetch("/api/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(userData),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          console.log("Account created:", result.user);
-
-          // Close register modal
-          document.getElementById("close-register-modal")?.click();
-
-          window.location.href = "dashboard.html";
-        } else {
-          showError(registerErrorDiv, result.error || "Registration failed.");
-        }
-      } catch (error) {
-        console.error("REGISTER ERROR:", error);
-        showError(
-          registerErrorDiv,
-          "Server connection error. Try again later.",
-        );
-      } finally {
-        if (registerButton) {
-          registerButton.disabled = false;
-          registerButton.textContent = "Sign Up";
-        }
-      }
-    });
-  }
-
-  /* ===========================
-      LOGIN
-  ============================ */
   if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       hideError(loginErrorDiv);
 
+      const loginButton = document.getElementById("login-submit");
       if (loginButton) {
         loginButton.disabled = true;
         loginButton.textContent = "Logging in...";
@@ -110,24 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const result = await response.json();
-
         if (response.ok) {
-          console.log("Login successful:", result.user);
-
-          // Close login modal
-          document.getElementById("close-login-modal")?.click();
-
-          // Refresh UI / redirect
           window.location.href = "dashboard.html";
         } else {
-          showError(
-            loginErrorDiv,
-            result.error || "Invalid email or password.",
-          );
+          showError(loginErrorDiv, result.error || "Invalid login.");
         }
       } catch (error) {
-        console.error("LOGIN ERROR:", error);
-        showError(loginErrorDiv, "Server connection error. Try again later.");
+        showError(loginErrorDiv, "Server error.");
       } finally {
         if (loginButton) {
           loginButton.disabled = false;
@@ -136,4 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+
+  if (registerForm) {
+    registerForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      hideError(registerErrorDiv);
+      // ... Add your registration logic here similar to login
+    });
+  }
+}

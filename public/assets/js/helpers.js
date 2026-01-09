@@ -2,32 +2,30 @@
 
 /**
  * Closes the mobile menu and hides its overlay.
- * This function is intentionally simple so it can be reused across modules.
+ * Reusable across menu.js, modals.js, and smooth-scroll.js.
  */
-
 export const closeMenu = () => {
-  // Fetch elements directly when the function is called.
-  // This ensures it works even if the DOM loads dynamically.
   const menu = document.getElementById("mobile-menu");
   const overlay = document.getElementById("menu-overlay");
   const openButton = document.getElementById("mobile-menu-button");
 
-  // Hide the menu by applying the translate-x utility class
   if (menu) {
-    // Move focus to open button if the focus is currently inside the menu being hidden
+    // 1. Manage Focus: return focus to hamburger if it was inside the menu
     if (menu.contains(document.activeElement) && openButton) {
       openButton.focus();
     }
 
+    // 2. Visual State: Move menu off-screen
     menu.classList.add("translate-x-full");
 
-    // Synchronize accessibility attributes
+    // 3. Accessibility State: Sync with menu.js logic
     menu.setAttribute("aria-hidden", "true");
     menu.setAttribute("inert", "");
   }
 
-  // Hide the overlay and disable interactions
   if (overlay) {
+    // 4. Force Overlay Hide: Remove active classes and add hidden classes
+    overlay.classList.remove("opacity-100", "pointer-events-auto");
     overlay.classList.add("opacity-0", "pointer-events-none");
   }
 };

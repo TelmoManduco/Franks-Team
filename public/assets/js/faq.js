@@ -1,50 +1,35 @@
-// /assets/js/faq.js
-// Handles the accordion functionality for the Frequently Asked Questions (FAQ) section.
-
-// ----------------------------------------------------------
-// MODULE: FAQ ACCORDION
-// ----------------------------------------------------------
-function setupFAQAccordion() {
-  // Selects all the clickable header elements of the FAQ items
+document.addEventListener("DOMContentLoaded", () => {
   const faqHeaders = document.querySelectorAll(".faq-header");
 
   faqHeaders.forEach((header) => {
     header.addEventListener("click", () => {
-      const content = header.nextElementSibling; // The content is the immediate next sibling element
-      const icon = header.querySelector('[data-icon="plus"]'); // The icon to be rotated
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('[data-icon="plus"]');
+      const isExpanded = header.getAttribute("aria-expanded") === "true";
 
-      // 1. Close all other FAQ items (maintaining only one open at a time)
+      // 1. Close other items for a true accordion effect
       faqHeaders.forEach((otherHeader) => {
         if (otherHeader !== header) {
+          otherHeader.setAttribute("aria-expanded", "false");
           const otherContent = otherHeader.nextElementSibling;
           const otherIcon = otherHeader.querySelector('[data-icon="plus"]');
-          // Usa "classList.contains" para verificar se precisa remover a classe
-          if (otherIcon && otherIcon.classList.contains("rotate-45")) {
-            otherIcon.classList.remove("rotate-45");
-          }
 
-          otherContent.classList.add("hidden");
-          otherHeader.setAttribute("aria-expanded", "false");
+          otherContent.style.maxHeight = null;
+          if (otherIcon) otherIcon.classList.remove("rotate-45");
         }
       });
 
-      // 2. Toggle the clicked item (Open or Close)
-      const isExpanded = header.getAttribute("aria-expanded") === "true";
-
+      // 2. Toggle current item
       if (isExpanded) {
-        // If it's open, close it
-        content.classList.add("hidden");
         header.setAttribute("aria-expanded", "false");
+        content.style.maxHeight = null;
         if (icon) icon.classList.remove("rotate-45");
       } else {
-        // If it's closed, open it
-        content.classList.remove("hidden");
         header.setAttribute("aria-expanded", "true");
-        if (icon) icon.classList.add("rotate-45"); // Rotates the icon to look like a 'X' or '-'
+        // Use scrollHeight to tell the browser exactly how tall the content is
+        content.style.maxHeight = content.scrollHeight + "px";
+        if (icon) icon.classList.add("rotate-45");
       }
     });
   });
-}
-
-// Initialization: Run the setup function once the HTML content is loaded.
-document.addEventListener("DOMContentLoaded", setupFAQAccordion);
+});

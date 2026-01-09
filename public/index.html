@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-pt-20">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,10 +8,6 @@
     content="Martial arts gym in Manchester offering Boxing, BJJ, MMA, Wrestling, Fitness and Youth classes." />
   <link rel="shortcut icon" href="assets/images/franks-logo.png" type="image/x-icon" />
   <link rel="stylesheet" href="assets/css/output.css" />
-
-  <script type="module" src="assets/js/main.js"></script>
-  <script defer src="assets/js/faq.js"></script>
-
   <title>Franks Team - Martial Arts in Manchester</title>
 </head>
 
@@ -19,12 +15,8 @@
   <header class="z-50 bg-gray-900 text-white shadow-lg md:sticky md:top-0">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <a href="index.html" aria-label="Go to homepage"><img src="assets/images/franks-logo.png"
-          alt="Franks Team - Homepage" class="w-32 invert" /></a>
-
-      <button id="mobile-menu-button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
-        type="button" class="cursor-pointer p-2 text-white focus:outline-none md:hidden">
-        <img src="assets/images/icons-images/burger-menu.svg" class="h-8 w-8" />
-      </button>
+          alt="Franks Team - Homepage" class="w-32 invert" />
+      </a>
 
       <nav id="desktop-menu" aria-label="Main site navigation"
         class="hidden items-center space-x-6 md:flex md:grow md:justify-end">
@@ -35,26 +27,28 @@
         <a href="#pricing" class="font-semibold text-white transition duration-300 hover:text-yellow-400">Membership</a>
         <a href="#contact" class="font-semibold text-white transition duration-300 hover:text-yellow-400">Contact Us</a>
 
-        <button id="open-login-modal"
-          class="cursor-pointer font-semibold text-white transition duration-300 hover:text-yellow-400" type="button">
-          My Account
+        <button id="open-login"
+          class="rounded-xl bg-yellow-500 px-6 py-2.5 font-bold text-gray-900 transition-all hover:bg-yellow-400 active:scale-95">
+          Login
         </button>
       </nav>
+
+      <button id="mobile-menu-button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
+        type="button" class="cursor-pointer p-2 text-white focus:outline-none md:hidden">
+        <img src="assets/images/icons-images/burger-menu.svg" class="h-8 w-8" />
+      </button>
+
     </div>
-
-
   </header>
-
-  <div id="menu-overlay"
-    class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300 md:hidden">
-  </div>
 
   <main>
     <section class="relative flex min-h-screen items-center overflow-hidden bg-gray-900 text-white">
-      <div id="hero-slideshow-container" class="absolute inset-0 flex transition-transform duration-1000 ease-in-out"
-        style="width: calc(100% * var(--image-count, 1))" aria-live="polite"></div>
+      <div id="hero-slideshow-container"
+        class="absolute inset-0 flex flex-row transition-transform duration-1000 ease-in-out"
+        style="width: calc(100% * var(--image-count, 1))" aria-live="polite">
+      </div>
 
-      <div class="absolute inset-0 bg-black/50"></div>
+      <div class="absolute inset-0 bg-black/50 z-10"></div>
 
       <div class="relative z-20 mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <h1 class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl">
@@ -407,65 +401,63 @@
           Got Questions? Find Your Answers.
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-xl text-gray-400">
-          If you can't find what you're looking for, please feel free to call
-          our Manchester team.
+          If you can't find what you're looking for, please feel free to call our Manchester team.
         </p>
       </div>
 
       <div class="mt-12 space-y-4">
-        <div class="rounded-lg border border-blue-700 bg-gray-800 shadow-xl">
-          <button id="faq-header-1" aria-expanded="false" aria-controls="faq-content-1"
+        <div class="rounded-lg border border-blue-700 bg-gray-800 shadow-xl overflow-hidden">
+          <button aria-expanded="false"
             class="faq-header flex w-full cursor-pointer items-center justify-between p-5 text-lg font-semibold text-white transition duration-300 hover:bg-gray-700 focus:outline-none">
             <span>What ages do you cater for?</span>
-            <img src="assets/images/icons-images/plus-icon.svg" alt="Open/Close Answer"
-              class="h-6 w-6 transform text-yellow-400 transition-transform duration-300" data-icon="plus" />
+            <svg data-icon="plus" class="h-6 w-6 transform transition-transform duration-300" viewBox="0 0 24 24"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12H20M12 4V20" stroke="#facc15" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </button>
-
-          <div id="faq-content-1"
-            class="faq-content hidden overflow-hidden text-gray-300 transition-all duration-300 ease-in-out">
-            <div class="border-t border-blue-700 px-5 pt-8 pb-5 text-base leading-relaxed">
-              We welcome students from **age 6 upwards**. We offer dedicated
-              children's classes, teen sessions focused on discipline and
-              fitness, and a full timetable of mixed-ability adult classes in
-              boxing and martial arts.
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="border-t border-blue-700 px-5 pt-8 pb-5 text-base leading-relaxed text-gray-300">
+              We welcome students from **age 6 upwards**. We offer dedicated children's classes, teen sessions focused
+              on discipline and fitness, and a full timetable of mixed-ability adult classes in boxing and martial arts.
             </div>
           </div>
         </div>
 
-        <div class="rounded-lg border border-blue-700 bg-gray-800 shadow-xl">
-          <button id="faq-header-2" aria-expanded="false" aria-controls="faq-content-2"
+        <div class="rounded-lg border border-blue-700 bg-gray-800 shadow-xl overflow-hidden">
+          <button aria-expanded="false"
             class="faq-header flex w-full cursor-pointer items-center justify-between p-5 text-lg font-semibold text-white transition duration-300 hover:bg-gray-700 focus:outline-none">
             <span>Do I need to be fit to start training?</span>
-            <img src="assets/images/icons-images/plus-icon.svg" alt="Open/Close Answer"
-              class="h-6 w-6 transform text-yellow-400 transition-transform duration-300" data-icon="plus" />
+            <svg data-icon="plus" class="h-6 w-6 transform transition-transform duration-300" viewBox="0 0 24 24"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12H20M12 4V20" stroke="#facc15" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </button>
-
-          <div id="faq-content-2"
-            class="faq-content hidden overflow-hidden text-gray-300 transition-all duration-300 ease-in-out">
-            <div class="border-t border-blue-700 px-5 pt-8 pb-5 text-base leading-relaxed">
-              Absolutely not! Our coaches specialise in welcoming beginners.
-              We offer foundational classes focusing on technique and basic
-              conditioning. We'll help you build fitness at your own pace,
-              ensuring a positive and safe start.
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="border-t border-blue-700 px-5 pt-8 pb-5 text-base leading-relaxed text-gray-300">
+              Absolutely not! Our coaches specialise in welcoming beginners. We offer foundational classes focusing on
+              technique and basic conditioning. We'll help you build fitness at your own pace, ensuring a positive and
+              safe start.
             </div>
           </div>
         </div>
 
-        <div class="rounded-lg border border-blue-700 bg-gray-800 shadow-xl">
-          <button id="faq-header-3" aria-expanded="false" aria-controls="faq-content-3"
+        <div class="rounded-lg border border-blue-700 bg-gray-800 shadow-xl overflow-hidden">
+          <button aria-expanded="false"
             class="faq-header flex w-full cursor-pointer items-center justify-between p-5 text-lg font-semibold text-white transition duration-300 hover:bg-gray-700 focus:outline-none">
             <span>Are you a registered CASC community club?</span>
-            <img src="assets/images/icons-images/plus-icon.svg" alt="Open/Close Answer"
-              class="h-6 w-6 transform text-yellow-400 transition-transform duration-300" data-icon="plus" />
+            <svg data-icon="plus" class="h-6 w-6 transform transition-transform duration-300" viewBox="0 0 24 24"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12H20M12 4V20" stroke="#facc15" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </button>
-
-          <div id="faq-content-3"
-            class="faq-content hidden overflow-hidden text-gray-300 transition-all duration-300 ease-in-out">
-            <div class="border-t border-blue-700 px-5 pt-8 pb-5 text-base leading-relaxed">
-              Yes, Franks Team is a registered **Community Amateur Sports Club
-              (CASC)**. This status means our mission is to benefit the
-              community through sport, and any revenue generated is reinvested
-              entirely back into the club to improve facilities and programs.
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="border-t border-blue-700 px-5 pt-8 pb-5 text-base leading-relaxed text-gray-300">
+              Yes, Franks Team is a registered **Community Amateur Sports Club (CASC)**. This status means our mission
+              is to benefit the community through sport, and any revenue generated is reinvested entirely back into the
+              club to improve facilities and programs.
             </div>
           </div>
         </div>
@@ -653,9 +645,6 @@
 
 
 
-
-  <!-- Testing new Menu-->
-
   <div id="menu-overlay"
     class="fixed inset-0 z-40 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
   </div>
@@ -724,9 +713,24 @@
         class="hidden w-full py-3 text-red-500 font-bold hover:bg-red-500/10 rounded-xl transition-all">Log Out</button>
     </div>
   </nav>
-  <script src="assets/js/auth-handler.js"></script>
-  <script type="module" src="assets/js/home-auth-check.js"></script>
-  <script src="assets/js/universal-menu.js"></script>
+
+
+  <button id="back-to-top" aria-label="Back to top"
+    class="fixed bottom-6 right-6 z-[100] flex md:hidden cursor-pointer items-center justify-center transition-all duration-300 opacity-0 pointer-events-none hover:scale-110 active:scale-90">
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="56px" height="56px" viewBox="0 0 24 24" id="top-circle"
+      data-name="Flat Color">
+      <g id="SVGRepo_iconCarrier">
+        <circle id="primary" cx="12" cy="12" r="10" style="fill: rgba(250, 204, 21, 0.7);" />
+        <path id="secondary"
+          d="M15.21,9.79l-2.5-2.5a1,1,0,0,0-1.42,0l-2.5,2.5a1,1,0,0,0,1.42,1.42l.79-.8V16a1,1,0,0,0,2,0V10.41l.79.8a1,1,0,0,0,1.42,0A1,1,0,0,0,15.21,9.79Z"
+          style="fill: #000000;" />
+      </g>
+    </svg>
+  </button>
+
+  <script defer src="assets/js/faq.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 
 </html>

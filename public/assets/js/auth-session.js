@@ -1,52 +1,67 @@
-/**
- * Auth Session - Manages persistent login state
- * Checks /api/me to see if the user has a valid session cookie.
- */
+// /assets/js/auth-session.js
+import { handleLogout } from "./auth-handler.js";
 
 export async function initAuthSession() {
   try {
-    const response = await fetch("/api/me", {
-      credentials: "include", // ✅ REQUIRED to send cookies
-    });
+    const response = await fetch("/api/me", { credentials: "include" });
 
+    // 1. If OK (Logged In)
     if (response.ok) {
       const data = await response.json();
       if (data.user) {
         renderLoggedInUI(data.user);
+        return;
       }
-    } else {
-      renderLoggedOutUI();
     }
+
+    // 2. If 401 or any other error, handle as Guest
+    renderLoggedOutUI();
   } catch (error) {
-    console.error("Session check failed:", error);
+    // Catch actual network failures (server down)
+    console.warn("Guest mode: Network or Auth check failed.");
+    renderLoggedOutUI();
   }
 }
 
 function renderLoggedInUI(user) {
-  // Select all "Account" buttons (Mobile and Desktop)
-  const accountButtons = document.querySelectorAll(
-    "#open-login-modal-mobile, #open-login-modal",
-  );
-
-  accountButtons.forEach((btn) => {
-    // 1. Change the text to the user's name
-    const firstName = user.name ? user.name.split(" ")[0] : "User";
-    btn.textContent = `Hi, ${firstName}`;
-
-    // 2. Optional: Change styling to show it's active
-    btn.classList.add("text-green-400");
-
-    // 3. Optional: Redirect to a dashboard instead of opening the login modal
-    btn.onclick = (e) => {
+  const desktopBtn = document.getElementById("open-login");
+  if (desktopBtn) {
+    desktopBtn.textContent = "Dashboard";
+    desktopBtn.onclick = (e) => {
       e.preventDefault();
-      e.stopPropagation();
-      console.log("Redirecting to profile...");
-      // window.location.href = "/profile.html";
+      window.location.href = "dashboard.html";
     };
-  });
+  }
+
+  // Swap elements
+  document.getElementById("menu-guest-header")?.classList.add("hidden");
+  document.getElementById("menu-user-profile")?.classList.remove("hidden");
+  document.getElementById("links-authenticated")?.classList.remove("hidden");
+  document.getElementById("menu-login-btn")?.classList.add("hidden");
+
+  const logoutBtn = document.getElementById("menu-logout-btn");
+  if (logoutBtn) {
+    logoutBtn.classList.remove("hidden");
+    logoutBtn.onclick = (e) => {
+      e.preventDefault();
+      handleLogout();
+    };
+  }
+
+  const nameLabel = document.getElementById("menu-full-name");
+  if (nameLabel && user.name) {
+    nameLabel.textContent = `Hi, ${user.name.split(" ")[0]}`;
+  }
 }
 
 function renderLoggedOutUI() {
-  // Logic to ensure buttons show "My Account" if no session exists
-  console.log("User is a guest.");
+  const desktopBtn = document.getElementById("open-login");
+  if (desktopBtn) {
+    desktopBtn.textContent = "Login";
+    desktopBtn.onclick = null; // Reset
+  }
+
+  document.getElementById("menu-login-btn")?.classList.remove("hidden");
+  document.getElementById("menu-logout-btn")?.classList.add("hidden");
+  document.getElementById("menu-guest-header")?.classList.remove("hidden");
 }
