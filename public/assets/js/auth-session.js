@@ -18,7 +18,6 @@ export async function initAuthSession() {
     renderLoggedOutUI();
   } catch (error) {
     // Catch actual network failures (server down)
-    console.warn("Guest mode: Network or Auth check failed.");
     renderLoggedOutUI();
   }
 }

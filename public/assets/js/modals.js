@@ -1,103 +1,79 @@
 // /assets/js/modals.js
 
-/**
- * setupModals - Manages Login and Registration modal visibility.
- * Handles opening, closing, and background-click dismissal.
- */
 export function setupModals() {
   const loginModal = document.getElementById("login-modal");
-  const loginContent = document.getElementById("login-modal-content");
+  const registerModal = document.getElementById("register-modal");
 
-  // 1. SELECT OPEN BUTTONS
-  const openButtons = [
-    document.getElementById("open-login"), // Desktop
-    document.getElementById("menu-login-btn"), // Mobile
-  ].filter((btn) => btn !== null);
+  // Open Buttons (Desktop & Mobile)
+  const openLoginBtns = [
+    document.getElementById("open-login"),
+    document.getElementById("menu-login-btn"),
+  ].filter((btn) => btn);
 
-  // 2. SELECT CLOSE BUTTONS
-  const closeBtn = document.getElementById("close-login-modal");
-  // We also treat the modal background itself as a close trigger
-  const modalOverlay = loginModal;
+  // Switch Links
+  const switchToRegister = document.getElementById("switch-to-register");
+  const switchToLogin = document.getElementById("switch-to-login");
 
-  // --- OPEN LOGIC ---
-  openButtons.forEach((btn) => {
+  // Close Buttons
+  const closeLogin = document.getElementById("close-login-modal");
+  const closeRegister = document.getElementById("close-register-modal");
+
+  // --- HELPER FUNCTIONS ---
+  const showModal = (modal) => {
+    modal?.classList.remove("hidden", "opacity-0", "pointer-events-none");
+    modal?.classList.add("flex", "opacity-100", "pointer-events-auto");
+    // Trigger scale animation on the inner div
+    const content = modal.querySelector("div");
+    content?.classList.remove("scale-95");
+    content?.classList.add("scale-100");
+  };
+
+  const hideModal = (modal) => {
+    modal?.classList.add("opacity-0", "pointer-events-none");
+    modal?.classList.remove("opacity-100", "pointer-events-auto");
+    const content = modal.querySelector("div");
+    content?.classList.add("scale-95");
+    content?.classList.remove("scale-100");
+
+    setTimeout(() => {
+      modal?.classList.add("hidden");
+    }, 150);
+  };
+
+  // --- EVENT LISTENERS ---
+
+  // 1. Open Login Modal
+  openLoginBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      // Only open if button is in "Login" mode (not "Dashboard" mode)
       if (btn.textContent.trim().toLowerCase() === "login") {
         e.preventDefault();
-
-        if (loginModal) {
-          // Show the wrapper and enable pointer events
-          loginModal.classList.remove(
-            "hidden",
-            "opacity-0",
-            "pointer-events-none",
-          );
-          loginModal.classList.add(
-            "flex",
-            "opacity-100",
-            "pointer-events-auto",
-          );
-        }
-
-        if (loginContent) {
-          // Animate the form scaling in
-          setTimeout(() => {
-            loginContent.classList.remove("scale-95", "opacity-0");
-            loginContent.classList.add("scale-100", "opacity-100");
-          }, 10);
-        }
+        showModal(loginModal);
       }
     });
   });
 
-  // --- CLOSE LOGIC ---
-  const handleClose = (e) => {
-    if (e) e.preventDefault();
+  // 2. Switch from Login to Register
+  switchToRegister?.addEventListener("click", (e) => {
+    e.preventDefault();
+    hideModal(loginModal);
+    setTimeout(() => showModal(registerModal), 150);
+  });
 
-    // Start fade/scale out animation
-    if (loginContent) {
-      loginContent.classList.add("scale-95", "opacity-0");
-      loginContent.classList.remove("scale-100", "opacity-100");
-    }
+  // 3. Switch from Register to Login
+  switchToLogin?.addEventListener("click", (e) => {
+    e.preventDefault();
+    hideModal(registerModal);
+    setTimeout(() => showModal(loginModal), 150);
+  });
 
-    if (loginModal) {
-      loginModal.classList.add("opacity-0");
-      loginModal.classList.remove("opacity-100");
-    }
+  // 4. Close Buttons
+  closeLogin?.addEventListener("click", () => hideModal(loginModal));
+  closeRegister?.addEventListener("click", () => hideModal(registerModal));
 
-    // Completely hide after animation finishes (300ms)
-    setTimeout(() => {
-      if (loginModal) {
-        loginModal.classList.add("hidden", "pointer-events-none");
-        loginModal.classList.remove("flex", "pointer-events-auto");
-      }
-    }, 300);
-  };
-
-  // Close when clicking the "X" button
-  if (closeBtn) {
-    closeBtn.addEventListener("click", handleClose);
-  }
-
-  // Close when clicking the dark background (overlay)
-  if (modalOverlay) {
-    modalOverlay.addEventListener("click", (e) => {
-      // ONLY close if the user clicked the dark part, NOT the form inside
-      if (e.target === modalOverlay) {
-        handleClose(e);
-      }
+  // 5. Close on Background Click
+  [loginModal, registerModal].forEach((modal) => {
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) hideModal(modal);
     });
-  }
-
-  // Close when pressing the "Escape" key
-  document.addEventListener("keydown", (e) => {
-    if (
-      e.key === "Escape" &&
-      loginModal &&
-      !loginModal.classList.contains("hidden")
-    ) {
-      handleClose(e);
-    }
   });
 }
