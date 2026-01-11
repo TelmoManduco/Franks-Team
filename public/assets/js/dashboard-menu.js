@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenu = document.getElementById("mobile-menu");
   const menuOverlay = document.getElementById("menu-overlay");
 
-  // Select both mobile and desktop logout buttons
+  // Select both mobile drawer logout and desktop sidebar logout buttons
   const logoutBtns = [
     document.getElementById("menu-logout-btn"),
     document.getElementById("desktop-logout-btn"),
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function openMenu() {
     if (!mobileMenu || !menuOverlay) return;
 
-    // 1. Show overlay (remove hidden)
+    // 1. Show overlay (remove hidden) and disable pointer events on main content
     menuOverlay.classList.remove("hidden", "pointer-events-none");
 
     // 2. Small delay to allow the CSS transition to trigger
@@ -50,34 +50,39 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = ""; // Re-enable scroll
   }
 
-  // --- 2. LOGOUT LOGIC ---
+  // --- 2. RESIZE HANDLER ---
+  // If the user expands the screen to desktop size (lg: 1024px),
+  // we force the mobile menu to close so the overlay doesn't get stuck.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 1024) {
+      closeMenu();
+    }
+  });
+
+  // --- 3. LOGOUT LOGIC ---
 
   logoutBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+      // Confirm with user before logging out
       if (confirm("Are you sure you want to log out?")) {
         handleLogout();
       }
     });
   });
 
-  // --- 3. EVENT LISTENERS ---
+  // --- 4. EVENT LISTENERS ---
 
-  // Open button
+  // Open button (Burger icon)
   openMenuBtn?.addEventListener("click", openMenu);
 
   // Close button (The X inside the menu)
   closeMenuBtn?.addEventListener("click", closeMenu);
 
-  // CLICK OUTSIDE (The Overlay)
-  menuOverlay?.addEventListener("click", (e) => {
-    // Only close if the user clicked the overlay itself, not the menu content
-    if (e.target === menuOverlay) {
-      closeMenu();
-    }
-  });
+  // Click outside (The Overlay)
+  menuOverlay?.addEventListener("click", closeMenu);
 
-  // Close when clicking any link inside the menu
+  // Close when clicking any link inside the menu (useful for single-page anchors)
   const menuLinks = mobileMenu?.querySelectorAll("a");
   menuLinks?.forEach((link) => {
     link.addEventListener("click", closeMenu);
