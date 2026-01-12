@@ -1,0 +1,18 @@
+MMA Gym Website: Technical Documentation & File Map:
+
+index.html (Entry Point for the GitHub Pages)
+
+public/index.html (The Public Landing Page)
+This is the Main Page It's designed to be fast, SEO-friendly, and informative for people who aren't members yet.
+
+Role: Showcases the gym, membership plans, timetable, frequent asked questions and contacts.
+
+Key Components:
+
+Hero Section: Powered by slideshow.js to rotate images.
+
+Public Navigation: Uses menu.js for the mobile drawer.
+
+Forms: Contains the "Login" and "Register" structures (hidden by default) that modals.js triggers.
+
+JavaScript Interaction: It loads almost all the "UI" scripts (faq.js, smooth-scroll.js, slideshow.js) because this page has the most visual variety.
