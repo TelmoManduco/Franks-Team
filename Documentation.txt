@@ -1,18 +1,32 @@
-MMA Gym Website: Technical Documentation & File Map:
+Entry Point Architecture (The Routing)
+Root index.html (The Redirector)
 
-index.html (Entry Point for the GitHub Pages)
+Location: /index.html (Project Root)
 
-public/index.html (The Public Landing Page)
-This is the Main Page It's designed to be fast, SEO-friendly, and informative for people who aren't members yet.
+Technical Role: This is a "dummy" file specifically for GitHub Pages compatibility.
 
-Role: Showcases the gym, membership plans, timetable, frequent asked questions and contacts.
+Function: Its only job is to immediately redirect the browser to the real homepage located at public/index.html.
+
+Interaction: It does not load any CSS or JS; it simply handles the initial URL hit.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+public/index.html (The Main Landing Page)
+
+Location: /public/index.html
+
+Technical Role: The true "Front Desk" of your application.
+
+Role: Designed to be fast, SEO-friendly, and informative for potential members.
 
 Key Components:
 
-Hero Section: Powered by slideshow.js to rotate images.
+Hero Section: Features a dynamic display powered by slideshow.js.
 
-Public Navigation: Uses menu.js for the mobile drawer.
+Public Navigation: A standard header and mobile drawer managed by menu.js.
 
-Forms: Contains the "Login" and "Register" structures (hidden by default) that modals.js triggers.
+Information Hub: Sections for Membership plans, Timetables, FAQ, and Contacts.
 
-JavaScript Interaction: It loads almost all the "UI" scripts (faq.js, smooth-scroll.js, slideshow.js) because this page has the most visual variety.
+Authentication Forms: Hidden structures for Login and Registration that are activated by modals.js.
+
+JavaScript Interaction: Loads the full UI suite (faq.js, smooth-scroll.js, slideshow.js, menu.js, and modals.js).
