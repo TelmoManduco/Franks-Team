@@ -30,3 +30,91 @@ Information Hub: Sections for Membership plans, Timetables, FAQ, and Contacts.
 Authentication Forms: Hidden structures for Login and Registration that are activated by modals.js.
 
 JavaScript Interaction: Loads the full UI suite (faq.js, smooth-scroll.js, slideshow.js, menu.js, and modals.js).
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+dashboard.html (The Member Portal)
+
+Location: /public/dashboard.html
+
+Technical Role: A "Protected Area" for authenticated users.
+
+Key UI Components:
+
+Desktop Sidebar: A persistent aside element for navigation and logout.
+
+Mobile Header: A sticky top bar with a "Welcome" message and a burger menu trigger.
+
+Mobile Drawer (#mobile-menu): A slide-out navigation menu for small screens.
+
+Activity Stats: Grid cards showing Workouts, Streaks, and Ranks.
+
+JavaScript Interaction: * Loads dashboard-menu.js as a type="module".
+
+Interacts with auth-handler.js for secure logout functionality.
+
+Relies on auth-session.js to ensure the user is logged in.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+timetable.html (The Schedule)
+
+Location: /public/timetable.html
+
+Role: A focused utility page showing the gym's weekly training schedule.
+
+Interaction: Linked from both the public index.html and the private dashboard.html.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+auth-handler.js (The Service Layer)
+
+Role: This is the central hub for communicating with your backend server.
+
+Key Functions:
+
+handleLogout(): Sends a request to the server to end the session and then redirects the user back to the landing page.
+
+setupForms(): Attaches listeners to Login and Registration forms to validate data before sending it to the API.
+
+Interactions: It is imported by dashboard-menu.js to enable logout functionality from both the desktop sidebar and the mobile drawer.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+auth-session.js (The Gatekeeper)
+
+Role: Manages the user's active session.
+
+Technical Logic: It checks for a valid token (usually in localStorage or cookies). If a user tries to access dashboard.html without being logged in, this script triggers a redirect back to index.html.
+
+Interactions: Runs immediately when a protected page loads to ensure security.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Utility & Helper Files
+These files provide "shortcuts" and common tools used by the other scripts.
+
+helpers.js (The Toolbelt)
+
+Role: Contains small, reusable functions that aren't tied to one specific feature.
+
+Functions: Might include closeMenu() logic, date formatters, or DOM selectors used to keep other files like dashboard-menu.js or menu.js clean.
+
+Benefit: If you need to change how a menu closes, you change it here once, and it updates everywhere.
+
+main.js (The Orchestrator)
+
+Role: Often acts as the "Entry Point" for JavaScript. It determines which page the user is on and initializes the correct scripts (like starting the slideshow only on the homepage).
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Special Feature Scripts (UI Logic)
+These control specific interactive elements on the pages.
+
+slideshow.js: Handles the timing and transition effects for the hero images on index.html.
+
+faq.js: Manages the "Accordion" behavior—opening and closing answers when a user clicks a question.
+
+modals.js: Listens for clicks on "Login" or "Join Now" buttons to show/hide the pop-up forms.
+
+smooth-scroll.js: Overrides the default browser "jump" behavior so that clicking navigation links slides the page smoothly to the target section.
