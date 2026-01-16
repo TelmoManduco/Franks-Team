@@ -2,41 +2,72 @@
 import { handleLogout } from "./auth-handler.js";
 
 export async function initAuthSession() {
+  const currentPage = window.location.pathname;
+
   try {
     const response = await fetch("/api/me", { credentials: "include" });
 
-    // 1. If OK (Logged In)
     if (response.ok) {
       const data = await response.json();
-      if (data.user) {
-        renderLoggedInUI(data.user);
+      const user = data.user;
+
+      if (user) {
+        // --- 1. THE GATEKEEPER LOGIC ---
+        // If they haven't finished the safety form, force them there
+        if (
+          !user.onboardingComplete &&
+          !currentPage.includes("onboarding.html")
+        ) {
+          window.location.href = "onboarding.html";
+          return;
+        }
+
+        // If they ARE finished, don't let them go back to the onboarding page
+        if (
+          user.onboardingComplete &&
+          currentPage.includes("onboarding.html")
+        ) {
+          window.location.href = "dashboard.html";
+          return;
+        }
+
+        renderLoggedInUI(user);
         return;
       }
     }
 
-    // 2. If 401 or any other error, handle as Guest
+    // 2. If Not Logged In
+    // If a guest tries to access private pages, kick them to home
+    if (
+      currentPage.includes("dashboard.html") ||
+      currentPage.includes("onboarding.html")
+    ) {
+      window.location.href = "index.html";
+    }
+
     renderLoggedOutUI();
   } catch (error) {
-    // Catch actual network failures (server down)
+    console.error("Session Init Error:", error);
     renderLoggedOutUI();
   }
 }
 
 function renderLoggedInUI(user) {
-  const desktopBtn = document.getElementById("open-login");
-  if (desktopBtn) {
-    desktopBtn.textContent = "Dashboard";
-    desktopBtn.onclick = (e) => {
-      e.preventDefault();
-      window.location.href = "dashboard.html";
-    };
-  }
+  // Desktop Header adjustments
+  const loginBtn = document.getElementById("desktop-login-btn");
+  const signupBtn = document.getElementById("desktop-signup-btn");
+  const dashboardLink = document.getElementById("desktop-dashboard-link");
 
-  // Swap elements
+  if (loginBtn) loginBtn.classList.add("hidden");
+  if (signupBtn) signupBtn.classList.add("hidden");
+  if (dashboardLink) dashboardLink.classList.remove("hidden");
+
+  // Mobile Menu adjustments
   document.getElementById("menu-guest-header")?.classList.add("hidden");
+  document.getElementById("guest-actions")?.classList.add("hidden"); // Hides both Login & Join
+
   document.getElementById("menu-user-profile")?.classList.remove("hidden");
   document.getElementById("links-authenticated")?.classList.remove("hidden");
-  document.getElementById("menu-login-btn")?.classList.add("hidden");
 
   const logoutBtn = document.getElementById("menu-logout-btn");
   if (logoutBtn) {
@@ -54,13 +85,15 @@ function renderLoggedInUI(user) {
 }
 
 function renderLoggedOutUI() {
-  const desktopBtn = document.getElementById("open-login");
-  if (desktopBtn) {
-    desktopBtn.textContent = "Login";
-    desktopBtn.onclick = null; // Reset
-  }
+  // Reset Desktop
+  document.getElementById("desktop-login-btn")?.classList.remove("hidden");
+  document.getElementById("desktop-signup-btn")?.classList.remove("hidden");
+  document.getElementById("desktop-dashboard-link")?.classList.add("hidden");
 
-  document.getElementById("menu-login-btn")?.classList.remove("hidden");
-  document.getElementById("menu-logout-btn")?.classList.add("hidden");
+  // Reset Mobile
   document.getElementById("menu-guest-header")?.classList.remove("hidden");
+  document.getElementById("guest-actions")?.classList.remove("hidden");
+  document.getElementById("menu-user-profile")?.classList.add("hidden");
+  document.getElementById("links-authenticated")?.classList.add("hidden");
+  document.getElementById("menu-logout-btn")?.classList.add("hidden");
 }
