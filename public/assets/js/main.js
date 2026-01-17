@@ -12,16 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log("MMA Gym Site Initializing...");
 
   /**
-   * 1. THE GATEKEEPER
-   * initAuthSession checks /api/me and handles the logic:
-   * - If no onboarding & on dashboard -> redirect to onboarding
-   * - If guest & on dashboard -> redirect to index
-   * - Swaps Login/Join Now buttons for Dashboard link
-   */
-  await initAuthSession();
-
-  /**
-   * 2. CORE LOGIC
+   * 1. CORE LOGIC
    * We initialize these on every page. setupForms will now
    * automatically handle the onboarding-form if it's found.
    */
@@ -30,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   setupModals();
 
   /**
-   * 3. PAGE-SPECIFIC VISUALS
+   * 2. PAGE-SPECIFIC VISUALS
    * We use "Conditional Initialization" so errors don't stop the script
    * if an element (like the Hero Slideshow) isn't present on the current page.
    */
@@ -43,6 +34,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Visual utilities
   setupSmoothScrolling();
   setupBackToTop();
+
+  /**
+   * 3. THE GATEKEEPER
+   * initAuthSession checks /api/me and handles the logic:
+   * - If no onboarding & on dashboard -> redirect to onboarding
+   * - If guest & on dashboard -> redirect to index
+   * - Swaps Login/Join Now buttons for Dashboard link
+   */
+  try {
+    console.log("Checking session status...");
+    await initAuthSession();
+  } catch (error) {
+    console.error("Session check failed:", error);
+  }
 
   console.log("Initialization Complete.");
 });
