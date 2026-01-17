@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athlete Safety Form | MMA Gym</title>
     <link rel="stylesheet" href="assets/css/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/css/intlTelInput.css">
 </head>
 
 <body class="bg-gray-950 text-white font-sans min-h-screen flex flex-col">
@@ -81,14 +82,16 @@
                     </div>
                 </section>
 
-                <button type="submit" id="onboarding-submit"
-                    class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold py-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2">
-                    Complete & Enter Dashboard
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                    </svg>
-                </button>
+                <div class="mt-6 flex flex-col items-center gap-4">
+                    <button type="submit" id="onboarding-submit" class="...">
+                        Complete & Enter Dashboard
+                    </button>
+
+                    <button type="button" id="logout-exit"
+                        class="text-gray-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all py-2 px-4 border border-transparent hover:border-gray-800 rounded-lg">
+                        Cancel & Log Out
+                    </button>
+                </div>
             </form>
 
         </div>
@@ -98,6 +101,7 @@
         © 2026 Frank's MMA Academy • Safety First
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/intlTelInput.min.js"></script>
     <script type="module" src="assets/js/main.js"></script>
 </body>
 

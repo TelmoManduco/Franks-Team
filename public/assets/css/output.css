@@ -1482,6 +1482,13 @@
       }
     }
   }
+  .hover\:border-gray-800 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-gray-800);
+      }
+    }
+  }
   .hover\:border-yellow-500\/50 {
     &:hover {
       @media (hover: hover) {

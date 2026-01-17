@@ -29,10 +29,31 @@ export async function handleLogout() {
 export function setupForms() {
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
-  const onboardingForm = document.getElementById("onboarding-form"); // New selector
+  const onboardingForm = document.getElementById("onboarding-form");
 
   const loginErrorDiv = document.getElementById("login-error");
   const registerErrorDiv = document.getElementById("register-error");
+
+  // --- PHONE INPUT INITIALIZATION ---
+  const itiOptions = {
+    initialCountry: "gb",
+    preferredCountries: ["gb", "us", "ie"],
+    strictMode: true,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js",
+  };
+
+  let registerIti, emergencyIti;
+
+  const registerPhoneField = document.querySelector("#register-phone");
+  if (registerPhoneField) {
+    registerIti = window.intlTelInput(registerPhoneField, itiOptions);
+  }
+
+  const emergencyPhoneField = document.querySelector("#emergency-phone");
+  if (emergencyPhoneField) {
+    emergencyIti = window.intlTelInput(emergencyPhoneField, itiOptions);
+  }
 
   // --- 1. LOGIN LOGIC ---
   if (loginForm) {
@@ -58,8 +79,6 @@ export function setupForms() {
 
         const result = await response.json();
         if (response.ok) {
-          // If login is successful, check if they need onboarding
-          // (Your server should ideally return if onboarding is complete)
           window.location.href = result.onboardingComplete
             ? "dashboard.html"
             : "onboarding.html";
@@ -82,10 +101,22 @@ export function setupForms() {
       hideError(registerErrorDiv);
       const registerButton = document.getElementById("register-submit");
 
+      // VALIDATION: Check if phone is valid before sending
+      if (registerIti && !registerIti.isValidNumber()) {
+        showError(
+          registerErrorDiv,
+          "Please enter a valid phone number for your country.",
+        );
+        return;
+      }
+
       const userData = {
         name: document.getElementById("name").value.trim(),
         email: document.getElementById("register-email").value.trim(),
-        phone: document.getElementById("register-phone").value.trim(), // Added phone
+        // Get full international format: e.g. +447123456789
+        phone: registerIti
+          ? registerIti.getNumber()
+          : document.getElementById("register-phone").value.trim(),
         password: document.getElementById("register-password").value,
       };
 
@@ -100,7 +131,6 @@ export function setupForms() {
         });
 
         if (response.ok) {
-          // SUCCESS: Redirect to Step 2 (Medical/Safety)
           window.location.href = "onboarding.html";
         } else {
           const result = await response.json();
@@ -121,9 +151,17 @@ export function setupForms() {
       event.preventDefault();
       const submitBtn = document.getElementById("onboarding-submit");
 
+      // VALIDATION: Check emergency phone
+      if (emergencyIti && !emergencyIti.isValidNumber()) {
+        alert("Please enter a valid emergency contact phone number.");
+        return;
+      }
+
       const medicalData = {
         emergencyName: document.getElementById("emergency-name").value.trim(),
-        emergencyPhone: document.getElementById("emergency-phone").value.trim(),
+        emergencyPhone: emergencyIti
+          ? emergencyIti.getNumber()
+          : document.getElementById("emergency-phone").value.trim(),
         medicalConditions: document
           .getElementById("medical-conditions")
           .value.trim(),
@@ -136,7 +174,6 @@ export function setupForms() {
         submitBtn.textContent = "Saving Profile...";
 
         const response = await fetch("/api/update-profile", {
-          // New endpoint
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -144,7 +181,6 @@ export function setupForms() {
         });
 
         if (response.ok) {
-          // FINISHED: Move to Dashboard
           window.location.href = "dashboard.html";
         }
       } catch (error) {
@@ -152,6 +188,19 @@ export function setupForms() {
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Complete & Enter Dashboard";
+      }
+    });
+  }
+
+  // --- 4. CANCEL/EXIT LOGIC ---
+  const exitBtn = document.getElementById("logout-exit");
+  if (exitBtn) {
+    exitBtn.addEventListener("click", async () => {
+      const confirmExit = confirm(
+        "Are you sure? You will need to log in again if you leave now.",
+      );
+      if (confirmExit) {
+        await handleLogout();
       }
     });
   }
