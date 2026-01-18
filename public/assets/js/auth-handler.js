@@ -45,6 +45,8 @@ export function setupForms() {
     fixDropdownWidth: true,
     dropdownContainer: document.body,
     validationNumberTypes: ["MOBILE"],
+    autoPlaceholder: "aggressive", // Options: "off", "polite", "aggressive"
+    placeholderNumberType: "MOBILE",
     // Standard way to load utils
     loadUtils: () =>
       import("https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js"),
