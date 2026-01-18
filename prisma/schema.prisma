@@ -7,28 +7,38 @@ datasource db {
   provider = "sqlite"
 }
 
+// 1. Core User - Login & Identity
 model User {
   id                 Int      @id @default(autoincrement())
   email              String   @unique
+  firstName          String
+  lastName           String
   password           String
-  name               String?
-  createdAt          DateTime @default(now())
-
-  // --- Step 1: Account Basics ---
-  phone              String?   // Added for contact
-
-  // --- Step 2: Safety & Onboarding ---
+  phone              String   @unique
   onboardingComplete Boolean  @default(false)
-  emergencyName      String?
-  emergencyPhone     String?
-  medicalConditions  String?
-  injuries           String?
-  waiverAccepted     Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
-  // --- Step 3: Physical & Goals (Optional/Later) ---
-  weight             Float?
-  height             Float?
-  skillLevel         String?   // e.g., "Beginner", "Advanced"
-  primaryInterest    String?   // e.g., "BJJ", "MMA"
+  // Relationship to Profile
+  profile            Profile?
 }
 
+// 2. Profile - Medical, Physical & Safety data
+model Profile {
+  id                Int     @id @default(autoincrement())
+  userId            Int     @unique
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Safety & Onboarding
+  emergencyName     String?
+  emergencyPhone    String?
+  medicalConditions String?
+  injuries          String?
+  waiverAccepted    Boolean @default(false)
+
+  // Physical & Goals
+  weight            Float?
+  height            Float?
+  skillLevel        String? // "Beginner", "Advanced"
+  primaryInterest   String? // "BJJ", "MMA"
+}

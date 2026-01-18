@@ -39,8 +39,9 @@ export function setupForms() {
     initialCountry: "gb",
     preferredCountries: ["gb", "us", "ie"],
     strictMode: true,
-    utilsScript:
-      "https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js",
+    validationNumberTypes: ["MOBILE"],
+    loadUtils: () =>
+      import("https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js"),
   };
 
   let registerIti, emergencyIti;
@@ -98,22 +99,27 @@ export function setupForms() {
   if (registerForm) {
     registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      hideError(registerErrorDiv);
       const registerButton = document.getElementById("register-submit");
 
-      // VALIDATION: Check if phone is valid before sending
-      if (registerIti && !registerIti.isValidNumber()) {
-        showError(
-          registerErrorDiv,
-          "Please enter a valid phone number for your country.",
-        );
-        return;
+      if (registerIti) {
+        // Use the promise from the docs to ensure utils are loaded
+        await registerIti.promise;
+
+        // Now isValidNumber will use the loaded utils to check the length
+        if (!registerIti.isValidNumber()) {
+          showError(
+            registerErrorDiv,
+            "Invalid number. Too short or incorrect for the selected country.",
+          );
+          registerButton.disabled = false;
+          return; // STOP HERE
+        }
       }
 
       const userData = {
-        name: document.getElementById("name").value.trim(),
+        firstName: document.getElementById("first-name").value.trim(),
+        lastName: document.getElementById("last-name").value.trim(),
         email: document.getElementById("register-email").value.trim(),
-        // Get full international format: e.g. +447123456789
         phone: registerIti
           ? registerIti.getNumber()
           : document.getElementById("register-phone").value.trim(),
@@ -151,10 +157,12 @@ export function setupForms() {
       event.preventDefault();
       const submitBtn = document.getElementById("onboarding-submit");
 
-      // VALIDATION: Check emergency phone
-      if (emergencyIti && !emergencyIti.isValidNumber()) {
-        alert("Please enter a valid emergency contact phone number.");
-        return;
+      // VALIDATION: Check emergency phone if utils are ready
+      if (emergencyIti && typeof window.intlTelInputUtils !== "undefined") {
+        if (!emergencyIti.isValidNumber()) {
+          alert("Please enter a valid emergency contact phone number.");
+          return;
+        }
       }
 
       const medicalData = {

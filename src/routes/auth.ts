@@ -12,12 +12,13 @@ const router = Router();
  */
 router.post("/register", async (req, res) => {
   try {
-    const { email, password, name, phone } = req.body;
+    // UPDATED: Destructure firstName and lastName instead of name
+    const { email, password, firstName, lastName, phone } = req.body;
 
-    if (!email || !password || !phone) {
-      return res
-        .status(400)
-        .json({ error: "Email, password, and phone are required" });
+    if (!email || !password || !phone || !firstName || !lastName) {
+      return res.status(400).json({
+        error: "All fields (Email, Name, Phone, Password) are required",
+      });
     }
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
@@ -31,17 +32,17 @@ router.post("/register", async (req, res) => {
       data: {
         email,
         password: hashedPassword,
-        name,
-        phone, // Ensure your Prisma schema has this field!
-        onboardingComplete: false, // Flag to track progress
+        firstName, // UPDATED
+        lastName, // UPDATED
+        phone,
+        onboardingComplete: false,
       },
     });
 
-    // Automatically log them in after registration so they can access onboarding.html
     const token = signToken({ userId: user.id });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: false, // Set to true in production with HTTPS
       sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -57,7 +58,6 @@ router.post("/register", async (req, res) => {
 
 /**
  * POST /api/login
- * Now returns onboarding status
  */
 router.post("/login", async (req, res) => {
   try {
@@ -78,8 +78,13 @@ router.post("/login", async (req, res) => {
 
     return res.json({
       message: "Login successful",
-      onboardingComplete: user.onboardingComplete, // Frontend uses this to redirect
-      user: { id: user.id, email: user.email, name: user.name },
+      onboardingComplete: user.onboardingComplete,
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
     });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
@@ -88,7 +93,7 @@ router.post("/login", async (req, res) => {
 
 /**
  * POST /api/update-profile
- * Step 2: Mandatory Medical & Safety Data
+ * Step 2: Mandatory Medical & Safety Data (Now uses Profile table)
  */
 router.post("/update-profile", requireAuth, async (req, res) => {
   try {
@@ -106,16 +111,33 @@ router.post("/update-profile", requireAuth, async (req, res) => {
         .json({ error: "You must accept the safety waiver." });
     }
 
-    await prisma.user.update({
-      where: { id: req.userId },
-      data: {
-        emergencyName,
-        emergencyPhone,
-        medicalConditions,
-        injuries,
-        onboardingComplete: true, // Mark step 2 as finished
-      },
-    });
+    // UPDATED: We use a transaction to create the profile AND mark onboarding complete
+    await prisma.$transaction([
+      // 1. Create the detailed Profile record
+      prisma.profile.upsert({
+        where: { userId: req.userId },
+        update: {
+          emergencyName,
+          emergencyPhone,
+          medicalConditions,
+          injuries,
+          waiverAccepted,
+        },
+        create: {
+          userId: req.userId,
+          emergencyName,
+          emergencyPhone,
+          medicalConditions,
+          injuries,
+          waiverAccepted,
+        },
+      }),
+      // 2. Update the User flag
+      prisma.user.update({
+        where: { id: req.userId },
+        data: { onboardingComplete: true },
+      }),
+    ]);
 
     return res.json({ message: "Profile updated successfully" });
   } catch (error) {
@@ -133,7 +155,8 @@ router.get("/me", requireAuth, async (req, res) => {
     select: {
       id: true,
       email: true,
-      name: true,
+      firstName: true, // UPDATED
+      lastName: true, // UPDATED
       onboardingComplete: true,
     },
   });
