@@ -1,5 +1,8 @@
 // /assets/js/auth-handler.js
 
+// REMOVED: import intlTelInput from "..."
+// Since we are using the global script method, we access it via window.intlTelInput
+
 const showError = (element, message) => {
   if (!element) return;
   element.textContent = message;
@@ -37,17 +40,24 @@ export function setupForms() {
   // --- PHONE INPUT INITIALIZATION ---
   const itiOptions = {
     initialCountry: "gb",
-    preferredCountries: ["gb", "us", "ie"],
     strictMode: true,
+    useFullscreenPopup: false,
+    fixDropdownWidth: true,
+    dropdownContainer: document.body,
     validationNumberTypes: ["MOBILE"],
+    // Standard way to load utils
     loadUtils: () =>
       import("https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js"),
+    i18n: {
+      searchPlaceholder: "Type a country...",
+    },
   };
 
   let registerIti, emergencyIti;
 
   const registerPhoneField = document.querySelector("#register-phone");
   if (registerPhoneField) {
+    // Accessing via window as per the global script method
     registerIti = window.intlTelInput(registerPhoneField, itiOptions);
   }
 
@@ -102,17 +112,24 @@ export function setupForms() {
       const registerButton = document.getElementById("register-submit");
 
       if (registerIti) {
-        // Use the promise from the docs to ensure utils are loaded
         await registerIti.promise;
+        const isValid = registerIti.isValidNumberPrecise();
 
-        // Now isValidNumber will use the loaded utils to check the length
-        if (!registerIti.isValidNumber()) {
-          showError(
-            registerErrorDiv,
-            "Invalid number. Too short or incorrect for the selected country.",
-          );
+        if (!isValid) {
+          const errorCode = registerIti.getValidationError();
+          let message = "Invalid phone number.";
+
+          // Accessing the validation error constants globally
+          const validationError = window.intlTelInput.utils.validationError;
+          if (errorCode === validationError.TOO_SHORT)
+            message = "Number is too short.";
+          if (errorCode === validationError.INVALID_COUNTRY_CODE)
+            message = "Invalid country code.";
+
+          showError(registerErrorDiv, message);
           registerButton.disabled = false;
-          return; // STOP HERE
+          registerButton.textContent = "Continue to Safety Form";
+          return;
         }
       }
 
@@ -120,9 +137,7 @@ export function setupForms() {
         firstName: document.getElementById("first-name").value.trim(),
         lastName: document.getElementById("last-name").value.trim(),
         email: document.getElementById("register-email").value.trim(),
-        phone: registerIti
-          ? registerIti.getNumber()
-          : document.getElementById("register-phone").value.trim(),
+        phone: registerIti ? registerIti.getNumber() : "",
         password: document.getElementById("register-password").value,
       };
 
@@ -157,9 +172,9 @@ export function setupForms() {
       event.preventDefault();
       const submitBtn = document.getElementById("onboarding-submit");
 
-      // VALIDATION: Check emergency phone if utils are ready
-      if (emergencyIti && typeof window.intlTelInputUtils !== "undefined") {
-        if (!emergencyIti.isValidNumber()) {
+      if (emergencyIti) {
+        await emergencyIti.promise;
+        if (!emergencyIti.isValidNumberPrecise()) {
           alert("Please enter a valid emergency contact phone number.");
           return;
         }
@@ -167,9 +182,7 @@ export function setupForms() {
 
       const medicalData = {
         emergencyName: document.getElementById("emergency-name").value.trim(),
-        emergencyPhone: emergencyIti
-          ? emergencyIti.getNumber()
-          : document.getElementById("emergency-phone").value.trim(),
+        emergencyPhone: emergencyIti ? emergencyIti.getNumber() : "",
         medicalConditions: document
           .getElementById("medical-conditions")
           .value.trim(),
@@ -190,6 +203,9 @@ export function setupForms() {
 
         if (response.ok) {
           window.location.href = "dashboard.html";
+        } else {
+          const result = await response.json();
+          alert(result.error || "Failed to save profile.");
         }
       } catch (error) {
         console.error("Onboarding Error:", error);
