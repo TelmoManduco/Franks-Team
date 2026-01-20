@@ -40,10 +40,29 @@
           </button>
         </div>
 
-        <a href="dashboard.html" id="desktop-dashboard-link"
-          class="hidden font-bold text-yellow-400 border border-yellow-400/30 px-4 py-2 rounded-xl hover:bg-yellow-400 hover:text-gray-900 transition-all">
-          My Dashboard
-        </a>
+        <div id="desktop-user-menu" class="relative hidden group">
+          <button
+            class="flex items-center space-x-2 font-bold text-yellow-400 border border-yellow-400/30 px-4 py-2 rounded-xl hover:bg-yellow-400 hover:text-gray-900 transition-all">
+            <span>Account</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div
+            class="absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <a href="dashboard.html"
+              class="block px-4 py-2 text-sm text-white hover:bg-yellow-500 hover:text-gray-900 transition">
+              My Dashboard
+            </a>
+            <hr class="border-gray-800 my-1">
+            <button id="desktop-logout-btn"
+              class="w-full text-left block px-4 py-2 text-sm text-red-500 hover:bg-red-500 hover:text-white transition">
+              Logout
+              </a>
+          </div>
+        </div>
       </nav>
 
       <button id="mobile-menu-button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
@@ -690,16 +709,15 @@
       </button>
     </div>
 
-    <div id="menu-user-profile" class="hidden p-6 border-b border-gray-800 flex flex-col items-center relative">
+    <div id="menu-user-profile" class="hidden p-6 border-b border-gray-800 relative">
       <button id="close-menu-button" class="absolute top-4 right-4 text-gray-400 hover:text-white">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      <img id="menu-avatar" src="assets/images/franks-logo.png"
-        class="w-14 h-14 rounded-full border-2 border-red-500 p-0.5 object-cover" />
-      <h2 id="menu-full-name" class="text-white font-bold mt-3 text-lg text-center">Welcome</h2>
-      <p id="menu-user-status" class="text-gray-500 text-[10px] uppercase tracking-widest mt-1">Guest</p>
+
+      <h2 id="menu-firstname" class="text-white font-bold text-xl">Hi, Athlete</h2>
+      <p class="text-yellow-500 text-xs font-medium mt-1">Logged in</p>
     </div>
 
     <div class="flex-1 overflow-y-auto p-4 space-y-1">

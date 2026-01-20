@@ -1,4 +1,5 @@
 // /assets/js/auth-session.js
+
 import { handleLogout } from "./auth-handler.js";
 
 export async function initAuthSession() {
@@ -13,7 +14,6 @@ export async function initAuthSession() {
 
       if (user) {
         // --- 1. THE GATEKEEPER LOGIC ---
-        // If they haven't finished the safety form, force them there
         if (
           !user.onboardingComplete &&
           !currentPage.includes("onboarding.html")
@@ -22,7 +22,6 @@ export async function initAuthSession() {
           return;
         }
 
-        // If they ARE finished, don't let them go back to the onboarding page
         if (
           user.onboardingComplete &&
           currentPage.includes("onboarding.html")
@@ -37,7 +36,6 @@ export async function initAuthSession() {
     }
 
     // 2. If Not Logged In
-    // If a guest tries to access private pages, kick them to home
     if (
       currentPage.includes("dashboard.html") ||
       currentPage.includes("onboarding.html")
@@ -53,42 +51,50 @@ export async function initAuthSession() {
 }
 
 function renderLoggedInUI(user) {
-  // Desktop Header adjustments
-  const loginBtn = document.getElementById("desktop-login-btn");
-  const signupBtn = document.getElementById("desktop-signup-btn");
-  const dashboardLink = document.getElementById("desktop-dashboard-link");
+  // --- DESKTOP HEADER ADJUSTMENTS ---
+  const authActions = document.getElementById("desktop-auth-actions"); // The div containing Login/Join
+  const userMenu = document.getElementById("desktop-user-menu"); // The new Dropdown div
+  const desktopLogoutBtn = document.getElementById("desktop-logout-btn");
 
-  if (loginBtn) loginBtn.classList.add("hidden");
-  if (signupBtn) signupBtn.classList.add("hidden");
-  if (dashboardLink) dashboardLink.classList.remove("hidden");
+  if (authActions) authActions.classList.add("hidden");
+  if (userMenu) userMenu.classList.remove("hidden");
 
-  // Mobile Menu adjustments
+  // Hook up the Desktop Logout
+  if (desktopLogoutBtn) {
+    desktopLogoutBtn.onclick = async (e) => {
+      e.preventDefault();
+      const confirmExit = confirm("Are you sure you want to log out?");
+      if (confirmExit) await handleLogout();
+    };
+  }
+
+  // --- MOBILE MENU ADJUSTMENTS ---
   document.getElementById("menu-guest-header")?.classList.add("hidden");
-  document.getElementById("guest-actions")?.classList.add("hidden"); // Hides both Login & Join
-
+  document.getElementById("guest-actions")?.classList.add("hidden");
   document.getElementById("menu-user-profile")?.classList.remove("hidden");
   document.getElementById("links-authenticated")?.classList.remove("hidden");
 
-  const logoutBtn = document.getElementById("menu-logout-btn");
-  if (logoutBtn) {
-    logoutBtn.classList.remove("hidden");
-    logoutBtn.onclick = (e) => {
+  const mobileLogoutBtn = document.getElementById("menu-logout-btn");
+  if (mobileLogoutBtn) {
+    mobileLogoutBtn.classList.remove("hidden");
+    mobileLogoutBtn.onclick = (e) => {
       e.preventDefault();
       handleLogout();
     };
   }
 
-  const nameLabel = document.getElementById("menu-full-name");
-  if (nameLabel && user.name) {
-    nameLabel.textContent = `Hi, ${user.name.split(" ")[0]}`;
+  const nameLabel = document.getElementById("menu-firstname");
+  if (nameLabel) {
+    nameLabel.textContent = user.firstName
+      ? `Hi, ${user.firstName}`
+      : "Hi, Athlete";
   }
 }
 
 function renderLoggedOutUI() {
   // Reset Desktop
-  document.getElementById("desktop-login-btn")?.classList.remove("hidden");
-  document.getElementById("desktop-signup-btn")?.classList.remove("hidden");
-  document.getElementById("desktop-dashboard-link")?.classList.add("hidden");
+  document.getElementById("desktop-auth-actions")?.classList.remove("hidden");
+  document.getElementById("desktop-user-menu")?.classList.add("hidden");
 
   // Reset Mobile
   document.getElementById("menu-guest-header")?.classList.remove("hidden");
