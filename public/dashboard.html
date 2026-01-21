@@ -6,18 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MMA Gym Dashboard</title>
     <link rel="stylesheet" href="assets/css/output.css" />
-    <style>
-        .icon-gray {
-            filter: invert(53%) sepia(0%) saturate(0%) hue-rotate(175deg) brightness(94%) contrast(90%);
-        }
-    </style>
 </head>
 
 <body class="bg-gray-950 min-h-screen lg:flex">
 
     <aside class="hidden lg:flex flex-col w-64 bg-gray-900 border-r border-gray-800 h-screen sticky top-0">
         <div class="p-6 border-b border-gray-800">
-            <h1 class="text-white font-bold text-xl">MMA GYM</h1>
+            <h1 id="dashboard-desktop-greeting" class="text-white font-bold text-xl">Hi, Athlete</h1>
+            <p class="text-yellow-500 text-xs font-semibold uppercase tracking-wider mt-1">Active Member</p>
         </div>
 
         <nav class="flex-1 p-4 space-y-2">
@@ -62,8 +58,8 @@
         <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-10 lg:hidden">
             <div class="px-4 py-4 flex items-center justify-between">
                 <div>
-                    <h1 class="text-white font-semibold">Welcome back, Alex</h1>
-                    <p class="text-gray-400 text-sm">Intermediate Fighter</p>
+                    <h1 id="dashboard-mobile-greeting" class="text-white font-semibold">Welcome back, Athlete</h1>
+                    <p class="text-gray-400 text-sm">Active Member</p>
                 </div>
                 <button id="open-menu-button" class="p-2 hover:bg-gray-800 rounded-lg transition-all active:scale-90">
                     <img src="assets/images/icons-images/burger-menu.svg" alt="Menu"
@@ -238,7 +234,7 @@
     </div>
 
     <nav id="mobile-menu"
-        class="fixed top-0 right-0 z-50 h-full w-60 max-w-[85vw] bg-gray-950 border-l border-gray-800 translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+        class="fixed top-0 right-0 z-50 h-full w-50 max-w-[85vw] bg-gray-950 border-l border-gray-800 translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
         <div id="menu-user-profile"
             class="relative flex flex-col items-center justify-center p-8 border-b border-gray-800/50">
             <button id="close-menu-button"
@@ -250,7 +246,7 @@
                     <img id="menu-avatar" src="assets/images/franks-logo.png" alt="Profile"
                         class="w-14 h-14 rounded-full object-cover border-2 border-white p-0.5" />
                 </div>
-                <h2 id="menu-full-name" class="text-white font-bold text-base mt-2">Alex Rodriguez</h2>
+                <h2 id="menu-firstname" class="text-white font-bold text-base mt-2">Hi, Athlete</h2>
                 <p id="menu-user-status" class="text-gray-400 text-[10px] uppercase tracking-widest font-medium">
                     Intermediate Fighter</p>
             </div>
@@ -302,6 +298,10 @@
     </nav>
 
     <script type="module" src="assets/js/dashboard-menu.js"></script>
+    <script type="module">
+        import { initAuthSession } from './assets/js/auth-session.js';
+        initAuthSession();
+    </script>
 </body>
 
 </html>
