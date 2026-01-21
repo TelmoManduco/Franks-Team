@@ -83,9 +83,16 @@ function renderLoggedInUI(user) {
     };
   }
 
-  const nameLabel = document.getElementById("menu-firstname");
-  if (nameLabel) {
-    nameLabel.textContent = user.firstName
+  const mobileNameLabel = document.getElementById("menu-firstname");
+  if (mobileNameLabel) {
+    mobileNameLabel.textContent = user.firstName
+      ? `Hi, ${user.firstName}`
+      : "Hi, Athlete";
+  }
+
+  const desktopNameLabel = document.getElementById("desktop-firstname");
+  if (desktopNameLabel) {
+    desktopNameLabel.textContent = user.firstName
       ? `Hi, ${user.firstName}`
       : "Hi, Athlete";
   }
