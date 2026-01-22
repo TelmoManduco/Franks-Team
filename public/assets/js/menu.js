@@ -6,59 +6,47 @@ export function setupMobileMenu() {
   const menu = document.getElementById("mobile-menu");
   const overlay = document.getElementById("menu-overlay");
 
+  // Filter out any buttons that might not exist on specific pages
   const closeButtons = [
     document.getElementById("close-menu-button"),
     document.getElementById("close-menu-button-guest"),
-  ].filter((btn) => btn);
+  ].filter(Boolean);
 
   if (!menu || !openButton) return;
 
-  // Helper function to force the menu to close
-  const forceClose = () => {
-    menu.classList.add("translate-x-full");
-    if (overlay) {
-      overlay.classList.add("opacity-0");
-      overlay.classList.add("pointer-events-none");
-    }
-    menu.setAttribute("inert", "");
-    document.body.style.overflow = "";
-  };
-
-  const toggleMenu = () => {
-    const isOpening = menu.classList.contains("translate-x-full");
-    menu.classList.toggle("translate-x-full");
+  const openMenu = () => {
+    menu.classList.remove("translate-x-full");
+    menu.removeAttribute("inert");
+    menu.setAttribute("aria-hidden", "false");
 
     if (overlay) {
-      overlay.classList.toggle("opacity-0");
-      overlay.classList.toggle("pointer-events-none");
+      overlay.classList.remove("opacity-0", "pointer-events-none");
+      overlay.classList.add("opacity-100", "pointer-events-auto");
     }
 
-    if (isOpening) {
-      menu.removeAttribute("inert");
-      document.body.style.overflow = "hidden"; // Stop scrolling when open
-    } else {
-      menu.setAttribute("inert", "");
-      document.body.style.overflow = "";
-      openButton.focus();
-    }
+    document.body.style.overflow = "hidden"; // Prevent background scroll
   };
 
-  // --- THE FIX: MONITOR WINDOW SIZE ---
+  // 1. OPEN
+  openButton.addEventListener("click", openMenu);
+
+  // 2. CLOSE (Shared logic from helpers.js)
+  const handleClose = () => {
+    closeMenu(); // This handles translate, inert, and focus
+    document.body.style.overflow = ""; // Re-enable scroll
+  };
+
+  closeButtons.forEach((btn) => btn.addEventListener("click", handleClose));
+  if (overlay) overlay.addEventListener("click", handleClose);
+
+  // 3. AUTO-CLOSE on Resize
   window.addEventListener("resize", () => {
-    // 768px is the standard Tailwind 'md' breakpoint
-    // If the window gets wider than mobile, close the menu automatically
-    if (window.innerWidth >= 768) {
-      forceClose();
-    }
+    if (window.innerWidth >= 768) handleClose();
   });
 
-  // Event Listeners
-  openButton.addEventListener("click", toggleMenu);
-  closeButtons.forEach((btn) => btn.addEventListener("click", toggleMenu));
-  if (overlay) overlay.addEventListener("click", toggleMenu);
-
+  // 4. AUTO-CLOSE on Link Click
   const links = menu.querySelectorAll('a[href^="#"], a[href*=".html"]');
   links.forEach((link) => {
-    link.addEventListener("click", forceClose);
+    link.addEventListener("click", handleClose);
   });
 }
