@@ -1,51 +1,44 @@
 // /assets/js/modals.js
+import { closeMenu, showElement, hideElement } from "./helpers.js";
 
 export function setupModals() {
   const loginModal = document.getElementById("login-modal");
   const registerModal = document.getElementById("register-modal");
 
-  // --- SELECTORS ---
+  // --- INTERNAL HELPERS ---
+  const showModal = (modal) => {
+    if (!modal) return;
+    closeMenu(); // Closes mobile menu if it's open
+    showElement(modal);
+    const content = modal.querySelector("div");
+    content?.classList.replace("scale-95", "scale-100");
+    document.body.style.overflow = "hidden";
+  };
 
-  // Collect all Login buttons (Desktop + Mobile)
+  const hideModal = (modal) => {
+    if (!modal) return;
+    hideElement(modal);
+    const content = modal.querySelector("div");
+    content?.classList.replace("scale-100", "scale-95");
+    document.body.style.overflow = "";
+  };
+
+  // --- SELECTORS ---
   const loginBtns = [
     document.getElementById("desktop-login-btn"),
     document.getElementById("menu-login-btn"),
-    document.getElementById("open-login"), // Keeping this as fallback
-  ].filter((btn) => btn);
+    document.getElementById("open-login"),
+  ].filter(Boolean);
 
-  // Collect all Sign Up / Join Now buttons (Desktop + Mobile)
   const signupBtns = [
     document.getElementById("desktop-signup-btn"),
     document.getElementById("menu-signup-btn"),
-  ].filter((btn) => btn);
+  ].filter(Boolean);
 
   const switchToRegister = document.getElementById("switch-to-register");
   const switchToLogin = document.getElementById("switch-to-login");
   const closeLogin = document.getElementById("close-login-modal");
   const closeRegister = document.getElementById("close-register-modal");
-
-  // --- HELPER FUNCTIONS ---
-  const showModal = (modal) => {
-    if (!modal) return;
-    modal.classList.remove("hidden", "opacity-0", "pointer-events-none");
-    modal.classList.add("flex", "opacity-100", "pointer-events-auto");
-    const content = modal.querySelector("div");
-    content?.classList.remove("scale-95");
-    content?.classList.add("scale-100");
-  };
-
-  const hideModal = (modal) => {
-    if (!modal) return;
-    modal.classList.add("opacity-0", "pointer-events-none");
-    modal.classList.remove("opacity-100", "pointer-events-auto");
-    const content = modal.querySelector("div");
-    content?.classList.add("scale-95");
-    content?.classList.remove("scale-100");
-
-    setTimeout(() => {
-      modal.classList.add("hidden");
-    }, 150);
-  };
 
   // --- EVENT LISTENERS ---
 
@@ -57,7 +50,7 @@ export function setupModals() {
     });
   });
 
-  // 2. Open Signup Modal (New Logic)
+  // 2. Open Signup Modal
   signupBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -65,7 +58,7 @@ export function setupModals() {
     });
   });
 
-  // 3. Switch Logic
+  // 3. Switch Logic (Login <-> Register)
   switchToRegister?.addEventListener("click", (e) => {
     e.preventDefault();
     hideModal(loginModal);
@@ -82,6 +75,7 @@ export function setupModals() {
   closeLogin?.addEventListener("click", () => hideModal(loginModal));
   closeRegister?.addEventListener("click", () => hideModal(registerModal));
 
+  // 5. Click Backdrop to Close
   [loginModal, registerModal].forEach((modal) => {
     modal?.addEventListener("click", (e) => {
       if (e.target === modal) hideModal(modal);

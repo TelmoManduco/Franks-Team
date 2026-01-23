@@ -1,31 +1,41 @@
 // /assets/js/helpers.js
 
-/**
- * Closes the mobile menu and hides its overlay.
- * Reusable across menu.js, modals.js, and smooth-scroll.js.
- */
+export const showElement = (el) => {
+  if (!el) return;
+  el.classList.remove("hidden", "opacity-0", "pointer-events-none");
+  el.classList.add("flex", "opacity-100", "pointer-events-auto");
+  el.setAttribute("aria-hidden", "false");
+  el.removeAttribute("inert");
+  document.body.style.overflow = "hidden";
+};
+
+export const hideElement = (el) => {
+  if (!el) return;
+  el.classList.add("opacity-0", "pointer-events-none");
+  el.classList.remove("opacity-100", "pointer-events-auto");
+  el.setAttribute("aria-hidden", "true");
+  el.setAttribute("inert", "");
+
+  // Only unlock if NO other overlays are visible
+  setTimeout(() => {
+    const activeOverlays = document.querySelectorAll(
+      ".opacity-100:not(.hidden)",
+    );
+    if (activeOverlays.length === 0) {
+      document.body.style.overflow = "";
+    }
+    el.classList.add("hidden");
+    el.classList.remove("flex");
+  }, 300); // Match your transition duration
+};
+
 export const closeMenu = () => {
   const menu = document.getElementById("mobile-menu");
   const overlay = document.getElementById("menu-overlay");
-  const openButton = document.getElementById("mobile-menu-button");
 
   if (menu) {
-    // 1. Manage Focus: return focus to hamburger if it was inside the menu
-    if (menu.contains(document.activeElement) && openButton) {
-      openButton.focus();
-    }
-
-    // 2. Visual State: Move menu off-screen
     menu.classList.add("translate-x-full");
-
-    // 3. Accessibility State: Sync with menu.js logic
-    menu.setAttribute("aria-hidden", "true");
-    menu.setAttribute("inert", "");
+    hideElement(menu);
   }
-
-  if (overlay) {
-    // 4. Force Overlay Hide: Remove active classes and add hidden classes
-    overlay.classList.remove("opacity-100", "pointer-events-auto");
-    overlay.classList.add("opacity-0", "pointer-events-none");
-  }
+  if (overlay) hideElement(overlay);
 };
