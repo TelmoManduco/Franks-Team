@@ -105,6 +105,12 @@ router.post("/update-profile", requireAuth, async (req, res) => {
       waiverAccepted,
     } = req.body;
 
+    const numericUserId = Number(req.userId);
+
+    if (isNaN(numericUserId)) {
+      return res.status(400).json({ error: "Invalid User Session" });
+    }
+
     if (!waiverAccepted) {
       return res
         .status(400)
@@ -124,7 +130,7 @@ router.post("/update-profile", requireAuth, async (req, res) => {
           waiverAccepted,
         },
         create: {
-          userId: req.userId,
+          userId: numericUserId,
           emergencyName,
           emergencyPhone,
           medicalConditions,
