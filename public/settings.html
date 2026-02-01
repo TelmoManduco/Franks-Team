@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | MMA Gym</title>
+    <link rel="stylesheet" href="assets/css/output.css" />
+</head>
+
+<body class="bg-gray-950 min-h-screen lg:flex">
+
+    <aside class="hidden lg:flex flex-col w-64 bg-gray-900 border-r border-gray-800 h-screen sticky top-0">
+        <div class="p-6 border-b border-gray-800">
+            <h1 id="dashboard-desktop-greeting" class="text-white font-bold text-xl">Settings</h1>
+            <p class="text-yellow-500 text-xs font-semibold uppercase tracking-wider mt-1">Manage Profile</p>
+        </div>
+        <nav class="flex-1 p-4 space-y-2">
+            <a href="dashboard.html"
+                class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-xl transition-all">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="settings.html"
+                class="flex items-center gap-3 px-4 py-3 bg-yellow-500 text-gray-900 rounded-xl font-bold">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                    </path>
+                </svg>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col min-w-0">
+        <header class="bg-gray-900 border-b border-gray-800 p-4 flex items-center justify-between lg:hidden">
+            <h1 class="text-white font-semibold">Settings</h1>
+            <button id="open-menu-button" class="p-2 hover:bg-gray-800 rounded-lg">
+                <img src="assets/images/icons-images/burger-menu.svg" alt="Menu" class="w-6 h-6 icon-gray" />
+            </button>
+        </header>
+
+        <main class="p-4 lg:p-8 max-w-4xl mx-auto w-full space-y-6">
+
+            <section class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+                <div class="p-4 border-b border-gray-800 bg-gray-800/30">
+                    <h2 class="text-white font-bold text-sm uppercase tracking-wider">Performance Profile</h2>
+                </div>
+                <div class="p-6 flex flex-wrap items-center gap-6">
+                    <div>
+                        <p class="text-gray-400 text-xs mb-1">Current Level</p>
+                        <span id="display-level"
+                            class="px-3 py-1 bg-red-500/10 text-red-500 border border-red-500/20 rounded-full text-sm font-bold">
+                            Evaluation Pending
+                        </span>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-xs mb-1">Member Since</p>
+                        <p id="display-joined" class="text-white font-medium text-sm">January 2024</p>
+                    </div>
+                </div>
+            </section>
+
+            <form id="settings-form" class="space-y-6">
+                <section class="bg-gray-900 border border-gray-800 rounded-2xl">
+                    <div class="p-4 border-b border-gray-800">
+                        <h2 class="text-white font-bold text-sm uppercase tracking-wider">Personal Details</h2>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-gray-400 text-xs font-medium ml-1">First Name</label>
+                            <input type="text" id="first-name"
+                                class="w-full bg-gray-950 border border-gray-800 text-white rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 text-xs font-medium ml-1">Last Name</label>
+                            <input type="text" id="last-name"
+                                class="w-full bg-gray-950 border border-gray-800 text-white rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 text-xs font-medium ml-1">Personal Phone Number</label>
+                            <input type="tel" id="user-phone"
+                                class="w-full bg-gray-950 border border-gray-800 text-white rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 text-xs font-medium ml-1">Email Address</label>
+                            <input type="email" id="email"
+                                class="w-full bg-gray-950 border border-gray-800 text-gray-500 rounded-xl px-4 py-3 cursor-not-allowed"
+                                readonly>
+                            <p class="text-[10px] text-gray-600 ml-1">Email cannot be changed manually.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-gray-900 border border-gray-800 rounded-2xl">
+                    <div class="p-4 border-b border-gray-800">
+                        <h2 class="text-white font-bold text-sm uppercase tracking-wider">Security</h2>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-gray-400 text-xs">Leave these blank if you don't want to change your password.
+                        </p>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 text-xs font-medium ml-1">Current Password</label>
+                            <input type="password" id="current-password" placeholder="••••••••"
+                                class="w-full bg-gray-950 border border-gray-800 text-white rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition-all">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-gray-400 text-xs font-medium ml-1">New Password</label>
+                                <input type="password" id="new-password" placeholder="Min. 8 characters"
+                                    class="w-full bg-gray-950 border border-gray-800 text-white rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition-all">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-gray-400 text-xs font-medium ml-1">Confirm New Password</label>
+                                <input type="password" id="confirm-password" placeholder="Confirm new password"
+                                    class="w-full bg-gray-950 border border-gray-800 text-white rounded-xl px-4 py-3 focus:border-yellow-500 outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </form>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/intlTelInput.min.js"></script>
+    <script type="module">
+        import { initAuthSession } from './assets/js/auth-session.js';
+        initAuthSession();
+        // We will build the settings-specific JS next
+    </script>
+</body>
+
+</html>
