@@ -40,14 +40,13 @@ export function setupForms() {
   // --- PHONE INPUT INITIALIZATION ---
   const itiOptions = {
     initialCountry: "gb",
-    strictMode: true,
+    strictMode: false, // FIXED: Changed from true to allow more flexible entry
     useFullscreenPopup: false,
     fixDropdownWidth: true,
     dropdownContainer: document.body,
     validationNumberTypes: ["MOBILE"],
-    autoPlaceholder: "aggressive", // Options: "off", "polite", "aggressive"
+    autoPlaceholder: "aggressive",
     placeholderNumberType: "MOBILE",
-    // Standard way to load utils
     loadUtils: () =>
       import("https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js"),
     i18n: {
@@ -59,7 +58,6 @@ export function setupForms() {
 
   const registerPhoneField = document.querySelector("#register-phone");
   if (registerPhoneField) {
-    // Accessing via window as per the global script method
     registerIti = window.intlTelInput(registerPhoneField, itiOptions);
   }
 
@@ -111,20 +109,23 @@ export function setupForms() {
   if (registerForm) {
     registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+      hideError(registerErrorDiv); // FIXED: Clears old errors on new attempt
       const registerButton = document.getElementById("register-submit");
 
       if (registerIti) {
         await registerIti.promise;
-        const isValid = registerIti.isValidNumberPrecise();
+        // FIXED: Using isValidNumber() instead of isValidNumberPrecise()
+        const isValid = registerIti.isValidNumber();
 
         if (!isValid) {
           const errorCode = registerIti.getValidationError();
           let message = "Invalid phone number.";
 
-          // Accessing the validation error constants globally
           const validationError = window.intlTelInput.utils.validationError;
           if (errorCode === validationError.TOO_SHORT)
             message = "Number is too short.";
+          if (errorCode === validationError.TOO_LONG)
+            message = "Number is too long.";
           if (errorCode === validationError.INVALID_COUNTRY_CODE)
             message = "Invalid country code.";
 
@@ -176,7 +177,8 @@ export function setupForms() {
 
       if (emergencyIti) {
         await emergencyIti.promise;
-        if (!emergencyIti.isValidNumberPrecise()) {
+        // FIXED: Using isValidNumber() for the emergency contact as well
+        if (!emergencyIti.isValidNumber()) {
           alert("Please enter a valid emergency contact phone number.");
           return;
         }

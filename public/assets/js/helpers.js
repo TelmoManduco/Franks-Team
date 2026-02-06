@@ -6,6 +6,7 @@ export const showElement = (el) => {
   el.classList.add("flex", "opacity-100", "pointer-events-auto");
   el.setAttribute("aria-hidden", "false");
   el.removeAttribute("inert");
+  // Lock scroll
   document.body.style.overflow = "hidden";
 };
 
@@ -16,22 +17,30 @@ export const hideElement = (el) => {
   el.setAttribute("aria-hidden", "true");
   el.setAttribute("inert", "");
 
-  // Only unlock if NO other overlays are visible
   setTimeout(() => {
-    const activeOverlays = document.querySelectorAll(
-      ".opacity-100:not(.hidden)",
+    // If the element we are hiding is the menu, we should check specifically
+    // for other modals. If it's just the menu closing, unlock the scroll.
+    const activeModals = document.querySelectorAll(
+      ".modal-open, [role='dialog']",
     );
-    if (activeOverlays.length === 0) {
+
+    // Simplest fix: Just unlock it if we are calling hide.
+    // If you have modals that need to keep the lock, check for them specifically.
+    if (activeModals.length === 0) {
       document.body.style.overflow = "";
     }
+
     el.classList.add("hidden");
     el.classList.remove("flex");
-  }, 300); // Match your transition duration
+  }, 300);
 };
 
 export const closeMenu = () => {
   const menu = document.getElementById("mobile-menu");
   const overlay = document.getElementById("menu-overlay");
+
+  // CRITICAL FIX: Force unlock the scroll immediately when menu is closed
+  document.body.style.overflow = "";
 
   if (menu) {
     menu.classList.add("translate-x-full");

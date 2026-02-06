@@ -23,6 +23,16 @@ export function setupMobileMenu() {
     closeMenu();
   };
 
+  // --- THE FIX: Listen for clicks on links inside the menu ---
+  const menuLinks = menu.querySelectorAll("a");
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      // Small timeout ensures the browser starts navigating before the menu disappears
+      setTimeout(handleClose, 100);
+    });
+  });
+  // ----------------------------------------------------------
+
   openButton.addEventListener("click", openMenu);
   closeButtons.forEach((btn) => btn.addEventListener("click", handleClose));
   if (overlay) overlay.addEventListener("click", handleClose);
